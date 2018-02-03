@@ -1,0 +1,45 @@
+Apache HP PC in wamp 3:
+
+#待配置
+<VirtualHost *:80>
+	ServerName rev1rd50c.me
+    ServerAlias *.rev1rd50c.me
+	DocumentRoot e:/installedapp/zend/apache2/htdocs/rev1rd50c
+	<Directory  "e:/installedapp/zend/apache2/htdocs/rev1rd50c/">
+		Options Indexes FollowSymLinks MultiViews
+		AllowOverride All
+		Require all granted
+	</Directory>
+</VirtualHost>
+
+--------------------------------------------------------------
+
+Apache Company PC in wamp 3:
+
+<VirtualHost *:80>
+    ServerName rev1rd50c.me
+    ServerAlias *.rev1rd50c.me
+    ErrorLog "logs/rev1rd50c.me-error.log"
+    CustomLog "logs/rev1rd50c.me-access.log" common
+	DocumentRoot d:/SERV_WORKSPACE/pub/rev1rd50c
+	<Directory  "d:/SERV_WORKSPACE/pub/rev1rd50c/">
+		Options Indexes FollowSymLinks MultiViews
+		AllowOverride All
+		Require all granted
+	</Directory>
+</VirtualHost>
+
+--------------------------------------------------------------
+
+Apache HP PC in wamp 2.2:
+
+NameVirtualHost rev1rd50c.me:80
+<VirtualHost *:80>
+    DocumentRoot E:/InstalledApp/Zend/Apache2/htdocs/rev1rd50c
+    ServerName rev1rd50c.me
+</VirtualHost>
+
+--------------------------------------------------------------
+
+Nginx: putes-ym-spv rof
+
