@@ -1,11 +1,10 @@
 Apache HP PC in wamp 3:
 
-#待配置
 <VirtualHost *:80>
 	ServerName rev1rd50c.me
     ServerAlias *.rev1rd50c.me
-	DocumentRoot e:/installedapp/zend/apache2/htdocs/rev1rd50c
-	<Directory  "e:/installedapp/zend/apache2/htdocs/rev1rd50c/">
+	DocumentRoot e:/installedapp/wamp/www/rev1rd50c
+	<Directory  "e:/installedapp/wamp/www/rev1rd50c/">
 		Options Indexes FollowSymLinks MultiViews
 		AllowOverride All
 		Require all granted
