@@ -8,6 +8,7 @@ CREATE TABLE IF NOT EXISTS `csdr_article` (
   `title` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT '标题',
   `cover` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT '封面',
   `images` text COLLATE utf8_unicode_ci NOT NULL COMMENT '文章图片链接数组序列化',
+  `digest` text COLLATE utf8_unicode_ci NOT NULL COMMENT '简介',
   `contents` text COLLATE utf8_unicode_ci NOT NULL COMMENT '文章正文，支持HTML',
   `rooter_id` bigint(20) NOT NULL DEFAULT '0' COMMENT '管理员ID',
   `editor` varchar(64) COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT '自定义的发布者（对外显示用）',
