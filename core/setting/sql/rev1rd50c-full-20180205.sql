@@ -2,7 +2,7 @@ CREATE DATABASE IF NOT EXISTS `rev1rd50c` DEFAULT CHARACTER SET utf8 COLLATE utf
 USE `rev1rd50c`;
 
 
-DROP TABLE IF EXISTS `dm_rooter`;
+DROP TABLE IF EXISTS `csdr_article`;
 CREATE TABLE IF NOT EXISTS `csdr_article` (
   `article_id` varchar(50) COLLATE utf8_unicode_ci NOT NULL COMMENT '文章ID（自增数据+时间戳）的sha1',
   `title` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT '标题',
@@ -17,8 +17,8 @@ CREATE TABLE IF NOT EXISTS `csdr_article` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='文章';
 
 
-DROP TABLE IF EXISTS `dm_rooter`;
-CREATE TABLE IF NOT EXISTS `dm_rooter` (
+DROP TABLE IF EXISTS `csdr_rooter`;
+CREATE TABLE IF NOT EXISTS `csdr_rooter` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `passport` varchar(20) NOT NULL COMMENT '通行证',
   `first_ip` varchar(16) NOT NULL DEFAULT '',
@@ -29,8 +29,8 @@ CREATE TABLE IF NOT EXISTS `dm_rooter` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='管理员';
 
 
-DROP TABLE IF EXISTS `dm_mixed`;
-CREATE TABLE `dm_mixed` (
+DROP TABLE IF EXISTS `csdr_mixed`;
+CREATE TABLE `csdr_mixed` (
   `mid` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL COMMENT '代号,用于标识配置项',
   `content` longtext NOT NULL COMMENT '配置值(多个值存储时需序列化)',
