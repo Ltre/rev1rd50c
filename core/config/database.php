@@ -11,7 +11,7 @@ function __never_used_name_in_database(){
             static $db = 'rev1rd50c';
             static $user = 'rev1rd50c';
             static $pwd = '85a1a56dd98b60bb776f6e2475c99d58d13bb3e9';
-            static $table_prefix = 'di_';//表前缀
+            static $table_prefix = 'csdr_';//表前缀
         }
         class DIMMCConfig {
             static $domain = 'rev1rd50c';
@@ -26,7 +26,7 @@ function __never_used_name_in_database(){
             static $db = 'rev1rd50c';
             static $user = 'root';
             static $pwd = 'ltre';
-            static $table_prefix = 'di_';//表前缀
+            static $table_prefix = 'csdr_';//表前缀
         }
         class DIMMCConfig {
             static $domain = 'rev1rd50c';
