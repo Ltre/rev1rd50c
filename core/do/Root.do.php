@@ -43,7 +43,7 @@ class RootDo extends DIDo {
         $p = arg('p') ?: 1;
         $limit = arg('limit') ?: 10;
         $scope = arg('scope') ?: 10;
-        $list = supertable('article')->select([], '*', '', [$p, $limit, $scope]);
+        $list = supertable('article')->select([], '*', 'create_time DESC', [$p, $limit, $scope]);
         putjson($list);
     }
 
