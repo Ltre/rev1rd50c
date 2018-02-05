@@ -33,8 +33,8 @@ class RootDo extends DIDo {
     }
 
 
-    function get(){
-        $one = supertable('article')->find(['article_id' => arg('article_id')]);
+    function get($articleId){
+        $one = supertable('article')->find(['article_id' => $articleId]);
         putjson($one);
     }
 
