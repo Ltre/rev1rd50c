@@ -17,7 +17,7 @@ fi
 mv /home/wwwroot/rev1rd50c /home/wwwroot/rev1rd50c.trash;
 cp /home/wwwsrc/rev1rd50c -r /home/wwwroot/rev1rd50c;
 chmod -R 767 /home/wwwroot/rev1rd50c/core/data;
-chmod 777 /home/wwwroot/rev1rd50c/core/setting/gitpull.sh;
+chmod +x /home/wwwroot/rev1rd50c/core/setting/gitpull.sh;
 rm -f -r /home/wwwroot/rev1rd50c.trash;
 
 cd /home/wwwroot/rev1rd50c
