@@ -40,12 +40,14 @@ class RootDo extends DIDo {
     }
 
 
-    function showList(){
-        $p = arg('p') ?: 1;
-        $limit = arg('limit') ?: 10;
-        $scope = arg('scope') ?: 10;
+    function showList($p = 1, $limit = 10){
+        $scope = 10;
         $list = supertable('article')->select([], '*', 'create_time DESC', [$p, $limit, $scope]);
         $this->list = $list;
+        $this->pages = supertable('article')->page;
+        $this->p = $p;
+        $this->limit = $limit;
+        $this->stpl();
     }
 
 
