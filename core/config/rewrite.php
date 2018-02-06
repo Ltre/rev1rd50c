@@ -11,6 +11,11 @@ class DIRouteRewrite {
         '://danmucopy.me' => 'danmu/search', //含有域名的配置最好放在最前面(经验之谈)
         //域名需要隐蔽配置，用加密字符串
         
+        //文章详细页
+        'article' => 'start/article',
+        'article/<A>' => 'start/article/<A>',
+
+        //通用入口
         '<D>' => '<D>/start',
         '<D>.htm' => '<D>/start',
         '<D>.html' => '<D>/start',
