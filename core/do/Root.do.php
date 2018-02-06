@@ -21,10 +21,11 @@ class RootDo extends DIDo {
             if (empty($d['title']) || empty($d['cover']) || empty($d['digest']) || empty($d['contents']) || empty($d['editor'])) {
                 die('fk!');
             }
-            $images = str_split("\n", $d['images']);
+            //$images = str_split("\n", $d['images']);
+            $images = explode("\r\n", $d['images']);
             $imagesArr = [];
             foreach ($images as $v) $imagesArr[] = trim($v);
-            $d['images'] = serialize($d['images']);
+            $d['images'] = serialize($imagesArr);
             $ret = supertable('article')->insert($d);
             putjson($ret);
         } else {

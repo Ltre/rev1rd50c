@@ -16,4 +16,14 @@ class StartDo extends DIDo {
         $this->stpl();
     }
 
+    function article($articleId){
+        $article = supertable('article')->find(['article_id' => $articleId]);
+        if (empty($article)) {
+            dispatch(DI_PAGE_404);
+        }
+        $article['images'] = empty($article['images']) ? [] : unserialize($article['images']);
+        $this->article = $article;
+        $this->stpl();
+    }
+
 }
