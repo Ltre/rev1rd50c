@@ -2,6 +2,10 @@
 
 class StartDo extends DIDo {
 
+    function index(){
+        $this->stpl();
+    }
+
     function start(){
         $p = arg('p') ?: 1;
         $limit = arg('limit') ?: 10;
