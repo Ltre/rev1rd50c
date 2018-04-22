@@ -10,7 +10,7 @@ class Tg extends DIEntity {
 
     protected $hk = "wcGpK5GE.8VFKhTeec@0MqXzKy'1x6TFJeIqWv~OQop1wk-rki*3Qb(!)5A0Ax-6OmUvv2w3Gp";
 
-    function __contruct(){
+    function __construct(){
         $http = new dwHttp;
         $this->token = ltreDeCrypt($this->token);
     }
