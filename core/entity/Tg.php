@@ -62,7 +62,7 @@ class Tg extends DIEntity {
 
 
     //这个需要上定时任务，刷新tg官方回调的webhook url所用的secret部分
-    function setHk($url){
+    function setHk(){
         $secret = $this->getHkSecret();
         $url = ltreDeCrypt($this->hk.'/'.$secret);
         $feed = $this->req('setWebhook', ['url' => $url]);
