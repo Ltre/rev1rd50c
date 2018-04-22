@@ -23,7 +23,7 @@ class Tg extends DIEntity {
 
     protected function req($method, array $args){
         $url = "https://api.telegram.org/bot{$this->token}/{$method}";
-        $ret = $this->http->post($url, $args);
+        $ret = $this->http->post($url, $args);//@todo: Fatal error: Uncaught Error: Call to a member function post() on null in /home/wwwroot/rev1rd50c/core/entity/Tg.php:26 Stack trace: #0 /home/wwwroot/rev1rd50c/core/entity/Tg.php(68): Tg->req('setWebhook', Array) #1 /home/wwwroot/rev1rd50c/core/do/Tg.do.php(14): Tg->setHk() #2 /home/wwwroot/rev1rd50c/core/base/__lib.php(255): TgDo->setHk() #3 /home/wwwroot/rev1rd50c/core/base/__route.php(30): invoke_method(Object(TgDo), 'setHk', Array) #4 /home/wwwroot/rev1rd50c/core/base/__lib.php(255): DIRoute->route() #5 /home/wwwroot/rev1rd50c/core/base/__init.php(3): invoke_method(Object(DIRoute), 'route') #6 /home/wwwroot/rev1rd50c/core/base/__include.php(105): require('/home/wwwroot/r...') #7 /home/wwwroot/rev1rd50c/index.php(4): require('/home/wwwroot/r...') #8 {main} thrown in /home/wwwroot/rev1rd50c/core/entity/Tg.php on line 26
         if (false === $ret) {
             $this->log("Req method[{$method}] failed, ret is: false");
             return false;
