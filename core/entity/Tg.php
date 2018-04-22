@@ -23,7 +23,7 @@ class Tg extends DIEntity {
 
     protected function req($method, array $args){
         $url = "https://api.telegram.org/bot{$this->token}/{$method}";
-        $ret = $http->post($url, $args);
+        $ret = $this->http->post($url, $args);
         if (false === $ret) {
             $this->log("Req method[{$method}] failed, ret is: false");
             return false;
