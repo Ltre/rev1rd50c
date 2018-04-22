@@ -94,6 +94,8 @@ class DIFilterMap {
 	 */
 	static function getGlobalFilters(){
 	    return array(
+	        'GetLog' => array(), //记录GET请求
+	        'PostLog' => array(), //记录POST请求
 	    	/* 'Global1' => array('Test/start', 'Test/shell'),
 	        'Global2' => array('Test/start', 'Test/shell', 'Test/test', 'Test/lets'),
 	        'Global3' => array('Test/start', 'Test/shell', 'Testtest'), */
