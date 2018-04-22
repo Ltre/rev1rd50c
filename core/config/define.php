@@ -15,7 +15,7 @@ function __never_used_name_in_define(){
     $isLinux = !! preg_match('/linux/i', php_uname('s'), $matches);
     $setups = [];
     if ($isLinux) {
-		define('DI_DEBUG_MODE', true);
+		define('DI_DEBUG_MODE', false);
     } else {
 		define('DI_DEBUG_MODE', true);
     }
