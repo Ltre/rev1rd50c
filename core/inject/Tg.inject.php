@@ -1,6 +1,6 @@
 <?php
 
-class Tg extends DIInject {
+class TgInject extends DIInject {
 	
 	function onHk($bridge = []){
         echo 'onHk<br>';

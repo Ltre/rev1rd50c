@@ -3,7 +3,7 @@
 class TgDo extends DIDo {
 
     //This is an webhook.
-    function hk($secret){
+    protected function hk($secret){
         $tg = new Tg;
         $tg->hk($secret);
     }
