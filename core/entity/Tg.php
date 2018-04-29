@@ -37,7 +37,7 @@ class Tg extends DIEntity {
     }
 
 
-    protected function dealFeed($feed){//以后修改输出格式为：根据请求类型判断，xhr用json返回, 其它直接dump
+    protected function dealFeed($feed){//@todo 以后修改输出格式为：根据请求类型判断，xhr用json返回, 其它直接dump
         if (false === $feed) {
             die('wtf');
         }
@@ -64,18 +64,19 @@ class Tg extends DIEntity {
     //这个需要上定时任务，刷新tg官方回调的webhook url所用的secret部分
     function setHk(){
         $secret = $this->getHkSecret();
-        $url = ltreDeCrypt($this->hk.'/'.$secret);
+        // $url = ltreDeCrypt($this->hk.'/'.$secret);
+        $url = ltreDeCrypt($this->hk).'/'.$secret;
         $feed = $this->req('setWebhook', ['url' => $url]);
         $this->dealFeed($feed);
         list ($ok, $response) = $feed;
-        dump($response);
+        dump($response);//@todo 如果这里失败，则需要告警，可使用机器人消息来告警
     }
 
 
     function hk($secret){
         $ourSecret = $this->getHkSecret();
         if ($secret != $ourSecret) {
-            die('invalid callback to webhook!');
+            die('Invalid callback to webhook!');
         }
     }
 
