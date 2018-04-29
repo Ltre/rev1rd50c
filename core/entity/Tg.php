@@ -28,7 +28,7 @@ class Tg extends DIEntity {
             $this->log("Req method[{$method}] failed, ret is: false");
             return false;
         }
-        $reponse = json_decode($ret, 1);
+        $response = json_decode($ret, 1);
         if (! @$response['ok']) {
             $this->log("Req method[{$method}] is not ok, ret is: {$ret}");
             return [false, $response];
