@@ -81,5 +81,13 @@ class Tg extends DIEntity {
         }
     }
 
+
+    function callMethod($method, array $params){
+        $feed = $this->req($method, $params);
+        $this->dealFeed($feed);
+        list ($ok, $response) = $feed;
+        dump($response);
+    }
+
 }
 
