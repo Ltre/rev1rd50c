@@ -69,6 +69,7 @@ class Tg extends DIEntity {
         $feed = $this->req('setWebhook', ['url' => $url]);
         $this->dealFeed($feed);
         list ($ok, $response) = $feed;
+        echo "url:{$url}<br>";
         dump($response);//@todo 如果这里失败，则需要告警，可使用机器人消息来告警
     }
 
