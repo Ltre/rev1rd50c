@@ -74,7 +74,7 @@ class Tg extends DIEntity {
     }
 
 
-    function hk($secret){
+    function hk($secret, $update){
         $ourSecret = $this->getHkSecret();
         if ($secret != $ourSecret) {
             die('Invalid callback to webhook!');
