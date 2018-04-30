@@ -16,7 +16,7 @@ class TgDo extends DIDo {
 
     function callMethod(){
         $tg = new Tg;
-        $tg->callMethod(arg('method', []));
+        $tg->callMethod(arg('method'), arg('params', []));
     }
 
 }
