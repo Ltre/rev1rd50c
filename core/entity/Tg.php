@@ -54,7 +54,7 @@ class Tg extends DIEntity {
         list ($secret, $expire) = $secretData;
         if (time() >= $expire) {
             $secret = sha1(microtime(1));
-            $expire = time() + 7200;
+            $expire = time() + 86400*30;
             file_put_contents($secretFile, serialize([$secret, $expire]));
         }
         return $secret;
