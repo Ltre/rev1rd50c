@@ -108,12 +108,10 @@ class Tg extends DIEntity {
      * @return mixed
      */
     function hk($secret, array $update){
-file_put_contents(DI_LOG_PATH . 'sb' . date('Y-m-d') . '.log', 'B');//debug
         $ourSecret = $this->getHkSecret();
         if ($secret != $ourSecret) {
             die('Invalid callback to webhook!');
         }
-file_put_contents(DI_LOG_PATH . 'sb' . date('Y-m-d') . '.log', 'C');//debug
         $dp = new TgDispatch($update);
         $feed = $dp->analyze();
         $dp->dispatch($feed);
