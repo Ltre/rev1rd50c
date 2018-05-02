@@ -17,7 +17,7 @@ file_put_contents(DI_DATA_PATH.'cache/tg.log', "C", FILE_APPEND);//DEBUG
         $msgList = self::_sampleStore('msgList') ?: array();
         $answers = self::_sampleStore('answers') ?: array();
         $modeKey = "mode.".sha1($fromId);
-        $mode = self::_sampleStore($modeKey) ?: 'wait';//默认为等待话题模式
+        $mode = self::_sampleStore($modeKey) ?: 'chat';//默认为chat模式
         if ($msg !== NULL) {
 file_put_contents(DI_DATA_PATH.'cache/tg.log', "D", FILE_APPEND);//DEBUG
             $msgList[] = $msg;
