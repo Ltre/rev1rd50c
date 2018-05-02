@@ -11,9 +11,12 @@ class TgDispatch extends DIEntity {
     }
 
     function analyze(){
+file_put_contents(DI_LOG_PATH . 'sb' . date('Y-m-d') . '.log', 'D');//debug
         if (isset($this->update['message'])) {
+file_put_contents(DI_LOG_PATH . 'sb' . date('Y-m-d') . '.log', 'E');//debug
             $message = $this->update['message'];
             if (isset($message['reply_to_message']) && isset($message['text'])) {
+file_put_contents(DI_LOG_PATH . 'sb' . date('Y-m-d') . '.log', 'F');//debug
                 return 1;
             }
         }
@@ -21,13 +24,16 @@ class TgDispatch extends DIEntity {
 
 
     function dispatch($analyzeFeed){
+file_put_contents(DI_LOG_PATH . 'sb' . date('Y-m-d') . '.log', 'G');//debug
         $deal = new TgDeal;
         switch ($analyzeFeed) {
             case 1:
+file_put_contents(DI_LOG_PATH . 'sb' . date('Y-m-d') . '.log', 'H');//debug
                 $result = $deal->onReply($this->update);
                 break;
         }
         if (@$result) {
+file_put_contents(DI_LOG_PATH . 'sb' . date('Y-m-d') . '.log', 'I');//debug
             $this->log(__CLASS__.__FUNCTION__, print_r($result, 1));
         }
     }
