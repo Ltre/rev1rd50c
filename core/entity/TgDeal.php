@@ -6,6 +6,7 @@
 class TgDeal extends DIEntity {
 
     function onReply(array $update){
+file_put_contents(DI_LOG_PATH . 'sb' . date('Y-m-d') . '.log', 'A');//debug
         $message = $update['message'];
         $text = $message['text'];
         $chat = $message['chat'];
