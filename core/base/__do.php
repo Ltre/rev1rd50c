@@ -137,7 +137,7 @@ abstract class DIDo extends DIBase{
     			$$hasPrep = method_exists($this->_inject, $$prep);
     		}
     		
-    		//invoke_method($this->_inject, $before, array($this->_bridge));//访问前置增强，并注入共享信息
+    		// invoke_method($this->_inject, $before, array($this->_bridge));//访问前置增强，并注入共享信息
     		$has_before && call_user_func_array(array($this->_inject, $before), array($this->_bridge));
     		
     		// $on_ret = $has_on ? invoke_method($this->_inject, $on, array($this->_bridge)) : array();//获取onXxx()配置的注入function数组
