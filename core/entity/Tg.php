@@ -74,11 +74,46 @@ class Tg extends DIEntity {
     }
 
 
-    function hk($secret, $update){
+    /**
+     * webhook
+     * @param string $secret
+     * @param array $update
+     * 传入结构部分示例(json表示)：
+     *  {
+     *      "update_id":812401123,
+     *      "message":
+     *      {
+     *          "message_id":17,
+     *          "from":
+     *          {
+     *              "id":456123156,
+     *              "is_bot":false,
+     *              "first_name":"fdsfsda",
+     *              "username":"adddfsa",
+     *              "language_code":"zh-cn"
+     *          },
+     *          "chat":
+     *          {
+     *              "id":456123156,
+     *              "first_name":"fdsfsda",
+     *              "username":"adddfsa",
+     *              "type":"private"
+     *          },
+     *          "date":1525247696,
+     *          "text":"1"
+     *      }
+     *  }
+     * 完整结构详见：https://core.telegram.org/bots/api#update
+     * @return mixed
+     */
+    function hk($secret, array $update){
         $ourSecret = $this->getHkSecret();
         if ($secret != $ourSecret) {
             die('Invalid callback to webhook!');
         }
+        $dp = new TgDispatch($update);
+        $feed = $dp->analyze();
+        $dp->dispatch($feed);
     }
 
 
@@ -86,7 +121,7 @@ class Tg extends DIEntity {
         $feed = $this->req($method, $params);
         $this->dealFeed($feed);
         list ($ok, $response) = $feed;
-        dump($response);
+        return [$ok, $response];
     }
 
 }
