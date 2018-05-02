@@ -8,7 +8,7 @@ class Tg extends DIEntity {
 
     protected $token = "TjIb~3Zc(aT7XQF0)m_q.aJhVM'z(dLfAi*4Yc_0Zm@z*kSm*eQdM0Hb~q)~GmJnSeB1Xn)vc9*3ZX_~RJa2c4!@zzAsb6";
 
-    protected $hk = "wcGpK5GE.8VFKhTeec@0MqXzKy'1x6TFJeIqWv~OQop1wk-rki*3Qb(!)5A0Ax-6OmUvv2w3Gp";
+    protected $hk = "OuUD~mZX(4@KGdVgHF*3v9!Eqe'1-FykLgk2r0sfB9BdUI'1MgC6)zO9OM!2G1)*_7McCz!2Fd_IWtXuve";
 
     function __construct(){
         $this->http = new dwHttp;
