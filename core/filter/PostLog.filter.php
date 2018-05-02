@@ -13,7 +13,8 @@ class PostLogFilter implements DIFilter {
         $file = DI_LOG_PATH . 'postlog_' . date('Y-m-d') . '.txt';
         $link = fopen($file, 'a+');
         $msg = "=========================={$time}==========================\r\n";
-        @$msg .= "    {$_SERVER['SERVER_PROTOCOL']}    {$_SERVER['SERVER_NAME']}" . (80 == $_SERVER['SERVER_PORT'] ? '' : ':' . $_SERVER['SERVER_PORT']) . "{$_SERVER['REQUEST_URI']}    REFERER[{$_SERVER['HTTP_REFERER']}]    REMOTE_ADDR[{$_SERVER['REMOTE_ADDR']}]    REQUEST_METHOD[{$_SERVER['REQUEST_METHOD']}]    $message\r\n";
+        $phpinput = file_get_contents("php://input");
+        @$msg .= "    {$_SERVER['SERVER_PROTOCOL']}    {$_SERVER['SERVER_NAME']}" . (80 == $_SERVER['SERVER_PORT'] ? '' : ':' . $_SERVER['SERVER_PORT']) . "{$_SERVER['REQUEST_URI']}    REFERER[{$_SERVER['HTTP_REFERER']}]    REMOTE_ADDR[{$_SERVER['REMOTE_ADDR']}]    REQUEST_METHOD[{$_SERVER['REQUEST_METHOD']}]      PHP_INPUT[{$phpinput}]    $message\r\n";
         fwrite($link, $msg);
     }
 
