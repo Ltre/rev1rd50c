@@ -25,14 +25,15 @@ class Tg extends DIEntity {
         $url = "https://api.telegram.org/bot{$this->token}/{$method}";
         $ret = $this->http->post($url, $args);
         if (false === $ret) {
-            $this->log("Req method[{$method}] failed, ret is: false");
+            $this->log("Req method[{$method}] failed, ret is: false, args is: ".print_r($args, 1));
             return false;
         }
         $response = json_decode($ret, 1);
         if (! @$response['ok']) {
-            $this->log("Req method[{$method}] is not ok, ret is: {$ret}");
+            $this->log("Req method[{$method}] is not ok, ret is: {$ret}, args is: ".print_r($args, 1));
             return [false, $response];
         }
+        $this->log("Req method[{$method}] is ok, ret is: {$ret}, args is: ".print_r($args, 1));
         return [true, $response];
     }
 
