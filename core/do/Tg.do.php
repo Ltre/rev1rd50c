@@ -3,7 +3,7 @@
 class TgDo extends DIDo {
 
     //This is an webhook.
-    protected function hk($secret){
+    function hk($secret){
         $tg = new Tg;
         $update = file_get_contents( "php://input");
         file_put_contents(DI_DATA_PATH.'cache/tg.update.post1.log', $update."\r\n", FILE_APPEND);
