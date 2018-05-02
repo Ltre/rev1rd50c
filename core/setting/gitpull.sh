@@ -21,3 +21,6 @@ chmod +x /home/wwwroot/rev1rd50c/core/setting/gitpull.sh;
 rm -f -r /home/wwwroot/rev1rd50c.trash;
 
 cd /home/wwwroot/rev1rd50c
+
+service nginx restart
+service php-fpm reload
