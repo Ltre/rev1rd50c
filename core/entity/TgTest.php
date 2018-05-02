@@ -4,7 +4,13 @@
  */
 class TgTest extends DIEntity {
     
-    static function sample($fromId, $msg){
+    static function sample($chatId, $fromId, $msg){
+        $initKey = 'isinit'.sha1($chatId);
+        $isInit = self::_sampleStore($initKey) ?: 'yes';
+        if ($isInit == 'yes') {
+            self::_sampleStore($initKey, 'no');
+            return "本母鸡刚出生，还不太会说话，如果有什么得罪的，你来打我啊...(用回复我的方式来跟我交流，其它方式本大鸡暂时不想理你..要是你们多人一起跟我说话，我会精神错乱的...)";
+        }
         $msgList = self::_sampleStore('msgList') ?: array();
         $answers = self::_sampleStore('answers') ?: array();
         $modeKey = "mode.".sha1($fromId);
@@ -13,10 +19,7 @@ class TgTest extends DIEntity {
             $msgList[] = $msg;
             self::_sampleStore('msgList', $msgList);
         }
-        if ($mode === 'wait') {
-            self::_sampleStore($modeKey, 'chat');
-            return "I'm a bot!";
-        } elseif ($mode === 'learn') {
+        if ($mode === 'learn') {
             $lastMsg = @$msgList[count($msgList) - 2];
             if ($lastMsg != '') {
                 $answers[$lastMsg] = $msg;//学习答案
