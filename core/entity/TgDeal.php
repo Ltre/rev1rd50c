@@ -9,10 +9,11 @@ class TgDeal extends DIEntity {
         $message = $update['message'];
         $text = $message['text'];
         $chat = $message['chat'];
+        $from = $message['from'];
         $tg = new Tg;
         return $tg->callMethod('sendMessage', [
             'chat_id' => $chat['id'],
-            'text' => '下一个TEXT',
+            'text' => TgTest::sample($from['id'], $text),
             'reply_to_message_id' => $message['message_id'],
         ]);
     }
