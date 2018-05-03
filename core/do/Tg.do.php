@@ -24,4 +24,9 @@ class TgDo extends DIDo {
         dump($tg->callMethod(arg('method'), arg('params', [])));
     }
 
+    function getMe(){
+        $tg = new Tg;
+        dump($tg->getMe());
+    }
+
 }
