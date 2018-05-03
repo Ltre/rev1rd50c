@@ -14,6 +14,7 @@ class TgDo extends DIDo {
 
     //To set webhook
     function setHk(){
+        die;
         $tg = new Tg;
         $tg->setHk();
     }
