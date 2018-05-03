@@ -118,6 +118,24 @@ class Tg extends DIEntity {
     }
 
 
+    function getMe(){
+        $meFile = DI_DATA_PATH.'cache/tg.me';
+        @$meData = unserialize(file_get_contents($meFile)) ?: ["", 0];
+        list ($me, $expire) = $meData;
+        if (time() >= $expire) {
+            list ($ok, $response) = $this->callMethod('getMe', []);
+            if (! $ok || ! isset($response['result'])) {
+                return null;
+            }
+            $me = $response['result'];//array {id:xx, is_bot:xx, first_name:xx, username:xx}
+            $expire = time() + 86400*30;
+            file_put_contents($meFile, serialize([$me, $expire]));
+        }
+        return $me;
+    }
+
+
+    //@todo 考虑是否支持第三个参数$cache：控制缓存：no-绕过，update-立即刷新，default-使用已有缓存
     function callMethod($method, array $params){
         $feed = $this->req($method, $params);
         $this->dealFeed($feed);
