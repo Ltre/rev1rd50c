@@ -28,7 +28,6 @@ class TgDeal extends DIEntity {
         $message = $update['message'];
         $text = $message['text'];
         $chat = $message['chat'];
-        $from = $message['from'];
         $tg = new Tg;
         $me = $tg->getMe();
         if (preg_match('/^\/(\w+)@'.$me['username'].'/', $text, $matches)) {
