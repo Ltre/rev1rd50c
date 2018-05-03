@@ -15,6 +15,8 @@ class TgDispatch extends DIEntity {
             $message = $this->update['message'];
             if (isset($message['reply_to_message']) && isset($message['text'])) {
                 return 1;
+            } elseif (isset($message['entities'][0]) && $message['entities'][0]['type'] == 'bot_command' && isset($message['text'])) {
+                return 2;
             }
         }
     }
@@ -25,6 +27,9 @@ class TgDispatch extends DIEntity {
         switch ($analyzeFeed) {
             case 1:
                 $result = $deal->onReply($this->update);
+                break;
+            case 2:
+                $result = $deal->onCmd($this->update);
                 break;
         }
         if (@$result) {
