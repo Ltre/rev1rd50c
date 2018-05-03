@@ -14,12 +14,12 @@ class TgDo extends DIDo {
 
     //To set webhook
     function setHk(){
-        die;
         $tg = new Tg;
         $tg->setHk();
     }
 
     function callMethod(){
+        die;
         $tg = new Tg;
         dump($tg->callMethod(arg('method'), arg('params', [])));
     }
