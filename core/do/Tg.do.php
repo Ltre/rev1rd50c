@@ -4,7 +4,6 @@ class TgDo extends DIDo {
 
     //This is an webhook.
     function hk($secret){
-        die;
         $tg = new Tg;
         $update = file_get_contents( "php://input");
 // $update = '{"update_id":812401070,"message":{"message_id":19,"from":{"id":462394947,"is_bot":false,"first_name":"\u6a39\u9928\u9577","username":"sgz134","language_code":"zh-cn"},"chat":{"id":-275439610,"title":"\u673a\u5668\u4eba\u6d4b\u8bd5","type":"group","all_members_are_administrators":true},"date":1525248932,"text":"/jj@pinkjjbot","entities":[{"offset":0,"length":13,"type":"bot_command"}]}}';
