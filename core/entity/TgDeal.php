@@ -30,7 +30,7 @@ class TgDeal extends DIEntity {
         $chat = $message['chat'];
         $tg = new Tg;
         $me = $tg->getMe();
-        if (preg_match('/^\/(\w+)@'.$me['username'].'/', $text, $matches)) {
+        if (preg_match('/^\/(\w+)(@'.$me['username'].')?/', $text, $matches)) {
             switch ($matches[1]) {
                 case 'jj':
                     $list = ['轻点，疼，对，就这样，嗯.. 嗯.. 啊~~ 昂~~~', '快进来~~', '叫你妹啊!'];
