@@ -28,4 +28,8 @@ class TgDo extends DIDo {
         dump($tg->getMe());
     }
 
+    function view4sendMessage(){
+        $this->stpl();
+    }
+
 }
