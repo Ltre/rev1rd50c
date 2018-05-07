@@ -1,27 +1,27 @@
 用户活动流水
 user_log
 	log_id
-	user_id  message.from的user id
-	first_name 历史记录的用户first_name
-	last_name 历史记录的用户last_name
-	username 历史记录的用户username
+	user_id  message.from的user id          ［索引］
+	first_name 历史记录的用户first_name         ［索引］
+	last_name 历史记录的用户last_name           ［索引］
+	username 历史记录的用户username             ［索引］
 	raw_update 原始的hook更新串
-	chat_id 所在的群／频道／私聊id
-	chat_type 历史记录的聊天类型：“private”, “group”,“supergroup” or “channel”
-	chat_title 历史记录的聊天标题，仅限群和频道
-	chat_username	历史记录的私聊对方username(此解释可能不妥)
-	chat_first_name 历史记录的私聊对方first_name(此解释可能不妥)
-	chat_last_name 历史记录的私聊对方last_name(此解释可能不妥)
+	chat_id 所在的群／频道／私聊id              ［索引］
+	chat_type 历史记录的聊天类型：“private”, “group”,“supergroup” or “channel”   ［索引］
+	chat_title 历史记录的聊天标题，仅限群和频道         ［索引］
+	chat_username	历史记录的私聊对方username(此解释可能不妥)      ［索引］
+	chat_first_name 历史记录的私聊对方first_name(此解释可能不妥)     ［索引］
+	chat_last_name 历史记录的私聊对方last_name(此解释可能不妥)      ［索引］
 	chat_ description 历史记录的聊天描述，仅限群和频道
 	chat_invite_link 历史记录的群频道邀请链接
-	chat_message_id
+	chat_message_id                                 ［索引］
 	is_forward 判断message. forward_*字段是否存在
 	is_reply 是否为回复
 	reply_message_id 
 	message_text
 	is_join_group 判断message. new_chat_members是否存在
 	is_left_group 判断left_chat_member是否存在
-	date 秒级时间
+	date 秒级时间                                       ［索引］
 	
 	
 	
