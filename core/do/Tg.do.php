@@ -29,7 +29,7 @@ class TgDo extends DIDo {
     }
 
     function view4sendMessage(){
-        $this->stpl();
+        @$this->stpl();
     }
 
 }

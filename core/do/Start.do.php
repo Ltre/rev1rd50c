@@ -3,7 +3,7 @@
 class StartDo extends DIDo {
 
     function index(){
-        $this->stpl();
+        @$this->stpl();
     }
 
     function start(){
@@ -17,7 +17,7 @@ class StartDo extends DIDo {
         ]);
         $this->list = $ret['list'];
         $this->pages = $ret['pages'];
-        $this->stpl();
+        @$this->stpl();
     }
 
     function article($articleId){
@@ -27,7 +27,7 @@ class StartDo extends DIDo {
         }
         $article['images'] = empty($article['images']) ? [] : unserialize($article['images']);
         $this->article = $article;
-        $this->stpl();
+        @$this->stpl();
     }
 
 }

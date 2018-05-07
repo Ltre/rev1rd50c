@@ -40,5 +40,45 @@ NameVirtualHost rev1rd50c.me:80
 
 --------------------------------------------------------------
 
-Nginx: putes-ym-spv rof
+Nginx: for mac os
 
+server {
+listen 80;
+server_name rev1rd50c.me;
+access_log /Users/Ltre/mydir/nginx-wwwlogs/rev1rd50c.me.log combined;
+index index.html index.htm index.jsp index.php;
+#include other.conf;
+root /Users/Ltre/mydir/projects/rev1rd50c;
+#error_page 404 /404.html;
+if ( $query_string ~* ".*[\;'\<\>].*" ){
+        return 404;
+        }
+
+location / {
+        if (!-e $request_filename) {
+                rewrite ~*. /index.php last;
+                }
+        }
+
+location ~ .*\.(wma|wmv|asf|mp3|mmf|zip|rar|jpg|gif|png|swf|flv)$ {
+        valid_referers none blocked rev1rd50c.me;
+        if ($invalid_referer) {
+                #rewrite ^/ http://www.linuxeye.com/403.html;
+                return 403;
+                }
+        }
+location ~ .*\.(php|php5)?$  {
+        fastcgi_pass 127.0.0.1:9000;
+        #fastcgi_pass unix:/dev/shm/php-cgi.sock;
+        fastcgi_index index.php;
+        include /usr/local/etc/nginx/fastcgi.conf;
+        }
+
+location ~ .*\.(gif|jpg|jpeg|png|bmp|swf|flv|ico)$ {
+        expires 30d;
+        }
+
+location ~ .*\.(js|css)?$ {
+        expires 7d;
+        }
+}
