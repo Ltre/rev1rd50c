@@ -20,7 +20,7 @@ class TgDo extends DIDo {
 
     function callMethod(){
         $tg = new Tg;
-        dump($tg->callMethod(arg('method'), arg('params', [])));
+        putjson(0, $tg->callMethod(arg('method'), arg('params', [])));
     }
 
     function getMe(){
