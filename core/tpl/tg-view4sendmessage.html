@@ -10,8 +10,15 @@
             <form action="/tg/callMethod" target="ii">
                 <input type="hidden" name="method" value="sendMessage">
                 <div class="form-group">
-                  <label for="exampleInputEmail1">chat_id</label><!-- 诈骗预警通报：-1001219575167 -->
-                  <input name="params[chat_id]" type="text" class="form-control" id="chat_id" aria-describedby="emailHelp" placeholder="" value="-1001389039341">
+                  <label for="exampleInputEmail1">chat_id</label><!-- 诈骗预警通报：-1001219575167 ; 污点记录-孙伟伟：-1001331726577 ; 手撕孙伟伟：-1001190956164 ; 零花群：-1001152891459 -->
+                  <!-- <input name="params[chat_id]" type="text" class="form-control" id="chat_id" aria-describedby="emailHelp" placeholder="" value="-1001389039341"> -->
+                  <select name="params[chat_id]" id="chat_id" class="form-control">
+                      <option value="-1001389039341">机器人测试</option>
+                      <option value="-1001219575167">诈骗预警通报</option>
+                      <option value="-1001331726577">污点记录-孙伟伟</option>
+                      <option value="-1001190956164">手撕孙伟伟</option>
+                      <option value="-1001152891459">零花群</option>
+                  </select>
                 </div>
                 <div class="form-group">
                   <label for="exampleInputEmail1">text</label>
@@ -42,7 +49,6 @@
 
         <script>
         $("form").submit(function(){
-            alert(1)
             api='/tg/callMethod';
             params = {
                 chat_id: $("#chat_id").val(),
@@ -54,10 +60,9 @@
             $.post(api, {
                 method: "sendMessage",
                 params: params
-            }, function(r){
-                alert(r);
-            });
-            alert(2)
+            }, function(j){
+                $('iframe').replaceWith('<div>'+ JSON.stringify(j) +'</div>')
+            }, 'json');
             return false;
         })
         </script>
