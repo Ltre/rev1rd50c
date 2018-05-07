@@ -19,7 +19,7 @@
                 </div>
                 <div class="form-group">
                   <label for="exampleInputEmail1">disable_web_page_preview</label>
-                  <input name="params[disable_web_page_preview]" type="text" class="form-control" id="disable_web_page_preview" aria-describedby="emailHelp" placeholder="" value=false>
+                  <input name="params[disable_web_page_preview]" type="checkbox" id="disable_web_page_preview" aria-describedby="emailHelp" placeholder="">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">parse_mode</label>
@@ -39,6 +39,29 @@
         </div>
 
         <iframe id="ii" name="ii" style="width:720px; height: 300px;"></iframe>
+
+        <script>
+        $("form").submit(function(){
+            alert(1)
+            api='/tg/callMethod';
+            params = {
+                chat_id: $("#chat_id").val(),
+                text: $("#text").val(),
+                disable_web_page_preview: $("#disable_web_page_preview").is(":checked"),
+                parse_mode: $("#parse_mode").val(),
+                reply_to_message_id: $("#reply_to_message_id").val()
+            };
+            $.post(api, {
+                method: "sendMessage",
+                params: params
+            }, function(r){
+                alert(r);
+            });
+            alert(2)
+            return false;
+        })
+        </script>
+
 
 <pre>
 ``
