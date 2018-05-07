@@ -138,7 +138,7 @@ class Tg extends DIEntity {
     //@todo 考虑是否支持第三个参数$cache：控制缓存：no-绕过，update-立即刷新，default-使用已有缓存
     function callMethod($method, array $params){
         $feed = $this->req($method, $params);
-        $this->dealFeed($feed);
+        // $this->dealFeed($feed);
         list ($ok, $response) = $feed;
         return [$ok, $response];
     }
