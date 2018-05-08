@@ -445,6 +445,7 @@ class TestDo extends DIDo{
 	function hehe(){
 		Tg::inst('pinkjj');
 		Tg::inst('pinkjj');
+		Tg::inst('zcg');
 		die;
 	}
 	

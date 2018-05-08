@@ -6,18 +6,41 @@ class Tg extends DIEntity {
 
     protected $http;
 
+    protected $hdl;
+
     protected $token = "TjIb~3Zc(aT7XQF0)m_q.aJhVM'z(dLfAi*4Yc_0Zm@z*kSm*eQdM0Hb~q)~GmJnSeB1Xn)vc9*3ZX_~RJa2c4!@zzAsb6";
 
     protected $hk = "OuUD~mZX(4@KGdVgHF*3v9!Eqe'1-FykLgk2r0sfB9BdUI'1MgC6)zO9OM!2G1)*_7McCz!2Fd_IWtXuve";
 
-    function __construct(){
+
+    /**
+     * 创建一个机器人对应的tg实例
+     *
+     * @param string $hdl
+     * @return Tg
+     */
+    static function inst($hdl){
+        static $objs = [];
+        if (! isset($objs[$hdl])) {
+            $objs[$hdl] = new self($hdl);
+        }
+        return $objs[$hdl];
+    }
+
+
+    function __construct($hdl){
+        if (! isset($GLOBALS['tg']['bot_tokens'][$hdl])) {
+            throw new DIException("tg.bot_tokens.{$hdl} is not found!");
+        }
+        $token = $GLOBALS['tg']['bot_tokens'][$hdl];
         $this->http = new dwHttp;
-        $this->token = ltreDeCrypt($this->token);
+        $this->hdl = $hdl;
+        $this->token = ltreDeCrypt($token);
     }
 
 
     protected function log($msg){
-        file_put_contents(DI_DATA_PATH.'cache/tg.log', "{$msg}\r\n", FILE_APPEND);
+        file_put_contents(DI_DATA_PATH."log/tg.{$this->hdl}.".date('Ymd').".log", "{$msg}\r\n", FILE_APPEND);
     }
 
 
@@ -50,7 +73,7 @@ class Tg extends DIEntity {
 
     //获取回调webhook时用的secret，本secret由我方系统生成，具有有效期
     protected function getHkSecret(){
-        $secretFile = DI_DATA_PATH.'cache/tg.hk.secret';
+        $secretFile = DI_DATA_PATH."cache/tg.{$this->hdl}.hk.secret";
         @$secretData = unserialize(file_get_contents($secretFile)) ?: ["", 0];
         list ($secret, $expire) = $secretData;
         if (time() >= $expire) {
@@ -65,8 +88,7 @@ class Tg extends DIEntity {
     //这个需要上定时任务，刷新tg官方回调的webhook url所用的secret部分
     function setHk(){
         $secret = $this->getHkSecret();
-        // $url = ltreDeCrypt($this->hk.'/'.$secret);
-        $url = ltreDeCrypt($this->hk).'/'.$secret;
+        $url = ltreDeCrypt($this->hk)."/{$this->hdl}/{$secret}";
         $feed = $this->req('setWebhook', ['url' => $url]);
         $this->dealFeed($feed);
         list ($ok, $response) = $feed;
