@@ -441,5 +441,11 @@ class TestDo extends DIDo{
 	    import('ApiMerge');
 	    ApiMergeTest::test7();//1 ~ 7
 	}
+
+	function hehe(){
+		Tg::inst('pinkjj');
+		Tg::inst('pinkjj');
+		die;
+	}
 	
 }
