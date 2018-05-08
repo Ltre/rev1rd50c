@@ -1,6 +1,7 @@
 用户活动流水
 user_log
 	log_id
+	bot_id 收集此信息的bot
 	user_id  message.from的user id          ［索引］
 	first_name 历史记录的用户first_name         ［索引］
 	last_name 历史记录的用户last_name           ［索引］
