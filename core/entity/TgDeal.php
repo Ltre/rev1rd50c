@@ -30,19 +30,22 @@ class TgDeal extends DIEntity {
         $chat = $message['chat'];
         $tg = new Tg;
         $me = $tg->getMe();
+        $responseText = null;
         if (preg_match('/^\/(\w+)(@'.$me['username'].')?/', $text, $matches)) {
             switch ($matches[1]) {
                 case 'jj':
                     $list = ['轻点，疼，对，就这样，嗯.. 嗯.. 啊~~ 昂~~~', '快进来~~', '叫你妹啊!'];
-                    $text = $list[rand(0, count($list)-1)];
+                    $responseText = $list[rand(0, count($list)-1)];
                     break;
             }
         }
-        return $tg->callMethod('sendMessage', [
-            'chat_id' => $chat['id'],
-            'text' => $text,
-            'reply_to_message_id' => $message['message_id'],
-        ]);
+        if ($responseText) {
+            return $tg->callMethod('sendMessage', [
+                'chat_id' => $chat['id'],
+                'text' => $responseText,
+                'reply_to_message_id' => $message['message_id'],
+            ]);
+        }
     }
     
 }
