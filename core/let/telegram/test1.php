@@ -1,5 +1,5 @@
 <?php
-
+//文档：https://docs.madelineproto.xyz/
 import('madelineproto/lib-dl');
 
 $MadelineProto = new \danog\MadelineProto\API('session.madeline');
