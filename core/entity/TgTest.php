@@ -36,8 +36,9 @@ class TgTest extends DIEntity {
             }
         }
     }
-    
-    static function store($key, $content = null){
+
+
+    private static function store($key, $content = null){
         $file = DI_CACHE_PATH."wechat.samplemsg.{$key}";
         if (null === $content) return @unserialize(file_get_contents($file)) ?: null;
         else file_put_contents($file, serialize($content));
