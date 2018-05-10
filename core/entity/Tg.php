@@ -132,16 +132,16 @@ class Tg extends DIEntity {
     function hk($secret, array $update){
         $ourSecret = $this->getHkSecret();
         if ($secret != $ourSecret) {
-            die('Invalid callback to webhook!');
+            // die('Invalid callback to webhook!');
         }
-        $dp = new TgDispatch($update);
-        $feed = $dp->analyze();
-        $dp->dispatch($feed);
+        $dp = TgDispatch::inst($this->hdl);
+        $feed = $dp->analyze($update);
+        $dp->dispatch($feed, $update);
     }
 
 
     function getMe(){
-        $meFile = DI_DATA_PATH.'cache/tg.me';
+        $meFile = DI_DATA_PATH."cache/tg.{$this->hdl}.me";
         @$meData = unserialize(file_get_contents($meFile)) ?: ["", 0];
         list ($me, $expire) = $meData;
         if (time() >= $expire) {

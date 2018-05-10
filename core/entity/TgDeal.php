@@ -5,12 +5,34 @@
  */
 class TgDeal extends DIEntity {
 
+    protected $hdl;
+
+    /**
+     * 创建一个机器人对应的TgDeal实例
+     *
+     * @param string $hdl
+     * @return TgDeal
+     */
+    static function inst($hdl){
+        static $objs = [];
+        if (! isset($objs[$hdl])) {
+            $objs[$hdl] = new self($hdl);
+        }
+        return $objs[$hdl];
+    }
+
+
+    function __construct($hdl){
+        $this->hdl = $hdl;
+    }
+
+
     function onReply(array $update){
         $message = $update['message'];
         $text = $message['text'];
         $chat = $message['chat'];
         $from = $message['from'];
-        $tg = new Tg;
+        $tg = Tg::inst($this->hdl);
         $me = $tg->getMe();
         $tg->log("get reply_to_message.from.id: {$message['reply_to_message']['from']['id']}");
         $tg->log("get me.id: {$me['id']}");
@@ -28,7 +50,7 @@ class TgDeal extends DIEntity {
         $message = $update['message'];
         $text = $message['text'];
         $chat = $message['chat'];
-        $tg = new Tg;
+        $tg = Tg::inst($this->hdl);
         $me = $tg->getMe();
         $responseText = null;
         if (preg_match('/^\/(\w+)(@'.$me['username'].')?/', $text, $matches)) {

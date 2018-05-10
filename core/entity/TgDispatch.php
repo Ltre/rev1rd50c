@@ -4,15 +4,32 @@
  */
 class TgDispatch extends DIEntity {
 
-    protected $update;
+    protected $hdl;
 
-    function __construct(array $update){
-        $this->update = $update;
+    /**
+     * 创建一个机器人对应的TgDispatch实例
+     *
+     * @param string $hdl
+     * @return TgDispatch
+     */
+    static function inst($hdl){
+        static $objs = [];
+        if (! isset($objs[$hdl])) {
+            $objs[$hdl] = new self($hdl);
+        }
+        return $objs[$hdl];
     }
 
-    function analyze(){
-        if (isset($this->update['message'])) {
-            $message = $this->update['message'];
+
+    function __construct($hdl){
+        $this->hdl = $hdl;
+    }
+
+
+    //分析机器人收到的数据，@todo 根据$this->hdl区分分析过程，以便于机器人行为多样化的实现
+    function analyze(array $update){
+        if (isset($update['message'])) {
+            $message = $update['message'];
             if (isset($message['reply_to_message']) && isset($message['text'])) {
                 return 1;
             } elseif (isset($message['entities'][0]) && $message['entities'][0]['type'] == 'bot_command' && isset($message['text'])) {
@@ -22,14 +39,15 @@ class TgDispatch extends DIEntity {
     }
 
 
-    function dispatch($analyzeFeed){
-        $deal = new TgDeal;
+    //分派到具体的处理逻辑中，@todo 根据$this->hdl区分分派路由，以便机器人行为多样化的实现
+    function dispatch($analyzeFeed, $update){
+        $deal = TgDeal::inst($this->hdl);
         switch ($analyzeFeed) {
             case 1:
-                $result = $deal->onReply($this->update);
+                @$result = $deal->onReply($update);
                 break;
             case 2:
-                $result = $deal->onCmd($this->update);
+                $result = $deal->onCmd($update);
                 break;
         }
         if (@$result) {
