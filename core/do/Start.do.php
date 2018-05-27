@@ -3,6 +3,7 @@
 class StartDo extends DIDo {
 
     function index(){
+        $this->cd = ltreDeCrypt("A9OA'EGoNm_u~zu6G4");
         @$this->stpl();
     }
 
