@@ -69,5 +69,26 @@ class TgDeal extends DIEntity {
             ]);
         }
     }
+
+
+    function onNewChatMember(array $update){
+        $message = $update['message'];
+        $chat = $message['chat'];
+        $member = $message['new_chat_member'];
+        $tg = Tg::inst($this->hdl);
+        if ($chat['id'] == '-1001377141307') {
+            @$name = str_replace(
+                ['(', ')', '`', '*', '[', ']', '"', "'", ':', ';', '!', '~', '@', '#', '$', '%', '^', '&', '-', '=', '{', '}', '|', '/', ',', '.', '?', '\\', '_', '+'],
+                ['（', '）', '·', '＊', '［', '］', '＂', "＇", '：', '；', '！', '～', '＠', '＃', '＄', '％', '＾', '＆', '－', '＝', '｛', '｝', '｜', '／', '，', '．', '？', '＼', '＿', '＋'],
+                $member['first_name'].$member['last_name']
+            );
+            return $tg->callMethod('sendMessage', [
+                'chat_id' => $chat['id'],
+                'text' => "`` 欢迎新傻逼: [{$name}]((tg://user?id={$member['chat_id']}))",
+                'reply_to_message_id' => $message['message_id'],
+                'parse_mode' => 'Markdown',
+            ]);
+        }
+    }
     
 }

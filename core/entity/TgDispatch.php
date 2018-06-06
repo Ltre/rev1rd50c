@@ -34,6 +34,8 @@ class TgDispatch extends DIEntity {
                 return 1;
             } elseif (isset($message['entities'][0]) && $message['entities'][0]['type'] == 'bot_command' && isset($message['text'])) {
                 return 2;
+            } elseif (isset($message['new_chat_member'])) {
+                return 3;
             }
         }
     }
@@ -48,6 +50,9 @@ class TgDispatch extends DIEntity {
                 break;
             case 2:
                 $result = $deal->onCmd($update);
+                break;
+            case 3:
+                $result = $deal->onNewChatMember($update);
                 break;
         }
         if (@$result) {
