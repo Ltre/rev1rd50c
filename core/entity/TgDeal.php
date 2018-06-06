@@ -84,7 +84,7 @@ class TgDeal extends DIEntity {
             );
             return $tg->callMethod('sendMessage', [
                 'chat_id' => $chat['id'],
-                'text' => "`` 欢迎新傻逼: [{$name}]((tg://user?id={$member['chat_id']}))",
+                'text' => "`` 欢迎新傻逼: [{$name}]((tg://user?id={$member['id']}))",
                 'reply_to_message_id' => $message['message_id'],
                 'parse_mode' => 'Markdown',
             ]);
