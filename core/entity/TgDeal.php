@@ -75,19 +75,19 @@ class TgDeal extends DIEntity {
         $message = $update['message'];
         $chat = $message['chat'];
         $member = $message['new_chat_member'];
+        $text = $message['text'];
         $tg = Tg::inst($this->hdl);
-        if ($chat['id'] == '-1001377141307') {
-            @$name = str_replace(
-                ['(', ')', '`', '*', '[', ']', '"', "'", ':', ';', '!', '~', '@', '#', '$', '%', '^', '&', '-', '=', '{', '}', '|', '/', ',', '.', '?', '\\', '_', '+'],
-                ['（', '）', '·', '＊', '［', '］', '＂', "＇", '：', '；', '！', '～', '＠', '＃', '＄', '％', '＾', '＆', '－', '＝', '｛', '｝', '｜', '／', '，', '．', '？', '＼', '＿', '＋'],
-                $member['first_name'].$member['last_name']
-            );
-            return $tg->callMethod('sendMessage', [
-                'chat_id' => $chat['id'],
-                'text' => "`` 欢迎新傻逼: [{$name}]((tg://user?id={$member['id']})",
-                'reply_to_message_id' => $message['message_id'],
-                'parse_mode' => 'Markdown',
-            ]);
+        $me = $tg->getMe();
+        if (preg_match('/^\/(\w+)(@'.$me['username'].')?/', $text, $matches)) {
+            if ($matches[1] == 'jj' && $chat['id'] == '-1001377141307') {
+                @$name = TgUtil::specialTextFilter($member['first_name'].$member['last_name'], 'Markdown');
+                return $tg->callMethod('sendMessage', [
+                    'chat_id' => $chat['id'],
+                    'text' => "`` 欢迎新傻逼: [{$name}]((tg://user?id={$member['id']})",
+                    'reply_to_message_id' => $message['message_id'],
+                    'parse_mode' => 'Markdown',
+                ]);
+            }
         }
     }
     
