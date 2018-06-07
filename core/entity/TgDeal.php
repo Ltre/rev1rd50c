@@ -80,7 +80,7 @@ class TgDeal extends DIEntity {
             @$name = TgUtil::specialTextFilter($member['first_name'].$member['last_name'], 'Markdown');
             return $tg->callMethod('sendMessage', [
                 'chat_id' => $chat['id'],
-                'text' => "`` 欢迎新傻逼: [{$name}]((tg://user?id={$member['id']})",
+                'text' => "`` 欢迎新傻逼: [{$name}]((tg://user?id={$member['id']}).\n欢迎费用：*10傻币/次*（代扣100智商，自动兑换傻币支付）",
                 'reply_to_message_id' => $message['message_id'],
                 'parse_mode' => 'Markdown',
             ]);
