@@ -74,6 +74,7 @@ class TgDeal extends DIEntity {
                 'chat_id' => $chat['id'],
                 'text' => $responseText,
                 'reply_to_message_id' => $message['message_id'],
+                'parse_mode' => 'Markdown',
             ]);
         }
     }
