@@ -443,6 +443,25 @@ class TestDo extends DIDo{
 	}
 
 	function hehe(){
+		$hdl = 'pinkjj';
+		$td = TgDeal::inst($hdl);
+		$td->onNewChatMember([
+			'message' => [
+				'chat' => [
+					'id'=> '-1001377141307', 'title'=> "傻逼群", 'username'=> "shabisb", 'type'=> "supergroup",
+				],
+				'date' => 1528363725,
+				'from' => ['first_name' => 'fdaf', 'id' => '566169252', 'is_bot' => false],
+				'message_id' => 1720,
+				'new_chat_member' => ['first_name' => 'fdaf', 'id' => '566169252', 'is_bot' => false],
+				'new_chat_members' => [
+					['first_name' => 'fdaf', 'id' => '566169252', 'is_bot' => false],
+				],
+				'new_chat_participant' => ['first_name' => 'fdaf', 'id' => '566169252', 'is_bot' => false],
+			],
+			'update_id' => 781348117,
+		]);
+		die;
 		Tg::inst('pinkjj');
 		Tg::inst('pinkjj');
 		Tg::inst('zcg');
