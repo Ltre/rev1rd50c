@@ -50,15 +50,23 @@ class TgDeal extends DIEntity {
         $message = $update['message'];
         $text = $message['text'];
         $chat = $message['chat'];
+        $from = $message['from'];
         $tg = Tg::inst($this->hdl);
         $me = $tg->getMe();
         $responseText = null;
         if (preg_match('/^\/(\w+)(@'.$me['username'].')?/', $text, $matches)) {
-            switch ($matches[1]) {
-                case 'jj':
-                    $list = ['轻点，疼，对，就这样，嗯.. 嗯.. 啊~~ 昂~~~', '快进来~~', '叫你妹啊!'];
-                    $responseText = $list[rand(0, count($list)-1)];
-                    break;
+            if ($this->hdl == 'pinkjj') {
+                switch ($matches[1]) {
+                    case 'jj':
+                        $list = ['轻点，疼，对，就这样，嗯.. 嗯.. 啊~~ 昂~~~', '快进来~~', '叫你妹啊!'];
+                        $responseText = $list[rand(0, count($list)-1)];
+                        break;
+                    case 'iq':
+                        @$name = TgUtil::specialTextFilter($from['first_name'].$from['last_name'], 'Markdown');
+                        $mention = "[{$name}]((tg://user?id={$from['id']})";
+                        $responseText = "`` {$mention} 的当前智商是：".intval(rand(0, 200));
+                        break;
+                }
             }
         }
         if ($responseText) {
