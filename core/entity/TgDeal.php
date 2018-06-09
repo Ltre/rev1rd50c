@@ -63,7 +63,7 @@ class TgDeal extends DIEntity {
                         break;
                     case 'iq':
                         @$name = TgUtil::specialTextFilter($from['first_name'].$from['last_name'], 'Markdown');
-                        $mention = "[{$name}]((tg://user?id={$from['id']})";
+                        $mention = "[{$name}](tg://user?id={$from['id']})";
                         $responseText = "`` {$mention} 的当前智商是：".intval(rand(0, 200));
                         break;
                 }
@@ -71,7 +71,7 @@ class TgDeal extends DIEntity {
                 switch ($matches[1]) {
                     case 'imsb': 
                         @$name = TgUtil::specialTextFilter($from['first_name'].$from['last_name'], 'Markdown');
-                        $mention = "[{$name}]((tg://user?id={$from['id']})";
+                        $mention = "[{$name}](tg://user?id={$from['id']})";
                         $list = [
                             "发出了“我是傻逼”的声音！", "说：我是傻逼.", "叫道：我是傻大逼！", "辩称：和我比傻逼，你输定了！", 
                             "反问道：你有我傻逼？", "小声逼逼道：我是新来的傻逼", "说：我从来没见过比我更傻逼的..", 
