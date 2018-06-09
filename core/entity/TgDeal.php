@@ -91,7 +91,7 @@ class TgDeal extends DIEntity {
             } elseif ($this->hdl == 'sbsww') {
                 switch ($matches[1]) {
                     case 'sbsww':
-                        $responseText = "@yangwei_club 灵堂追悼！";
+                        $responseText = "`` @yangwei_club 灵堂追悼！";
                         break;
                 }
             }
