@@ -140,5 +140,35 @@ class TgDeal extends DIEntity {
             ]);
         }
     }
+
+
+    function onPrivateForwardFrom(array $update){
+        $message = $update['message'];
+        $ffw = $message['forward_from'];
+        @$name = TgUtil::specialTextFilter($ffw['first_name'].$ffw['last_name']);
+        @$response1 = "``id: {$ffw['id']}\nfirst: {$ffw['first_name']}\nlast: {$ffw['last_name[']}\nusername: {$ffw['username']}\nis_bot: {$ffw['is_bot']}\n[{$name}](tg://user?id={$ffw['id']})";
+        @$response2 = "``[{$name}](tg://user?id={$ffw['id']})";
+        $tg = Tg::inst($this->hdl);
+        //返回多行详细信息
+        $tg->callMethod('sendMessage', [
+            'chat_id' => $message['chat']['id'],
+            'text' => $response1,
+            'reply_to_message_id' => $message['message_id'],
+            'parse_mode' => 'Markdown',
+        ]);
+        //返回mention
+        $tg->callMethod('sendMessage', [
+            'chat_id' => $message['chat']['id'],
+            'text' => $response2,
+            'reply_to_message_id' => $message['message_id'],
+            'parse_mode' => 'Markdown',
+        ]);
+        //返回mention前的字符串
+        $tg->callMethod('sendMessage', [
+            'chat_id' => $message['chat']['id'],
+            'text' => $response2,
+            'reply_to_message_id' => $message['message_id'],
+        ]);
+    }
     
 }
