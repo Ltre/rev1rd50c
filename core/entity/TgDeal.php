@@ -97,10 +97,10 @@ class TgDeal extends DIEntity {
             } elseif ($this->hdl == 'ganmom') {
                 switch ($matches[1]) {
                     case 'gan':
-                        $responseText = "这个是脏话，小孩子不可以乱讲！";
+                        $responseText = "`` 这个是脏话，[小孩子](tg://user?id={$chat['id']})不可以乱讲！";
                         break;
                     case 'jby':
-                        $responseText = "好了，你不要再讲了！";
+                        $responseText = "`` 好了，[你](tg://user?id={$chat['id']})不要再讲了！";
                         break;
                     case 'fuckstop':
                         return $tg->callMethod('sendVideo', [
