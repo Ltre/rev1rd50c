@@ -148,7 +148,7 @@ class TgDeal extends DIEntity {
         if ($this->hdl == 'pinkjj') {
             @$name = TgUtil::specialTextFilter($ffw['first_name'].$ffw['last_name']);
             //@$response1 = "`` id: {$ffw['id']}\n first: {$ffw['first_name']}\n last: {$ffw['last_name[']}\n username: {$ffw['username']}\n is_bot: {$ffw['is_bot']}\n [{$name}](tg://user?id={$ffw['id']})";
-            @$response1 = "``id: {$ffw['id']}\nfirst: {$ffw['first_name']}\nlast: {$ffw['last_name[']}\nusername: {$ffw['username']}\nis_bot: {$ffw['is_bot']}";
+            @$response1 = "id: {$ffw['id']}\nfirst: {$ffw['first_name']}\nlast: {$ffw['last_name[']}\nusername: {$ffw['username']}\nis_bot: {$ffw['is_bot']}";
             @$response2 = "``[{$name}](tg://user?id={$ffw['id']})";
             $tg = Tg::inst($this->hdl);
             //返回多行详细信息
