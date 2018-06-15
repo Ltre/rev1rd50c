@@ -28,4 +28,34 @@ class TgDo extends DIDo {
         @$this->stpl();
     }
 
+    function login($auth = ''){
+        if ($auth == 'auth') {
+            try {
+                $auth_data = TgLogin::checkTelegramAuthorization('ganmom', $_GET);
+                TgLogin::saveTelegramUserData($auth_data);
+            } catch (Exception $e) {
+                die ($e->getMessage());
+            }
+            header('Location: /tg/login');
+            exit;
+        } elseif ($auth == 'logout') {
+            setcookie('tg_user', '');
+            header('Location: /tg/login');
+            exit;
+        } else {
+            $tg_user = TgLogin::getTelegramUserData();
+            if ($tg_user === false) {
+                $this->botname = 'ganmom_bot';
+                $this->stpl();
+            } else {
+                $first_name = htmlspecialchars($tg_user['first_name']);
+                @$last_name = htmlspecialchars($tg_user['last_name']);
+                @$username = htmlspecialchars($tg_user['username']?:'');
+                @$photo_url = htmlspecialchars($tg_user['photo_url']?:'');
+                echo "<html><head><meta charset='utf-8'></head><body>first_name: {$first_name}, last:name: {$last_name}, username: {$username}, photo: <img src='{$photo_url}'><a href='/tg/login/logout'>退出</a></body></html>";
+            }
+            exit;
+        }
+    }
+
 }
