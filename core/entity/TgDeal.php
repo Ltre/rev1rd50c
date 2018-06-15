@@ -172,7 +172,6 @@ class TgDeal extends DIEntity {
                 'text' => $response2,
                 'reply_to_message_id' => $message['message_id'],
             ]);
-            usleep(500);
         }
     }
     
