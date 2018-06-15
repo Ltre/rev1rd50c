@@ -147,7 +147,8 @@ class TgDeal extends DIEntity {
         $ffw = $message['forward_from'];
         if ($this->hdl == 'pinkjj') {
             @$name = TgUtil::specialTextFilter($ffw['first_name'].$ffw['last_name']);
-            @$response1 = "`` id: {$ffw['id']}\n first: {$ffw['first_name']}\n last: {$ffw['last_name[']}\n username: {$ffw['username']}\n is_bot: {$ffw['is_bot']}\n [{$name}](tg://user?id={$ffw['id']})";
+            //@$response1 = "`` id: {$ffw['id']}\n first: {$ffw['first_name']}\n last: {$ffw['last_name[']}\n username: {$ffw['username']}\n is_bot: {$ffw['is_bot']}\n [{$name}](tg://user?id={$ffw['id']})";
+            @$response1 = "``id: {$ffw['id']}\nfirst: {$ffw['first_name']}\nlast: {$ffw['last_name[']}\nusername: {$ffw['username']}\nis_bot: {$ffw['is_bot']}";
             @$response2 = "``[{$name}](tg://user?id={$ffw['id']})";
             $tg = Tg::inst($this->hdl);
             //返回多行详细信息
@@ -155,7 +156,7 @@ class TgDeal extends DIEntity {
                 'chat_id' => $message['chat']['id'],
                 'text' => $response1,
                 'reply_to_message_id' => $message['message_id'],
-                'parse_mode' => 'Markdown',
+                //'parse_mode' => 'Markdown',
             ]);
             usleep(500);
             //返回mention
