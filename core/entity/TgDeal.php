@@ -94,6 +94,18 @@ class TgDeal extends DIEntity {
                         $responseText = "`` [灵堂追悼](https://t.me/yangwei_club) ！";
                         break;
                 }
+            } elseif ($this->hdl == 'ganmom') {
+                switch ($matches[1]) {
+                    case 'gan':
+                        $responseText = "这个是脏话，小孩子不可以乱讲！";
+                        break;
+                    case 'jby':
+                        $responseText = "好了，你不要再讲了！";
+                        break;
+                    case 'fuckstop':
+                        $responseText = "鸡掰！";
+                        break;
+                }
             }
         }
         if ($responseText) {
