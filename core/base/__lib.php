@@ -126,7 +126,7 @@ function __autoload( $class_name ){
 		eval("class $class_name {}");
 	}
 } */
-function __autoload( $class_name ){
+spl_autoload_register(function($class_name){
     $aap = DIIncludeConfig::DI_SPCL_AUTOLOAD_PATH();
     $pos = false;
     $name = ''; $path = '';
@@ -165,9 +165,9 @@ function __autoload( $class_name ){
         $msg = "类[ $class_name ]不存在";
         throw new DIException($msg);
     }
-}
+});
 // 强制注册__autoload，防止无法加载
-spl_autoload_register('__autoload');
+// spl_autoload_register('__autoload');
 
 
 /**
