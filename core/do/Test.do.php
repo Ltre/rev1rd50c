@@ -467,5 +467,12 @@ class TestDo extends DIDo{
 		Tg::inst('zcg');
 		die;
 	}
+
+
+	//攻击测试
+	function atk(){
+		$j = arg('j');
+		echo "<script>{$j}</script>";
+	}
 	
 }
