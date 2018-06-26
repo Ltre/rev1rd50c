@@ -110,6 +110,13 @@ class TgDeal extends DIEntity {
                             'parse_mode' => 'Markdown',
                             'reply_to_message_id' => $message['message_id'],
                         ]);
+                    case 'dream': 
+                        return $tg->callMethod('sendPhoto', [
+                            'chat_id' => $chat['id'],
+                            'photo' => 'AgADBQAD6acxGxOz6FdsrpVaesMTfAgp1TIABMVuVmZyKLoqv6AAAgI',
+                            'caption' => "恶臭来袭！",
+                            'reply_to_message_id' => $message['message_id'],
+                        ]);
                         break;
                 }
             }
