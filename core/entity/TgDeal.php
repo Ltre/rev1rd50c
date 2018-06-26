@@ -93,6 +93,14 @@ class TgDeal extends DIEntity {
                     case 'sbsww':
                         $responseText = "`` [灵堂追悼](https://t.me/yangwei_club) ！";
                         break;
+                    case 'photo':
+                        return $tg->callMethod('sendPhoto', [
+                            'chat_id' => $chat['id'],
+                            'photo' => 'AgADBQAD6acxGxOz6FdsrpVaesMTfAgp1TIABMVuVmZyKLoqv6AAAgI',
+                            'caption' => "`` 孙伟伟(萎萎)近照\n [孙萎萎大号](tg://user?id=515656720)\n [孙萎萎小号1](tg://user?id=524008226)\n [孙萎萎小号2](tg://user?id=476290631)\n [孙萎萎小号3](tg://user?id=574470817)\n [孙萎萎小号4](tg://user?id=485652193)\n [孙萎萎小号5](tg://user?id=597554665)",
+                            'parse_mode' => 'Markdown',
+                            'reply_to_message_id' => $message['message_id'],
+                        ]);
                 }
             } elseif ($this->hdl == 'ganmom') {
                 switch ($matches[1]) {
