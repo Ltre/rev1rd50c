@@ -197,7 +197,7 @@ class TgDeal extends DIEntity {
         $member = $message['left_chat_member'];
         $chat = $message['chat'];
         $tg = Tg::inst($this->hdl);
-        if ($this->hdl == 'shabisb' && $chat['id'] == '-1001377141307') {//傻逼群
+        if ($this->hdl == 'shabisb' && $chat['id'] == '-1001389039341') {//傻逼群
             @$name = TgUtil::specialTextFilter($member['first_name'].$member['last_name'], 'Markdown');
             $tg->callMethod('sendMessage', [
                 'chat_id' => $message['chat']['id'],

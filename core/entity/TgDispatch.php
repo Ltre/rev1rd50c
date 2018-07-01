@@ -63,6 +63,7 @@ class TgDispatch extends DIEntity {
                 break;
             case 5:
                 $result = $deal->onLeftChatMember($update);
+                break;
         }
         if (@$result) {
             $this->log(__CLASS__.__FUNCTION__, print_r($result, 1));
