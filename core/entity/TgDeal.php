@@ -145,11 +145,11 @@ class TgDeal extends DIEntity {
         $chat = $message['chat'];
         $member = $message['new_chat_member'];
         $tg = Tg::inst($this->hdl);
-        if ($this->hdl == 'pinkjj' && $chat['id'] == '-1001377141307') {
+        if ($this->hdl == 'pinkjj' && $chat['id'] == '-1001377141307') {//傻逼群
             @$name = TgUtil::specialTextFilter($member['first_name'].$member['last_name'], 'Markdown');
             return $tg->callMethod('sendMessage', [
                 'chat_id' => $chat['id'],
-                'text' => "`` 欢迎新傻逼: [{$name}]((tg://user?id={$member['id']}).\n欢迎费用：*10傻币/次*（代扣100智商，自动兑换傻币支付）",
+                'text' => "`` 欢迎新傻逼: [{$name}](tg://user?id={$member['id']}).\n欢迎费用：*10傻币/次*（代扣100智商，自动兑换傻币支付）",
                 'reply_to_message_id' => $message['message_id'],
                 'parse_mode' => 'Markdown',
             ]);
@@ -160,12 +160,12 @@ class TgDeal extends DIEntity {
     function onPrivateForwardFrom(array $update){
         $message = $update['message'];
         $ffw = $message['forward_from'];
+        $tg = Tg::inst($this->hdl);
         if ($this->hdl == 'pinkjj') {
             @$name = TgUtil::specialTextFilter($ffw['first_name'].$ffw['last_name']);
             // @$response1 = "`` id: {$ffw['id']}\n first: ".TgUtil::specialTextFilter($ffw['first_name'])."\n last: ".TgUtil::specialTextFilter($ffw['last_name'])."\n username: {$ffw['username']}\n is_bot: {$ffw['is_bot']}\n [{$name}](tg://user?id={$ffw['id']})";
             @$response1 = "id: {$ffw['id']}\nfirst: {$ffw['first_name']}\nlast: {$ffw['last_name[']}\nusername: {$ffw['username']}\nis_bot: {$ffw['is_bot']}";
             @$response2 = "``[{$name}](tg://user?id={$ffw['id']})";
-            $tg = Tg::inst($this->hdl);
             //返回多行详细信息
             $tg->callMethod('sendMessage', [
                 'chat_id' => $message['chat']['id'],
@@ -187,6 +187,23 @@ class TgDeal extends DIEntity {
                 'chat_id' => $message['chat']['id'],
                 'text' => $response2,
                 'reply_to_message_id' => $message['message_id'],
+            ]);
+        }
+    }
+
+
+    function onLeftChatMember(array $update){
+        $message = $update['message'];
+        $member = $message['left_chat_member'];
+        $chat = $message['chat'];
+        $tg = Tg::inst($this->hdl);
+        if ($this->hdl == 'shabisb' && $chat['id'] == '-1001377141307') {//傻逼群
+            @$name = TgUtil::specialTextFilter($member['first_name'].$member['last_name'], 'Markdown');
+            $tg->callMethod('sendMessage', [
+                'chat_id' => $message['chat']['id'],
+                'text' => "有一个傻逼：[{$name}](tg://user?id={$member['id']}) 已滚出，扣除100傻币所得（代扣1000智商），祝ta不能融入非傻逼界！",
+                'reply_to_message_id' => $message['message_id'],
+                'parse_mode' => 'Markdown',
             ]);
         }
     }

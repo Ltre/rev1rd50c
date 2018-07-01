@@ -38,6 +38,8 @@ class TgDispatch extends DIEntity {
                 return 3;
             } elseif ($message['chat']['type'] == 'private' && isset($message['forward_from'])) {
                 return 4;
+            } elseif (isset($message['left_chat_member'])) {
+                return 5;
             }
         }
     }
@@ -59,6 +61,8 @@ class TgDispatch extends DIEntity {
             case 4:
                 $result = $deal->onPrivateForwardFrom($update);
                 break;
+            case 5:
+                $result = $deal->onLeftChatMember($update);
         }
         if (@$result) {
             $this->log(__CLASS__.__FUNCTION__, print_r($result, 1));
