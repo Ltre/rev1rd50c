@@ -36,12 +36,23 @@ class TgDeal extends DIEntity {
         $me = $tg->getMe();
         $tg->log("get reply_to_message.from.id: {$message['reply_to_message']['from']['id']}");
         $tg->log("get me.id: {$me['id']}");
-        if (@$message['reply_to_message']['from']['id'] == $me['id']) {
-            return $tg->callMethod('sendMessage', [
-                'chat_id' => $chat['id'],
-                'text' => TgTest::sample($chat['id'], $from['id'], $text),
-                'reply_to_message_id' => $message['message_id'],
-            ]);
+        if (@$message['reply_to_message']['from']['id'] == $me['id']) {//这个分支才是回复给机器人自己的消息
+            if ($this->hdl == 'kowaii') {
+                @$name = TgUtil::specialTextFilter($from['first_name'].$from['last_name'], 'Markdown');
+                $mention = "[{$name}](tg://user?id={$from['id']})";
+                return $tg->callMethod('sendMessage', [
+                    'chat_id' => $chat['id'],
+                    'text' => "`` {$memtion}、私と話をするな、そうでないと結果が悪い.",
+                    'reply_to_message_id' => $message['message_id'],
+                    'parse_mode' => 'Markdown',
+                ]);
+            } else {
+                return $tg->callMethod('sendMessage', [
+                    'chat_id' => $chat['id'],
+                    'text' => TgTest::sample($chat['id'], $from['id'], $text),
+                    'reply_to_message_id' => $message['message_id'],
+                ]);
+            }
         }
     }
 
