@@ -42,7 +42,7 @@ class TgDeal extends DIEntity {
                 $mention = "[{$name}](tg://user?id={$from['id']})";
                 return $tg->callMethod('sendMessage', [
                     'chat_id' => $chat['id'],
-                    'text' => "`` {$memtion}、私と話をするな、そうでないと結果が悪い.",
+                    'text' => "`` {$mention}、私と話をするな、そうでないと結果が悪い.",
                     'reply_to_message_id' => $message['message_id'],
                     'parse_mode' => 'Markdown',
                 ]);
