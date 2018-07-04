@@ -127,6 +127,15 @@ class TgDeal extends DIEntity {
                         ]);
                         break;
                 }
+            } elseif ($this->hdl == 'kowaii') {
+                switch ($matches[1]) {
+                    case 'song':
+                        @$name = TgUtil::specialTextFilter($from['first_name'].$from['last_name'], 'Markdown');
+                        $mention = "[{$name}](tg://user?id={$from['id']})";
+                        $responseText = "`` {$mention}";
+                        $responseText .= "、あなたが選ばれたので、準備をしてください！";
+                    break;
+                }
             }
         }
         if ($responseText) {
