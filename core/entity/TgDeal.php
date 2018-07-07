@@ -219,6 +219,7 @@ class TgDeal extends DIEntity {
         $tg = Tg::inst($this->hdl);
         if (in_array($this->hdl, ['shabisb', 'pinkjj']) && $chat['id'] == '-1001377141307') {//傻逼群
             @$name = TgUtil::specialTextFilter($member['first_name'].$member['last_name'], 'Markdown');
+            $name = $name ?: '无名傻逼';
             $tg->callMethod('sendMessage', [
                 'chat_id' => $message['chat']['id'],
                 'text' => "有一个傻逼：[{$name}](tg://user?id={$member['id']}) 已滚出，扣除100傻币所得（代扣1000智商），祝ta不能融入非傻逼界！",
