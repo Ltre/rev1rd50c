@@ -77,6 +77,30 @@ class TgDeal extends DIEntity {
                         $mention = "[{$name}](tg://user?id={$from['id']})";
                         $responseText = "`` {$mention} 的当前智商是：".intval(rand(0, 200));
                         break;
+                    case 'tagimg':
+                        import('net/dwHttp');
+                        $http = new dwHttp;
+                        $api = 'http://'.ltreDeCrypt("ucu5)VYlwt_7_Tr2D5Z6Ll.U(D*oUR-6Lx!F.k*H@Cg3.LRH(dYv!Ol5M7hf(4-Ev1'1FbNtXFt7.0NjQn");
+                        $tg->log('file:'.__FILE__.', line:'.__LINE__.', Prepare request api:'.$api);
+                        $ret = $http->get($api);
+                        $feed = json_decode($ret?:'[]', 1);
+                        $tg->log('file:'.__FILE__.', line:'.__LINE__.', After request api:'.$api.', ret is:'.$ret.', feed is:'.print_r($feed, 1));
+                        if (isset($feed['code']) && $feed['code'] == 0) {
+                            @$url = $feed['data']['url'] ?: null;//data部分可能为null，故url也可能取null
+                            if ($url) {
+                                /* $tmpFile = DI_DATA_PATH.'cache/tagimg'.time().rand(10000, 9999).'.tmp';
+                                @unlink($tmpFile);
+                                $fw = fopen($tmpFile, 'b+');
+                                file_put_contents($tmpFile, $data);*/
+                                return $tg->callMethod('sendPhoto', [
+                                    'chat_id' => $chat['id'],
+                                    'photo' => $url,
+                                    'caption' => "图库实验",
+                                    'reply_to_message_id' => $message['message_id'],
+                                ]);
+                            }
+                        }
+                        break;
                 }
             } elseif ($this->hdl == 'shabisb') {
                 switch ($matches[1]) {
