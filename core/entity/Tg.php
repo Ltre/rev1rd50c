@@ -63,9 +63,6 @@ class Tg extends DIEntity {
 
 
     protected function dealFeed($feed){//@todo 以后修改输出格式为：根据请求类型判断，xhr用json返回, 其它直接dump
-        if (false === $feed) {
-            die('wtf');
-        }
         list ($ok, $response) = $feed;
         if (! $ok) {
             dump($response, 1);
@@ -73,11 +70,11 @@ class Tg extends DIEntity {
     }
 
     //获取回调webhook时用的secret，本secret由我方系统生成，具有有效期
-    protected function getHkSecret(){
+    protected function getHkSecret($forceUpdate = 0){
         $secretFile = DI_DATA_PATH."cache/tg.{$this->hdl}.hk.secret";
         @$secretData = unserialize(file_get_contents($secretFile)) ?: ["", 0];
         list ($secret, $expire) = $secretData;
-        if (time() >= $expire) {
+        if (time() >= $expire || $forceUpdate) {
             $secret = sha1(microtime(1).rand(0, 99999));
             $expire = time() + 86400*30;
             file_put_contents($secretFile, serialize([$secret, $expire]));
@@ -87,8 +84,8 @@ class Tg extends DIEntity {
 
 
     //这个需要上定时任务，刷新tg官方回调的webhook url所用的secret部分
-    function setHk(){
-        $secret = $this->getHkSecret();
+    function setHk($forceUpdate){
+        $secret = $this->getHkSecret($forceUpdate);
         $url = ltreDeCrypt($this->hk)."/{$this->hdl}/{$secret}";
         $feed = $this->req('setWebhook', ['url' => $url]);
         $this->dealFeed($feed);

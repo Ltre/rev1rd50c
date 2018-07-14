@@ -12,8 +12,8 @@ class TgDo extends DIDo {
     }
 
     //To set webhook
-    function setHk($hdl){
-        Tg::inst($hdl)->setHk();
+    function setHk($hdl, $forceUpdate = 0){
+        Tg::inst($hdl)->setHk($forceUpdate);
     }
 
     function callMethod($hdl){
