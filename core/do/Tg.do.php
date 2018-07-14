@@ -16,6 +16,15 @@ class TgDo extends DIDo {
         Tg::inst($hdl)->setHk($forceUpdate);
     }
 
+    //To set webhook for all
+    function setHkAll($forceUpdate = 0){
+        $hdls = array_keys($GLOBALS['tg']['bot_tokens']);
+        foreach ($hdls as $hdl) {
+            echo $hdl;//debug
+            Tg::inst($hdl)->setHk($forceUpdate);
+        }
+    }
+
     function callMethod($hdl){
         putjson(0, Tg::inst($hdl)->callMethod(arg('method'), arg('params', [])));
     }

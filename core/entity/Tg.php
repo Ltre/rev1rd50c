@@ -65,7 +65,7 @@ class Tg extends DIEntity {
     protected function dealFeed($feed){//@todo 以后修改输出格式为：根据请求类型判断，xhr用json返回, 其它直接dump
         list ($ok, $response) = $feed;
         if (! $ok) {
-            dump($response, 1);
+            dump($response);
         }
     }
 
