@@ -102,17 +102,23 @@ class TgDeal extends DIEntity {
                         }
                         break;
                     case 'hideimg':
-                        $tg->log('file:'.__FILE__.', line:'.__LINE__.', /hideimg regex:'.'/^\/hideimg(@'.$me['username'].')?\s+(\d+)\s*$/, message:'.$message['text']);
-                        if (preg_match('/^\/hideimg(@'.$me['username'].')?\s+(\d+)\s*$/', $message['text'], $argMatches)) {
-                            $tuId = $argMatches[2];//获取命令里指定的图id
-                            $tg->log('file:'.__FILE__.', line:'.__LINE__.', /hideimg regex matches:'.print_r($argMatches, 1));
-                            $tg->log('file:'.__FILE__.', line:'.__LINE__.', /hideimg tuId:'.$tuId);
-                            import('net/dwHttp');
-                            $http = new dwHttp;
-                            $ret = $http->get('http://tu.miku.us/hide/'.$tuId);
-                            $tg->log('file:'.__FILE__.', line:'.__LINE__.', /hideimg http_req_ret not false:'.(false!==$ret?'yes':'no'));
-                            //需要打日志，因为发现好像没成功
-                            //@todo: 发消息告知执行完毕。。。
+                        if ($chat['type'] != 'private' || $chat['id'] != '462394947') {
+                            $responseText = '你没有权限';
+                        } else {
+                            $tg->log('file:'.__FILE__.', line:'.__LINE__.', /hideimg regex:'.'/^\/hideimg(@'.$me['username'].')?\s+(\d+)\s*$/, message:'.$message['text']);
+                            if (preg_match('/^\/hideimg(@'.$me['username'].')?\s+(\d+)\s*$/', $message['text'], $argMatches)) {
+                                $tuId = $argMatches[2];//获取命令里指定的图id
+                                $tg->log('file:'.__FILE__.', line:'.__LINE__.', /hideimg regex matches:'.print_r($argMatches, 1));
+                                $tg->log('file:'.__FILE__.', line:'.__LINE__.', /hideimg tuId:'.$tuId);
+                                import('net/dwHttp');
+                                $http = new dwHttp;
+                                $ret = $http->get('http://tu.miku.us/hide/'.$tuId);
+                                $tg->log('file:'.__FILE__.', line:'.__LINE__.', /hideimg http_req_ret not false:'.(false!==$ret?'yes':'no'));
+                                //@todo: 发消息告知执行完毕。。。
+                                $responseText = 'tuId='.$tuId.', 执行完毕';
+                            } else {
+                                $responseText = 'tuId='.$tuId.', 参数错误';
+                            }
                         }
                         break;
                 }
