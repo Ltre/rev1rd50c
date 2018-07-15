@@ -95,7 +95,7 @@ class TgDeal extends DIEntity {
                                 return $tg->callMethod('sendPhoto', [
                                     'chat_id' => $chat['id'],
                                     'photo' => $url,
-                                    'caption' => "tuId={$feed['data']['tuId']}",
+                                    'caption' => "tuId={$feed['data']['tuId']}\n" . join('; ', $feed['data']['tags']),
                                     'reply_to_message_id' => $message['message_id'],
                                 ]);
                             }
