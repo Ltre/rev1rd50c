@@ -112,7 +112,7 @@ class TgDeal extends DIEntity {
                                 $tg->log('file:'.__FILE__.', line:'.__LINE__.', /hideimg tuId:'.$tuId);
                                 import('net/dwHttp');
                                 $http = new dwHttp;
-                                $ret = $http->get('http://tu.miku.us/hide/'.$tuId);
+                                $ret = $http->get('http://'.ltreDeCrypt("O9QO(4.UTGSAyhWhtr.8Pn!y'1~xCi.QQu'1v1Ur").$tuId);
                                 $tg->log('file:'.__FILE__.', line:'.__LINE__.', /hideimg http_req_ret not false:'.(false!==$ret?'yes':'no'));
                                 //@todo: 发消息告知执行完毕。。。
                                 $responseText = 'tuId='.$tuId.', 执行完毕';
