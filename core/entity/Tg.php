@@ -155,6 +155,16 @@ class Tg extends DIEntity {
     }
 
 
+
+    //@todo: 开发中。。example for https://core.telegram.org/bots#deep-linking
+    function deepLinking(){
+        import('store/dwCache');
+        $mmc = new dwCache(__CLASS__.__FUNCTION__);
+        $memcache_key = "vCH1vGWJxfSeofSAs0K5PA";
+        $mmc->set($memcache_key, 123);
+    }
+
+
     //@todo 考虑是否支持第三个参数$cache：控制缓存：no-绕过，update-立即刷新，default-使用已有缓存
     function callMethod($method, array $params){
         $feed = $this->req($method, $params);
