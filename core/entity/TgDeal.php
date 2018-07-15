@@ -101,6 +101,14 @@ class TgDeal extends DIEntity {
                             }
                         }
                         break;
+                    case 'hideimg':
+                        if (preg_match('/^\/hideimg(@'.$me['username'].')?\s+(\d+)\s*$/', $message['text'], $argMatches)) {
+                            $tuId = $argMatches[2];//获取命令里指定的图id
+                            import('dwHttp');
+                            $http = new dwHttp;
+                            $http->get('http://tu.miku.us/hide/'.$tuId);
+                        }
+                        break;
                 }
             } elseif ($this->hdl == 'shabisb') {
                 switch ($matches[1]) {
