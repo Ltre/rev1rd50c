@@ -107,7 +107,7 @@ class TgDeal extends DIEntity {
                             $tuId = $argMatches[2];//获取命令里指定的图id
                             $tg->log('file:'.__FILE__.', line:'.__LINE__.', /hideimg regex matches:'.print_r($argMatches, 1));
                             $tg->log('file:'.__FILE__.', line:'.__LINE__.', /hideimg tuId:'.$tuId);
-                            import('dwHttp');
+                            import('net/dwHttp');
                             $http = new dwHttp;
                             $ret = $http->get('http://tu.miku.us/hide/'.$tuId);
                             $tg->log('file:'.__FILE__.', line:'.__LINE__.', /hideimg http_req_ret not false:'.(false!==$ret?'yes':'no'));
