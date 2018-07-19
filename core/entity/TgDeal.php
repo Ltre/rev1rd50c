@@ -99,7 +99,7 @@ class TgDeal extends DIEntity {
                                     /* return  */$tg->callMethod('sendVideo', [
                                         'chat_id' => $chat['id'],
                                         'video' => $url,
-                                        'caption' => $caption,
+                                        'caption' => 'gif: '.$caption,
                                         'reply_to_message_id' => $message['message_id'],
                                     ]);
                                 } elseif (preg_match('/^image\//i', $headers['Content-Type'])) {
