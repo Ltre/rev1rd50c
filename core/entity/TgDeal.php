@@ -95,8 +95,7 @@ class TgDeal extends DIEntity {
                                 $caption = "tuId={$feed['data']['tuId']}\nTags: " . join('; ', $feed['data']['tags']);
                                 $headers = get_headers($url, 1);
                                 if ($headers['Content-Type'] == 'image/gif') {
-                                    $responseText = 'gif已采用视频形式发送';//DEBUG
-                                    /* return  */$tg->callMethod('sendVideo', [
+                                    return $tg->callMethod('sendVideo', [
                                         'chat_id' => $chat['id'],
                                         'video' => $url,
                                         'caption' => 'gif: '.$caption,
