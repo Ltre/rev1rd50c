@@ -92,12 +92,24 @@ class TgDeal extends DIEntity {
                                 @unlink($tmpFile);
                                 $fw = fopen($tmpFile, 'b+');
                                 file_put_contents($tmpFile, $data);*/
-                                return $tg->callMethod('sendPhoto', [
-                                    'chat_id' => $chat['id'],
-                                    'photo' => $url,
-                                    'caption' => "tuId={$feed['data']['tuId']}\nTags: " . join('; ', $feed['data']['tags']),
-                                    'reply_to_message_id' => $message['message_id'],
-                                ]);
+                                $caption = "tuId={$feed['data']['tuId']}\nTags: " . join('; ', $feed['data']['tags']);
+                                $headers = get_headers($url, 1);
+                                if ($headers['Content-Type'] == 'image/gif') {
+                                    $responseText = 'gif已采用视频形式发送';//DEBUG
+                                    /* return  */$tg->callMethod('sendVideo', [
+                                        'chat_id' => $chat['id'],
+                                        'video' => $url,
+                                        'caption' => $caption,
+                                        'reply_to_message_id' => $message['message_id'],
+                                    ]);
+                                } elseif (preg_match('/^image\//i', $headers['Content-Type'])) {
+                                    return $tg->callMethod('sendPhoto', [
+                                        'chat_id' => $chat['id'],
+                                        'photo' => $url,
+                                        'caption' => $caption,
+                                        'reply_to_message_id' => $message['message_id'],
+                                    ]);
+                                }
                             }
                         }
                         break;
