@@ -88,10 +88,6 @@ class TgDeal extends DIEntity {
                         if (isset($feed['code']) && $feed['code'] == 0) {
                             @$url = $feed['data']['url'] ?: null;//data部分可能为null，故url也可能取null
                             if ($url) {
-                                /* $tmpFile = DI_DATA_PATH.'cache/tagimg'.time().rand(10000, 9999).'.tmp';
-                                @unlink($tmpFile);
-                                $fw = fopen($tmpFile, 'b+');
-                                file_put_contents($tmpFile, $data);*/
                                 $caption = "tuId={$feed['data']['tuId']}\nTags: " . join('; ', $feed['data']['tags']);
                                 $headers = get_headers($url, 1);
                                 if ($headers['Content-Type'] == 'image/gif') {
