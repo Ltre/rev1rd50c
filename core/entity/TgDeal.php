@@ -104,6 +104,8 @@ class TgDeal extends DIEntity {
                                         'caption' => $caption,
                                         'reply_to_message_id' => $message['message_id'],
                                     ]);
+                                } else {
+                                    $responseText = "Unsupport MIMETYPE：{$headers['Content-Type']}";
                                 }
                             }
                         }
@@ -158,7 +160,7 @@ class TgDeal extends DIEntity {
                     case 'photo':
                         return $tg->callMethod('sendPhoto', [
                             'chat_id' => $chat['id'],
-                            'photo' => 'AgADBQAD6acxGxOz6FdsrpVaesMTfAgp1TIABMVuVmZyKLoqv6AAAgI',
+                            'photo' => 'AgADBQADA6gxG-SemFYQq1o23FVywCmw1jIABLqe8C7iL-o1uKgAAgI',//备用：AgADBQADA6gxG-SemFYQq1o23FVywCmw1jIABDexokh0wUBfu6gAAgI， AgADBQADA6gxG-SemFYQq1o23FVywCmw1jIABETVZ7UbToTXuqgAAgI，AgADBQADA6gxG-SemFYQq1o23FVywCmw1jIABGFwtnyNuEz0uagAAgI
                             'caption' => "`` 孙伟伟(萎萎)近照\n [孙萎萎大号](tg://user?id=515656720)\n [孙萎萎小号1](tg://user?id=524008226)\n [孙萎萎小号2](tg://user?id=476290631)\n [孙萎萎小号3](tg://user?id=574470817)\n [孙萎萎小号4](tg://user?id=485652193)\n [孙萎萎小号5](tg://user?id=597554665)",
                             'parse_mode' => 'Markdown',
                             'reply_to_message_id' => $message['message_id'],
