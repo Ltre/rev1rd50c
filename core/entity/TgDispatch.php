@@ -49,6 +49,19 @@ class TgDispatch extends DIEntity {
      * 分派到具体的处理逻辑中
      * @todo 根据$this->hdl区分分派路由，以便机器人行为多样化的实现
      * @todo 可以将TgDeal改为抽象类或接口，让具体的机器人继承或实现TgDeal
+     *      TgDeal::inst()伪代码：
+                static function inst($hdl){
+                    $clazz = 'TgDeal'.ucfirst($this->hdl);
+                    static $objs = [];
+                    if (! isset($objs[$hdl])) {
+                        if (class_exists($clazz)) {
+                            $objs[$hdl] = new $clazz($hdl);
+                        } else {
+                            $objs[$hdl] = new self($hdl);
+                        }
+                    }
+                    return $objs[$hdl];
+                }
      * @todo 需要开发一个基类，继承或实现TgDeal，实现默认的功能，以便新加入机器人可以使用这些默认功能
      */
     function dispatch($analyzeFeed, $update){
