@@ -45,7 +45,11 @@ class TgDispatch extends DIEntity {
     }
 
 
-    //分派到具体的处理逻辑中，@todo 根据$this->hdl区分分派路由，以便机器人行为多样化的实现
+    /**
+     * 分派到具体的处理逻辑中
+     * @todo 根据$this->hdl区分分派路由，以便机器人行为多样化的实现
+     * @todo 可以将TgDeal改为抽象类或接口，让具体的机器人继承或实现TgDeal
+     */
     function dispatch($analyzeFeed, $update){
         $deal = TgDeal::inst($this->hdl);
         switch ($analyzeFeed) {
