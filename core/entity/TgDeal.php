@@ -230,6 +230,7 @@ class TgDeal extends DIEntity {
     }
 
 
+    //用私聊的方式转发时
     function onPrivateForwardFrom(array $update){
         $message = $update['message'];
         $ffw = $message['forward_from'];
@@ -239,7 +240,7 @@ class TgDeal extends DIEntity {
             // @$response1 = "`` id: {$ffw['id']}\n first: ".TgUtil::specialTextFilter($ffw['first_name'])."\n last: ".TgUtil::specialTextFilter($ffw['last_name'])."\n username: {$ffw['username']}\n is_bot: {$ffw['is_bot']}\n [{$name}](tg://user?id={$ffw['id']})";
             @$response1 = "id: {$ffw['id']}\nfirst: {$ffw['first_name']}\nlast: {$ffw['last_name']}\nusername: {$ffw['username']}\nis_bot: {$ffw['is_bot']}";
             @$response2 = "``[{$name}](tg://user?id={$ffw['id']})";
-            //返回多行详细信息
+            //返回多行原发者的详细信息
             $tg->callMethod('sendMessage', [
                 'chat_id' => $message['chat']['id'],
                 'text' => $response1,
@@ -247,7 +248,7 @@ class TgDeal extends DIEntity {
                 // 'parse_mode' => 'Markdown',
             ]);
             usleep(500);
-            //返回mention
+            //返回原发者的mention
             $tg->callMethod('sendMessage', [
                 'chat_id' => $message['chat']['id'],
                 'text' => $response2,
@@ -255,12 +256,20 @@ class TgDeal extends DIEntity {
                 'parse_mode' => 'Markdown',
             ]);
             usleep(500);
-            //返回mention前的字符串
+            //返回原发者mention前的字符串
             $tg->callMethod('sendMessage', [
                 'chat_id' => $message['chat']['id'],
                 'text' => $response2,
                 'reply_to_message_id' => $message['message_id'],
             ]);
+            // usleep(500);
+            //@todo //返回原发处的来源信息(尽可能包含调整URL) 这个方法是获取不到forward_from_chat的，所以根本不会执行到这里，需要在TgDispatch重新判断forward_from_chat字段是否存在，并在TgDeal多开一个on方法
+            // $tg->callMethod('sendMessage', [
+            //     'chat_id' => $message['chat']['id'],
+            //     'text' => "``原发时间: {$meesage['forward_date']}\n原发消息ID: {$message['forward_from_message_id']}\n原发点标题: {$message['forward_from_chat']}\n",
+            //     'reply_to_message_id' => $message['message_id'],
+            //     'parse_mode' => 'Markdown',
+            // ]);
         }
     }
 
