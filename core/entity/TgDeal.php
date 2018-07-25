@@ -30,7 +30,7 @@ class TgDeal extends DIEntity {
     function onAnyWhere(array $update){
         $tg = Tg::inst($this->hdl);
         return $tg->callMethod('sendMessage', [
-            'chat_id' => '-195000192',//名称：消息手机筒
+            'chat_id' => '-195000192',//名称：消息收集筒
             'text' => print_r($update, 1),
         ]);
     }
