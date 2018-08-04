@@ -99,11 +99,11 @@ class TgDeal extends DIEntity {
                             if ($url) {
                                 $caption = "tuId={$feed['data']['tuId']}\nTags: " . join('; ', $feed['data']['tags']);
                                 $headers = get_headers($url, 1);
-                                if ($headers['Content-Type'] == 'image/gif') {
+                                if (in_array($headers['Content-Type'], ['image/gif', 'video/mp4'])) {//@debug: 测试增加video/mp4的情况，如有错误，则回退至仅判断image/gif
                                     return $tg->callMethod('sendVideo', [
                                         'chat_id' => $chat['id'],
                                         'video' => $url,
-                                        'caption' => 'gif: '.$caption,
+                                        'caption' => 'gif|mp4: '.$caption,
                                         'reply_to_message_id' => $message['message_id'],
                                     ]);
                                 } elseif (preg_match('/^image\//i', $headers['Content-Type'])) {
