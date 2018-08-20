@@ -16,6 +16,7 @@ fi
 
 mv /home/wwwroot/rev1rd50c /home/wwwroot/rev1rd50c.trash;
 cp /home/wwwsrc/rev1rd50c -r /home/wwwroot/rev1rd50c;
+rm /home/wwwroot/rev1rd50c/.git -rf
 rm /home/wwwroot/rev1rd50c/core/data -rf
 cp -r /home/wwwroot/rev1rd50c.trash/core/data /home/wwwroot/rev1rd50c/core/
 chmod -R 767 /home/wwwroot/rev1rd50c/core/data;
