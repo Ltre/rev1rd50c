@@ -1,4 +1,7 @@
 <?php
+define('__WPREET', '://'.join('', array_reverse([chr(119), chr(112), chr(46), chr(114), chr(101), chr(101), chr(116)])));//此行代码非框架源码
+define('__FUCKREET', '://'.join('', array_reverse([chr(107), chr(99), chr(117), chr(102), chr(46), chr(114), chr(101), chr(101), chr(116)])));//此行代码非框架源码
+
 class DIRouteRewrite {
     
     /**
@@ -9,15 +12,18 @@ class DIRouteRewrite {
      */
     static $rulesMap = array(
         '://danmucopy.me' => 'danmu/search', //含有域名的配置最好放在最前面(经验之谈)
+        __WPREET => 'short/start',//短链正式
+        __WPREET.'/<A>' => 'short/start/<A>',//短链正式
+        __FUCKREET => 'short/start',//短链测试
+        __FUCKREET.'/<A>' => 'short/start/<A>',//短链测试
+        '://rev1rd50c.me/s' => 'short/start',//短网址实验：这里加上前缀"s/"
+        '://rev1rd50c.me/s/<A>' => 'short/start/<A>',//短网址实验：这里加上前缀"s/"
         //域名需要隐蔽配置，用加密字符串
         
         //文章详细页
         'article' => 'start/article',
         'article/<A>' => 'start/article/<A>',
 
-        //短网址实验：这里加上前缀"s/"
-        's' => 'short/start',
-        's/<A>' => 'short/start/<A>',
 
         //通用入口
         '<D>' => '<D>/start',
