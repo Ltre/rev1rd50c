@@ -46,4 +46,4 @@ CREATE TABLE `csdr_mixed` (
   PRIMARY KEY (`mid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='杂项配置';
 
-打标签：照搬tu项目即可
+-- 打标签：照搬tu项目即可

@@ -55,6 +55,9 @@ class DITpl extends DIBase {
             $this->_smarty->left_delimiter  = DI_SMARTY_LEFT_DELIMITER;
             $this->_smarty->right_delimiter = DI_SMARTY_RIGHT_DELIMITER;
             $this->_smarty->auto_literal    = true;
+            if (! function_exists('__autoload')) {
+                @eval('function __autoload($class_name){}');
+            }
             import('bootstrap');
             $this->_smarty->registerPlugin('function', 'spte', 'bt_shell_page_sm');
             $this->_smarty->registerPlugin('function', 'spte3', 'bt3_shell_page_sm');

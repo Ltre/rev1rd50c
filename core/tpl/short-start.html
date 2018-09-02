@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="baidu-site-verification" content="W6ucd2TO2r"/>
+    <meta name="google-site-verification" content="XMYGTLhZ1KGy6cACOpwE2VIGz9TPMAFMHcvWL-6Hv30"/>
+    <meta name="keywords" content="缩短网址,网址压缩,网址缩短,短网址,短域名,短地址,短URL,免费缩短网址,短链接生成器,短网址生成,免费缩址,域名伪装,域名转向,网站推广,短链接,长网址变短网址">
+<meta name="description" content="缩我(Suo.im)免费专业的网址缩短服务,在线生成短网址,开放API接口,可批量生成短链接,不限制接口请求数,跳转快,稳定可靠,防屏蔽,防拦截!免费提供访问统计!！">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-touch-fullscreen" content="yes">
+<meta name="format-detection" content="telephone=no,email=no">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Language" content="zh-CN">    <title>短网址_短链接_网址缩短-suo.im短网址</title>    <link href="http://suo.im/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">        <script src="https://cdn.bootcss.com/jquery/1.8.3/jquery.min.js"></script>
+    <script src="//suo.im/js/create.url.js?v=1"></script>
+    <script>
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?e0b9cd88e830ccbbe41dc1122558b669";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+    <style>
+        html {
+            background: #105c9a url(//suo.im/Public/Web/img/bg.png) repeat-x scroll 0 -450px;
+            overflow-y: scroll
+        }
+
+        body,
+        h1 {
+            margin: 0;
+            padding: 0
+        }
+
+        body {
+            min-width: 900px;
+            max-height: 358px;
+            padding: 20px 0;
+            font: 12px/1.62 Georgia, tahoma, arial, \5b8b\4f53;
+            background: url(//suo.im/Public/Web/img/bg.png) no-repeat center 0;
+            _background: none
+        }
+
+        a {
+            text-decoration: none
+        }
+
+        h1 {
+            width: 204px;
+            margin: 0 auto 10px;
+            *margin-bottom: 0;
+        }
+
+        h1 a {
+            color: white;
+            font-size: 48px;
+            font-weight: normal
+        }
+
+        h1 strong {
+            position: relative;
+            top: -2px;
+            left: 5px;
+            font-size: 40px;
+            font-weight: normal;
+            font-family: Microsoft YaHei, simhei
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            font-weight: bold
+        }
+
+        input {
+            width: 521px;
+            height: 16px;
+            padding: 7px 5px;
+            font-size: 14px;
+            font-weight: bold;
+            font-family: Georgia, tahoma, arial, \5b8b\4f53;
+            border: solid 1px #333;
+            border-radius: 4px;
+            background: #e8f4fc;
+            outline: none;
+            box-shadow: 0 1px 0 rgba(255, 255, 255, 0.27), 1px 1px 2px rgba(0, 0, 0, 0.443) inset
+        }
+
+        input:focus {
+            background: #fff;
+        }
+
+        button {
+            height: 44px;
+            padding: 0 35px 4px;
+            *padding: 0 17px;
+            color: white;
+            font-size: 23px;
+            font-family: Microsoft YaHei, simhei;
+            background: #ce1171 url(//suo.im/Public/Web/img/bg.png) 0 -400px;
+            border: solid 2px white;
+            border-radius: 5px;
+            cursor: pointer
+        }
+
+        textarea::-webkit-input-placeholder {
+            text-align: center;
+            padding-top: 70px
+        }
+
+        .section {
+            width: 700px;
+            margin: 0 auto;
+            color: white;
+        }
+
+        .success {
+            position: relative;
+            font-size: 14px;
+            word-break: break-all;
+            word-wrap: break-word
+        }
+
+        .success a {
+            color: white
+        }
+
+        .foot {
+            color: #7EBFDC;
+            text-align: center
+        }
+
+        .foot a {
+            color: #7EBFDC
+        }
+
+        .ad {
+            width: 728px;
+            margin: 110px auto 0 -96px;
+        }
+
+        .text {
+            width: 700px;
+            display: block;
+            margin: 0 auto 25px auto;
+            height: 200px;
+            resize: none;
+            font-size: 20px;
+            border-color: rgba(204, 204, 204, 1);
+            border-radius: 5px;
+        }
+
+        .url {
+            margin: 15px 0 12px
+        }
+
+        .url label {
+            margin-bottom: 3px
+        }
+
+        .alias label {
+            display: inline;
+            margin-right: 4px
+        }
+
+        .alias input {
+            width: 80px;
+            margin: 0 3px;
+            padding: 3px
+        }
+
+        .shorten {
+            text-align: right;
+            margin: 10px 5px 50px
+        }
+
+        .n {
+            width: 200px;
+            padding: 5px 3px;
+            border: 0;
+            border-radius: 0;
+            box-shadow: 0 0 0 0;
+        }
+
+        .p {
+            position: absolute;
+            display: none;
+            width: 122px;
+            margin-top: -56px;
+            *margin-top: -29px;
+            left: 49px;
+            padding: 2px 8px 3px;
+            border: solid 1px #0f619d;
+            background: #dbdbdb;
+            color: #f00;
+            text-shadow: 1px 1px 1px #fff;
+            box-shadow: 0 1px 2px #0f619d;
+            border-radius: 0
+        }
+
+        .p span {
+            position: absolute;
+            display: block;
+            width: 0;
+            height: 0;
+            _overflow: hidden;
+            top: 28px;
+            left: 61px;
+            border: solid 6px #0f619d;
+            border-color: #0f619d transparent;
+            border-width: 6px 6px 0
+        }
+
+        .f .p {
+            display: block
+        }
+
+        .p1 {
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .warp {
+            display: block;
+            width: 800px;
+            margin: 0 auto;
+            color: #000;
+            margin-bottom: 50px;
+            color: #fff;
+        }
+
+        .warp p {
+            font-size: 14px;
+            line-height: 16px;
+        }
+
+        .warp > div {
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+<div class="section">
+    <h1>
+        <strong>
+            <a href="http://suo.im/">网址缩短</a>
+        </strong>
+    </h1>
+    <form>
+        <div>
+            <p class="p1">输入将要缩短的长网址:</p>
+            <textarea class="text" placeholder="每行一个长网址，可以批量缩短，支持一次缩短300条短网址" id="multiurl" name="multiurl"></textarea>
+            <div class="alias">
+                <!-- Baidu Button BEGIN -->
+                <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare">
+                    <span class="bds_more">分享到：</span>
+                    <a class="bds_qzone"></a>
+                    <a class="bds_tsina"></a>
+                    <a class="bds_tqq"></a>
+                    <a class="bds_renren"></a>
+                    <a class="bds_t163"></a>
+                    <a class="shareCount"></a>
+                </div>
+                <script type="text/javascript" id="bdshare_js" data="type=tools&uid=664244"></script>
+                <script type="text/javascript" id="bdshell_js"></script>
+                <script type="text/javascript">
+                    document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date() / 3600000)
+                </script>
+                <!-- Baidu Button END -->
+            </div>
+        </div>
+        <div class="shorten">
+            <button type="button" onclick="form_submit(this, '/front/index/urlCreate/')">生 成</button>
+        </div>
+
+        <div class="warp">
+            <div>
+                <p>TXT格式短网址API接口</p>
+                <p>接口：http://suo.im/api.php?url=urlencode('要缩短的网址')</p>
+                <p>例如：http://suo.im/api.php?url=http%3a%2f%2fwww.baidu.com</p>
+                <p>返回：http://suo.im/baidu</p>
+            </div>
+            <div>
+                <p>JSON格式短网址API接口</p>
+                <p>说明：format为json</p>
+                <p>
+                    例如：http://suo.im/api.php?format=json&url=http%3a%2f%2fwww.baidu.com</p>
+                <p>返回：{"url":"http://suo.im/baidu","err":""}</p>
+            </div>
+            <div>
+                <p>JSONP格式短网址API接口</p>
+                <p>说明：format为jsonp</p>
+                <p>
+                    例如：http://suo.im/api.php?format=jsonp&url=http%3a%2f%2fwww.baidu.com&callback=callbackname</p>
+                <p>返回：callbackname({"url":"http://suo.im/baidu","err":""})</p>
+            </div>
+        </div>
+        <input type="hidden" id="generate_id" value="4ae73a3de4353ac1e87ce2d7a932f872">
+        <input type="hidden" id="generate_cid" value="qA8ree&2xMZyWac#7Y9XQCU!u3#1">
+    </form>
+
+    <img src="http://mrw.so/59mOs7" style="display: none;">
+
+    <div class="foot" style="text-align: left">
+        <a href="http://suo.im" target="_blank">短网址</a>
+
+<a href="http://hao.mfw.so" target="_blank">运营导航网</a>
+
+
+<a href="http://www.126z.net" target="_blank">126</a>
+
+<a href="http://www.baiduhl.com" target="_blank">百度网址大全 </a>
+
+<a href="http://km.so.tedu.cn" target="_blank">达内昆明网络营销培训</a>
+
+<a href="http://www.ym5.com" target="_blank">域名抢注</a>
+
+<a href="http://www.95sexy.com" target="_blank">成人用品</a>
+
+<a href="http://www.1234soft.com" target="_blank">微信营销软件</a>
+
+<a href="http://www.fansclub.cc" target="_blank">明星粉丝团名</a>
+
+<a href="http://ganso.alihuahua.com" target="_blank">元祖蛋糕</a>
+
+<a href="http://mrw.so" target="_blank">短网址</a>
+
+<a href="http://www.findtuan.com" target="_blank">找图案网</a>    </div>
+    <br/>
+    <div class="foot">
+        ©2017&nbsp;&nbsp;
+        <a href="http://suo.im/" target="_blank">网址缩短</a> -
+        <a href="javascript:(function()%7Bvar%20d=document,s=d.createElement('script');window.yourls_callback=function(r)%7Bif(r.short_url)%7Bprompt('Done , click and copy it !   by : suo.im',r.short_url);%7Delse%7Balert('An%20error%20occured:%20'+r.short_url);%7D%7D;s.src='http://suo.im/admin/index.php?u='+encodeURIComponent(d.location.href)+'&jsonp=yourls';void(d.body.appendChild(s));%7D)();"
+           onClick="alert('右键将我添加到收藏夹!');return false;">
+            插件
+        </a>
+        <br/>
+        <!--                <a href="http://www.miitbeian.gov.cn" target="_blank"> 粤ICP备16111948号-8 深圳市爱瑞电子科技有限公司 版权所有</a>-->
+        <br/>
+        <br/>
+        <!-- 2018-1-12  @ljy-start -->
+        <style>
+            .section {
+                position: relative;
+                overflow: visible
+            }
+
+            .qr_code {
+                position: absolute;
+                top: 100px;
+                right: 0;
+                margin-right: -160px;
+                z-index: 99999
+            }
+
+            .qr_code img {
+                width: 120px;
+                -webkit-animation: jump-12 3s ease-in-out infinite;
+                animation: jump-12 3s ease-in-out infinite
+            }
+
+            @-webkit-keyframes jump-12 {
+                0% {
+                    -webkit-transform: translate(0, -10px);
+                    transform: translate(0, -10px)
+                }
+                50% {
+                    -webkit-transform: translate(0, 0);
+                    transform: translate(0, 0)
+                }
+                100% {
+                    -webkit-transform: translate(0, -10px);
+                    transform: translate(0, -10px)
+                }
+            }
+
+            @keyframes jump-12 {
+                0% {
+                    -webkit-transform: translate(0, -10px);
+                    transform: translate(0, -10px)
+                }
+                50% {
+                    -webkit-transform: translate(0, 0);
+                    transform: translate(0, 0)
+                }
+                100% {
+                    -webkit-transform: translate(0, -10px);
+                    transform: translate(0, -10px)
+                }
+            }
+        </style>
+        <div class="qr_code">
+            <img src="//suo.im/images/qr_suo.png" alt=""/>
+        </div>
+        <!-- 2018-1-12  @ljy-end -->
+
+    </div>
+</body>
+</html>

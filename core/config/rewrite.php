@@ -15,6 +15,10 @@ class DIRouteRewrite {
         'article' => 'start/article',
         'article/<A>' => 'start/article/<A>',
 
+        //短网址实验：这里加上前缀"s/"
+        's' => 'short/start',
+        's/<A>' => 'short/start/<A>',
+
         //通用入口
         '<D>' => '<D>/start',
         '<D>.htm' => '<D>/start',
