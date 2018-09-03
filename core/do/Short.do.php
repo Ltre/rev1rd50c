@@ -16,7 +16,7 @@ class ShortDo extends DIDo {
         } else {
             $url = $this->readDst($key);
             if (false === $url) die('wrong!');
-            header("Location: $url");
+            echo "<script>location.href='$url'</script>";
         }
     }
 
