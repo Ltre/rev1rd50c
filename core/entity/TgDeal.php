@@ -55,6 +55,12 @@ class TgDeal extends DIEntity {
                     'reply_to_message_id' => $message['message_id'],
                     'parse_mode' => 'Markdown',
                 ]);
+            } elseif ($this->hdl == 'eosgetdice') {
+                return $tg->callMethod('sendMessage', [
+                    'chat_id' => $chat['id'],
+                    'text' => TgTest2::sample($chat['id'], $from['id'], $text),
+                    'reply_to_message_id' => $message['message_id'],
+                ]);
             } else {
                 return $tg->callMethod('sendMessage', [
                     'chat_id' => $chat['id'],
@@ -207,6 +213,15 @@ class TgDeal extends DIEntity {
                         $mention = "[{$name}](tg://user?id={$from['id']})";
                         $responseText = "`` {$mention}";
                         $responseText .= "、あなたが選ばれたので、準備をしてください！";
+                    break;
+                }
+            } elseif ($this->hdl == 'eosgetdice') {
+                switch ($matches[1]) {
+                    case 'test':
+                        @$name = TgUtil::specialTextFilter($from['first_name'].$from['last_name'], 'Markdown');
+                        $mention = "[{$name}](tg://user?id={$from['id']})";
+                        $responseText = "`` Hello, {$mention}.";
+                        $responseText .= "This is a command for testing. Do you want to achieve your own robot? Please refer to: [this link](https://core.telegram.org/bots/api#sendmessage)";
                     break;
                 }
             }
