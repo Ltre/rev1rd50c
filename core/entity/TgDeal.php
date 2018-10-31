@@ -105,7 +105,7 @@ class TgDeal extends DIEntity {
                             if ($url) {
                                 $caption = "tuId={$feed['data']['tuId']}\nTags: " . join('; ', $feed['data']['tags']);
                                 $headers = get_headers($url, 1);
-                                if (in_array($headers['Content-Type'], ['image/gif', 'video/mp4'])) {//@debug: 测试增加video/mp4的情况，如有错误，则回退至仅判断image/gif
+                                if (in_array($headers['Content-Type'], ['image/gif', 'video/mp4'])) {
                                     return $tg->callMethod('sendVideo', [
                                         'chat_id' => $chat['id'],
                                         'video' => $url,
@@ -142,6 +142,44 @@ class TgDeal extends DIEntity {
                                 $responseText = 'tuId='.$tuId.', 执行完毕';
                             } else {
                                 $responseText = 'tuId='.$tuId.', 参数错误';
+                            }
+                        }
+                        break;
+                    case 'tu':
+                        if ($chat['type'] != 'private' || $chat['id'] != '462394947') {
+                            $responseText = '你没有权限';
+                        } else {
+                            $tg->log('file:'.__FILE__.', line:'.__LINE__.', /tu regex:'.'/^\/tu(@'.$me['username'].')?\s+(\d+)\s*$/, message:'.$message['text']);
+                            if (preg_match('/^\/tu(@'.$me['username'].')?\s+(\d+)\s*$/', $message['text'], $argMatches)) {
+                                $tuId = $argMatches[2];//获取命令里指定的图id
+                                $tg->log('file:'.__FILE__.', line:'.__LINE__.', /tu regex matches:'.print_r($argMatches, 1));
+                                $tg->log('file:'.__FILE__.', line:'.__LINE__.', /tu tuId:'.$tuId);
+                                import('net/dwHttp');
+                                $http = new dwHttp;
+                                $ret = $http->get('http://'.ltreDeCrypt("Rc*~@0obk2Ldmbx4JvGq!na8~1VrGd!nYW.8RpIe.0Lh!Itbs6.0-C@x").$tuId);
+                                $tg->log('file:'.__FILE__.', line:'.__LINE__.', /tu http_req_ret not false:'.(false!==$ret?'yes':'no'));
+                                if (false !== $ret) {
+                                    $feed = json_decode($ret, 1);
+                                    if (isset($feed['data']['url'])) {
+                                        $url = $feed['data']['url'];
+                                        $headers = get_headers($url, 1);
+                                        if (in_array($headers['Content-Type'], ['image/gif', 'video/mp4'])) {//@debug: 测试增加video/mp4的情况，如有错误，则回退至仅判断image/gif
+                                            return $tg->callMethod('sendVideo', [
+                                                'chat_id' => $chat['id'],
+                                                'video' => $url,
+                                                'reply_to_message_id' => $message['message_id'],
+                                            ]);
+                                        } elseif (preg_match('/^image\//i', $headers['Content-Type'])) {
+                                            return $tg->callMethod('sendPhoto', [
+                                                'chat_id' => $chat['id'],
+                                                'photo' => $url,
+                                                'reply_to_message_id' => $message['message_id'],
+                                            ]);
+                                        } else {
+                                            $responseText = "Unsupport MIMETYPE：{$headers['Content-Type']}";
+                                        }
+                                    }
+                                }
                             }
                         }
                         break;
