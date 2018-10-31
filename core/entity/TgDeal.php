@@ -182,7 +182,7 @@ class TgDeal extends DIEntity {
                                     }
                                     //ID递增
                                     $tuId ++;
-                                    sleep(1);
+                                    usleep(200);
                                 }
                                 return;
                             }
