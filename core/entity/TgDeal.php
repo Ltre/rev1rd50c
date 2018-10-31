@@ -150,35 +150,41 @@ class TgDeal extends DIEntity {
                             $responseText = '你没有权限';
                         } else {
                             $tg->log('file:'.__FILE__.', line:'.__LINE__.', /tu regex:'.'/^\/tu(@'.$me['username'].')?\s+(\d+)\s*$/, message:'.$message['text']);
-                            if (preg_match('/^\/tu(@'.$me['username'].')?\s+(\d+)\s*$/', $message['text'], $argMatches)) {
+                            if (preg_match('/^\/tu(@'.$me['username'].')?\s+(\d+)(-\d+)?\s*$/', $message['text'], $argMatches)) {
                                 $tuId = $argMatches[2];//获取命令里指定的图id
-                                $tg->log('file:'.__FILE__.', line:'.__LINE__.', /tu regex matches:'.print_r($argMatches, 1));
-                                $tg->log('file:'.__FILE__.', line:'.__LINE__.', /tu tuId:'.$tuId);
-                                import('net/dwHttp');
-                                $http = new dwHttp;
-                                $ret = $http->get('http://'.ltreDeCrypt("Rc*~@0obk2Ldmbx4JvGq!na8~1VrGd!nYW.8RpIe.0Lh!Itbs6.0-C@x").$tuId);
-                                $tg->log('file:'.__FILE__.', line:'.__LINE__.', /tu http_req_ret not false:'.(false!==$ret?'yes':'no'));
-                                if (false !== $ret) {
-                                    $feed = json_decode($ret, 1);
-                                    if (isset($feed['data']['url'])) {
-                                        $url = $feed['data']['url'];
-                                        $headers = get_headers($url, 1);
-                                        if (in_array($headers['Content-Type'], ['image/gif', 'video/mp4'])) {//@debug: 测试增加video/mp4的情况，如有错误，则回退至仅判断image/gif
-                                            return $tg->callMethod('sendVideo', [
-                                                'chat_id' => $chat['id'],
-                                                'video' => $url,
-                                                'reply_to_message_id' => $message['message_id'],
-                                            ]);
-                                        } elseif (preg_match('/^image\//i', $headers['Content-Type'])) {
-                                            return $tg->callMethod('sendPhoto', [
-                                                'chat_id' => $chat['id'],
-                                                'photo' => $url,
-                                                'reply_to_message_id' => $message['message_id'],
-                                            ]);
-                                        } else {
-                                            $responseText = "Unsupport MIMETYPE：{$headers['Content-Type']}";
+                                $limit = abs((int)$argMatches[3]);//可选的最大输出图个数, 限制20（从第一张图开始，按id递增尝试获取）
+                                while ($limit -- && $limit <= 20) {
+                                    $tg->log('file:'.__FILE__.', line:'.__LINE__.', /tu regex matches:'.print_r($argMatches, 1));
+                                    $tg->log('file:'.__FILE__.', line:'.__LINE__.', /tu tuId:'.$tuId);
+                                    import('net/dwHttp');
+                                    $http = new dwHttp;
+                                    $ret = $http->get('http://'.ltreDeCrypt("Rc*~@0obk2Ldmbx4JvGq!na8~1VrGd!nYW.8RpIe.0Lh!Itbs6.0-C@x").$tuId);
+                                    $tg->log('file:'.__FILE__.', line:'.__LINE__.', /tu http_req_ret not false:'.(false!==$ret?'yes':'no'));
+                                    if (false !== $ret) {
+                                        $feed = json_decode($ret, 1);
+                                        if (isset($feed['data']['url'])) {
+                                            $url = $feed['data']['url'];
+                                            $headers = get_headers($url, 1);
+                                            if (in_array($headers['Content-Type'], ['image/gif', 'video/mp4'])) {//@debug: 测试增加video/mp4的情况，如有错误，则回退至仅判断image/gif
+                                                return $tg->callMethod('sendVideo', [
+                                                    'chat_id' => $chat['id'],
+                                                    'video' => $url,
+                                                    'reply_to_message_id' => $message['message_id'],
+                                                ]);
+                                            } elseif (preg_match('/^image\//i', $headers['Content-Type'])) {
+                                                return $tg->callMethod('sendPhoto', [
+                                                    'chat_id' => $chat['id'],
+                                                    'photo' => $url,
+                                                    'reply_to_message_id' => $message['message_id'],
+                                                ]);
+                                            } else {
+                                                $responseText = "Unsupport MIMETYPE：{$headers['Content-Type']}";
+                                            }
                                         }
                                     }
+                                    //ID递增
+                                    $tuId ++;
+                                    usleep(200);
                                 }
                             }
                         }
