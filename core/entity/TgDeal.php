@@ -166,26 +166,25 @@ class TgDeal extends DIEntity {
                                             $url = $feed['data']['url'];
                                             $headers = get_headers($url, 1);
                                             if (in_array($headers['Content-Type'], ['image/gif', 'video/mp4'])) {//@debug: 测试增加video/mp4的情况，如有错误，则回退至仅判断image/gif
-                                                return $tg->callMethod('sendVideo', [
+                                                $tg->callMethod('sendVideo', [
                                                     'chat_id' => $chat['id'],
                                                     'video' => $url,
                                                     'reply_to_message_id' => $message['message_id'],
                                                 ]);
                                             } elseif (preg_match('/^image\//i', $headers['Content-Type'])) {
-                                                return $tg->callMethod('sendPhoto', [
+                                                $tg->callMethod('sendPhoto', [
                                                     'chat_id' => $chat['id'],
                                                     'photo' => $url,
                                                     'reply_to_message_id' => $message['message_id'],
                                                 ]);
-                                            } else {
-                                                $responseText = "Unsupport MIMETYPE：{$headers['Content-Type']}";
                                             }
                                         }
                                     }
                                     //ID递增
                                     $tuId ++;
-                                    usleep(200);
+                                    sleep(1);
                                 }
+                                return;
                             }
                         }
                         break;
