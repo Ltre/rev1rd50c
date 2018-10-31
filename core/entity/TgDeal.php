@@ -153,6 +153,7 @@ class TgDeal extends DIEntity {
                             if (preg_match('/^\/tu(@'.$me['username'].')?\s+(\d+)(-\d+)?\s*$/', $message['text'], $argMatches)) {
                                 $tuId = $argMatches[2];//获取命令里指定的图id
                                 $limit = abs((int)$argMatches[3]);//可选的最大输出图个数, 限制20（从第一张图开始，按id递增尝试获取）
+                                $limit = $limit ?: 1;
                                 while ($limit -- && $limit <= 20) {
                                     $tg->log('file:'.__FILE__.', line:'.__LINE__.', /tu regex matches:'.print_r($argMatches, 1));
                                     $tg->log('file:'.__FILE__.', line:'.__LINE__.', /tu tuId:'.$tuId);
