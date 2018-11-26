@@ -2,6 +2,7 @@
 
 /**
  * tg分派后的具体处理逻辑存放
+ * @todo 涉及发图的代码，可以封装下，缓存tg的文件ID，文件ID失效时则重新发图，并再次缓存文件ID
  */
 class TgDeal extends DIEntity {
 
