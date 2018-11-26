@@ -248,7 +248,20 @@ class TgDeal extends DIEntity {
                             'caption' => "恶臭来袭！",
                             'reply_to_message_id' => $message['message_id'],
                         ]);
-                        break;
+                    case 'nimabi':
+                        return $tg->callMethod('sendPhoto', [
+                            'chat_id' => $chat['id'],
+                            'photo' => 'AgADBQADvagxG9NA2FebtqyA5sBoIMN_3zIABCI5TEP5R0praSoAAgI',
+                            'caption' => "爱我请吸我！",
+                            'reply_to_message_id' => $message['message_id'],
+                        ]);
+                    case 'eatmyjb':
+                        return $tg->callMethod('sendPhoto', [
+                            'chat_id' => $chat['id'],
+                            'photo' => 'AgADBQADQ6gxG84u2VfVyPs7PDTSBEVX2zIABJJJcgYGdZbceMIBAAEC',
+                            'caption' => "骚年，我的大不大？",
+                            'reply_to_message_id' => $message['message_id'],
+                        ]);
                 }
             } elseif ($this->hdl == 'kowaii') {
                 switch ($matches[1]) {
