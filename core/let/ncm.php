@@ -45,7 +45,7 @@ if (isset($_FILES['f'])) {
             }
             if ($resultFile) {
                 echo 'H:<br>';
-                download($resultFile);
+                //download($resultFile);
             }
         }
     }
