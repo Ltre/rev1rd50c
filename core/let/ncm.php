@@ -14,7 +14,7 @@ function download($file, $del=false){
     exit;
 }
 
-$dir = '/root/mydir/uncompress/ncmdump/tmp';
+$dir = DI_DATA_PATH.'tmp';
 $bin = "/root/mydir/uncompress/ncmdump/ncmdump";
 if (isset($_FILES['f'])) {
     $f = $_FILES['f'];
