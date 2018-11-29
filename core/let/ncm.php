@@ -18,19 +18,32 @@ $dir = '/root/mydir/uncompress/ncmdump/tmp';
 $bin = "/root/mydir/uncompress/ncmdump/ncmdump";
 if (isset($_FILES['f'])) {
     $f = $_FILES['f'];
+    var_dump($f);
     if (preg_match('/\.ncm$/', $f['name'])) {
+        echo 'A:<br>';
         if (is_uploaded_file($f['tmp_name'])) {
+            echo 'B:<br>';
             $tmpdir = $dir.'/'.intval(microtime(1)*1000);
+            var_dump($tmpdir);
             mkdir($tmpdir);
             $dlname = $tmpdir.'/1.ncm';
-            move_uploaded_file($f['tmp_name'], $dlname);
-            shell_exec("{$bin} {$dlname}");
+            echo 'C:<br>';
+            var_dump(move_uploaded_file($f['tmp_name'], $dlname));
+            echo 'D:<br>';
+            var_dump(shell_exec("{$bin} {$dlname}"));
             $resultFile = null;
+            echo 'E:<br>';
+            var_dump(glob($tmpdir));
             foreach (glob($tmpdir) as $v) {
+                echo 'F:<br>';
+                var_dump($v);
                 if (in_array($v, ['.', '..', '1.ncm'])) continue;
                 $resultFile = $tmpdir.'/'.$v;
+                echo 'G:<br>';
+                var_dump($resultFile);
             }
             if ($resultFile) {
+                echo 'H:<br>';
                 download($resultFile);
             }
         }
