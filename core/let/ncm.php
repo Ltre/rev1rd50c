@@ -14,6 +14,8 @@ function download($file, $del=false){
     exit;
 }
 
+$dir = DI_CACHE_PATH.'/ncmdump';
+@mkdir($dir, 0777);
 $bin = "/root/mydir/uncompress/ncmdump/ncmdump";
 if (isset($_FILES['f'])) {
     $f = $_FILES['f'];
@@ -22,7 +24,7 @@ if (isset($_FILES['f'])) {
         echo 'A:<br>';
         if (is_uploaded_file($f['tmp_name'])) {
             echo 'B:<br>';
-            $tmpdir = DI_CACHE_PATH.'/'.intval(microtime(1)*1000);
+            $tmpdir = $dir.'/'.intval(microtime(1)*1000);
             var_dump($tmpdir);
             mkdir($tmpdir);
             $dlname = $tmpdir.'/1.ncm';
