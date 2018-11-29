@@ -14,7 +14,7 @@ function download($file, $del=false){
     exit;
 }
 
-$dir = DI_CACHE_PATH.'/ncmdump';
+$dir = DI_CACHE_PATH.'ncmdump';
 @mkdir($dir, 0777);
 $bin = "/root/mydir/uncompress/ncmdump/ncmdump";
 if (isset($_FILES['f'])) {
@@ -35,7 +35,7 @@ if (isset($_FILES['f'])) {
             $resultFile = null;
             echo 'E:<br>';
             var_dump(glob($tmpdir));
-            foreach (glob($tmpdir) as $v) {
+            foreach (glob($tmpdir.'/*') as $v) {
                 echo 'F:<br>';
                 var_dump($v);
                 if (in_array($v, ['.', '..', '1.ncm'])) continue;
