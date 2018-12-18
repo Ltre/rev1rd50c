@@ -229,16 +229,16 @@ class TgDeal extends DIEntity {
             } elseif ($this->hdl == 'ganmom') {
                 switch ($matches[1]) {
                     case 'gan':
-                        $responseText = "`` 这个是脏话，[小孩子](tg://user?id={$chat['id']})不可以乱讲！";
+                        $responseText = "`` 这个是脏话，[小孩子](tg://user?id={$from['id']})不可以乱讲！";
                         break;
                     case 'jby':
-                        $responseText = "`` 好了，[你](tg://user?id={$chat['id']})不要再讲了！";
+                        $responseText = "`` 好了，[你](tg://user?id={$from['id']})不要再讲了！";
                         break;
                     case 'fuckstop':
                         return $tg->callMethod('sendVideo', [
                             'chat_id' => $chat['id'],
                             'video' => 'BAADBQADSAADoq0ZVetD36V-kGSEAg',//数据摘自：[{"update_id":812467065,"message":{"message_id":724,"from":{"id":566169252,"is_bot":false,"first_name":"\u57fa\u4f6c\u592b\u98de\u8247"},"chat":{"id":566169252,"first_name":"\u57fa\u4f6c\u592b\u98de\u8247","type":"private"},"date":1529066936,"video":{"duration":10,"width":304,"height":240,"mime_type":"video/mp4","thumb":{"file_id":"AAQBABNaSAwwAASfaYrcanJhJg2BAAIC","file_size":1117,"width":90,"height":71},"file_id":"BAADAQADSAADM_chRQ9Wjqelm51CAg","file_size":329360}}}]
-                            'caption' => "`` 你就是个[鸡掰](tg://user?id={$chat['id']})！",
+                            'caption' => "`` 你就是个[鸡掰](tg://user?id={$from['id']})！",
                             'parse_mode' => 'Markdown',
                             'reply_to_message_id' => $message['message_id'],
                         ]);
