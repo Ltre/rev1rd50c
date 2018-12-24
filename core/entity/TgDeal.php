@@ -289,12 +289,17 @@ class TgDeal extends DIEntity {
                         import('net/dwHttp');
                         $http = new dwHttp;
                         $ret = $http->get($api, 20);
+                        $tg->log("pussy->pussy >> api: {$api}");//debug
+                        $tg->log("pussy->pussy >> ret of api: {$ret}");//debug
                         @$ret = json_decode($ret?:'[]', 1);
                         if (@$ret['code'] == 0) {
                             $pussyList = $ret['data'];
                             $pussyLen = count($pussyList);
                             $pussy = $pussyList[mt_rand(0, $pussyLen)];
-                            retrun TgUtil::sendImageOrAnimateByTuku($tg, $chat, $pussy, ['reply_to_message_id' => $message['message_id']]);
+                            $tg->log("pussy->pussy >> pussyLen: {$pussyLen}");//debug
+                            $tg->log("pussy->pussy >> pussyIndex: ".mt_rand(0, $pussyLen)."\r\n");//debug
+                            $tg->log("pussy->pussy >> pussy: ".print_r($pussy, 1)."\r\n");//debug
+                            return TgUtil::sendImageOrAnimateByTuku($tg, $chat, $pussy, ['reply_to_message_id' => $message['message_id']]);
                         } else {
                             $responseText = 'Can\'t get any pussy!';
                         }
