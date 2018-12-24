@@ -294,7 +294,9 @@ class TgDeal extends DIEntity {
                             $pussyList = $ret['data'];
                             $pussyLen = count($pussyList);
                             $pussy = $pussyList[mt_rand(0, $pussyLen)];
-                            TgUtil::sendImageOrAnimateByTuku($tg, $chat, $pussy, ['reply_to_message_id' => $message['message_id']]);
+                            retrun TgUtil::sendImageOrAnimateByTuku($tg, $chat, $pussy, ['reply_to_message_id' => $message['message_id']]);
+                        } else {
+                            $responseText = 'Can\'t get any pussy!';
                         }
                         break;
                 }
