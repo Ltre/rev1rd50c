@@ -18,6 +18,12 @@ class TgUtil extends DIEntity {
 
     //发送自建图库的图片或动态图
     static function sendImageOrAnimateByTuku($tg, array $chat, array $tuData, array $otherArgs){
+return $tg->callMethod('sendMessage', [
+    'chat_id' => $chat['id'],
+    'text' => 'testtesttest',
+    'reply_to_message_id' => $otherArgs['reply_to_message_id'],
+    'parse_mode' => 'Markdown',
+]);//debug
         $caption = "tuId={$tuData['tuId']}\nTags: " . join('; ', $tuData['tags']);
         $headers = get_headers($tuData['url'], 1);
         if (in_array($headers['Content-Type'], ['image/gif', 'video/mp4'])) {
