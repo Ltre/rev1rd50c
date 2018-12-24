@@ -98,12 +98,12 @@ class TgDeal extends DIEntity {
                         $http = new dwHttp;
                         $api = 'http://'.ltreDeCrypt("ucu5)VYlwt_7_Tr2D5Z6Ll.U(D*oUR-6Lx!F.k*H@Cg3.LRH(dYv!Ol5M7hf(4-Ev1'1FbNtXFt7.0NjQn");
                         $tg->log('file:'.__FILE__.', line:'.__LINE__.', Prepare request api:'.$api);
-                        $ret = $http->get($api);
+                        $ret = $http->get($api, 20);
                         $feed = json_decode($ret?:'[]', 1);
                         $tg->log('file:'.__FILE__.', line:'.__LINE__.', After request api:'.$api.', ret is:'.$ret.', feed is:'.print_r($feed, 1));
                         if (isset($feed['code']) && $feed['code'] == 0) {
                             @$url = $feed['data']['url'] ?: null;//data部分可能为null，故url也可能取null
-                            if ($url) {
+                            if ($url) {//@todo 此处将改造为 TgUtil::sendImageOrAnimateByTuku() 方式
                                 $caption = "tuId={$feed['data']['tuId']}\nTags: " . join('; ', $feed['data']['tags']);
                                 $headers = get_headers($url, 1);
                                 if (in_array($headers['Content-Type'], ['image/gif', 'video/mp4'])) {
@@ -137,7 +137,7 @@ class TgDeal extends DIEntity {
                                 $tg->log('file:'.__FILE__.', line:'.__LINE__.', /hideimg tuId:'.$tuId);
                                 import('net/dwHttp');
                                 $http = new dwHttp;
-                                $ret = $http->get('http://'.ltreDeCrypt("O9QO(4.UTGSAyhWhtr.8Pn!y'1~xCi.QQu'1v1Ur").$tuId);
+                                $ret = $http->get('http://'.ltreDeCrypt("O9QO(4.UTGSAyhWhtr.8Pn!y'1~xCi.QQu'1v1Ur").$tuId, 20);
                                 $tg->log('file:'.__FILE__.', line:'.__LINE__.', /hideimg http_req_ret not false:'.(false!==$ret?'yes':'no'));
                                 //@todo: 发消息告知执行完毕。。。
                                 $responseText = 'tuId='.$tuId.', 执行完毕';
@@ -160,7 +160,7 @@ class TgDeal extends DIEntity {
                                     $tg->log('file:'.__FILE__.', line:'.__LINE__.', /tu tuId:'.$tuId);
                                     import('net/dwHttp');
                                     $http = new dwHttp;
-                                    $ret = $http->get('http://'.ltreDeCrypt("Rc*~@0obk2Ldmbx4JvGq!na8~1VrGd!nYW.8RpIe.0Lh!Itbs6.0-C@x").$tuId);
+                                    $ret = $http->get('http://'.ltreDeCrypt("Rc*~@0obk2Ldmbx4JvGq!na8~1VrGd!nYW.8RpIe.0Lh!Itbs6.0-C@x").$tuId, 20);
                                     $tg->log('file:'.__FILE__.', line:'.__LINE__.', /tu http_req_ret not false:'.(false!==$ret?'yes':'no'));
                                     if (false !== $ret) {
                                         $feed = json_decode($ret, 1);
@@ -271,7 +271,7 @@ class TgDeal extends DIEntity {
                         $mention = "[{$name}](tg://user?id={$from['id']})";
                         $responseText = "`` {$mention}";
                         $responseText .= "、あなたが選ばれたので、準備をしてください！";
-                    break;
+                        break;
                 }
             } elseif ($this->hdl == 'eosgetdice') {
                 switch ($matches[1]) {
@@ -280,7 +280,22 @@ class TgDeal extends DIEntity {
                         $mention = "[{$name}](tg://user?id={$from['id']})";
                         $responseText = "`` Hello, {$mention}.";
                         $responseText .= "This is a command for testing. Do you want to achieve your own robot? Please refer to: [this link](https://core.telegram.org/bots/api#sendmessage)";
-                    break;
+                        break;
+                }
+            } elseif ($this->hdl == 'pussy') {
+                switch ($matches[1]) {
+                    case 'pussy'://取一张pussy
+                        $api = 'http://'.ltreDeCrypt("zzbbNNTTed!pWT-6z6TBxbDlAfDx-(!2Vnz7y6SoNoK7DA@0Om!MHxKh_sUR_7a0y5FvPc~yKij1.n!zEqCm(pYW)5-ED9'1!yEk!KYC.0*zx4");
+                        $http = new dwHttp;
+                        $ret = $http->get($api, 20);
+                        @$ret = json_decode($ret?:'[]', 1);
+                        if (@$ret['code'] == 0) {
+                            $pussyList = $ret['data'];
+                            $pussyLen = count($pussyList);
+                            $pussy = $pussyList[mt_rand(0, $pussyLen)];
+                            TgUtil::sendImageOrAnimateByTuku($tg, $chat, $pussy, ['reply_to_message_id' => $message['message_id']]);
+                        }
+                        break;
                 }
             }
         }
