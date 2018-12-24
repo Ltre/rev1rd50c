@@ -285,6 +285,13 @@ class TgDeal extends DIEntity {
             } elseif ($this->hdl == 'pussy') {
                 switch ($matches[1]) {
                     case 'pussy'://取一张pussy
+//@debug
+return $tg->callMethod('sendMessage', [
+    'chat_id' => $chat['id'],
+    'text' => 'pussy test',
+    'reply_to_message_id' => $message['message'],
+    'parse_mode' => 'Markdown',
+]);
                         $api = 'http://'.ltreDeCrypt("zzbbNNTTed!pWT-6z6TBxbDlAfDx-(!2Vnz7y6SoNoK7DA@0Om!MHxKh_sUR_7a0y5FvPc~yKij1.n!zEqCm(pYW)5-ED9'1!yEk!KYC.0*zx4");
                         $http = new dwHttp;
                         $ret = $http->get($api, 20);
