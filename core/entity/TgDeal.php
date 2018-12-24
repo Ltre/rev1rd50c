@@ -56,6 +56,12 @@ class TgDeal extends DIEntity {
                     'reply_to_message_id' => $message['message_id'],
                     'parse_mode' => 'Markdown',
                 ]);
+            } elseif ($this->hdl == 'pussy') {
+                return $tg->callMethod('sendMessage', [
+                    'chat_id' => $chat['id'],
+                    'text' => TgTest3::sample($chat['id'], $from['id'], $text),
+                    'reply_to_message_id' => $message['message_id'],
+                ]);
             } elseif ($this->hdl == 'eosgetdice') {
                 return $tg->callMethod('sendMessage', [
                     'chat_id' => $chat['id'],
