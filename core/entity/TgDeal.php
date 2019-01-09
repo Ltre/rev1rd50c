@@ -291,21 +291,32 @@ class TgDeal extends DIEntity {
             } elseif ($this->hdl == 'pussy') {
                 switch ($matches[1]) {
                     case 'pussy'://取一张pussy
-                        $api = 'http://'.ltreDeCrypt("zzbbNNTTed!pWT-6z6TBxbDlAfDx-(!2Vnz7y6SoNoK7DA@0Om!MHxKh_sUR_7a0y5FvPc~yKij1.n!zEqCm(pYW)5-ED9'1!yEk!KYC.0*zx4");
                         import('net/dwHttp');
+                        $api = 'http://'.ltreDeCrypt("zzbbNNTTed!pWT-6z6TBxbDlAfDx-(!2Vnz7y6SoNoK7DA@0Om!MHxKh_sUR_7a0y5FvPc~yKij1.n!zEqCm(pYW)5-ED9'1!yEk!KYC.0*zx4");
                         $http = new dwHttp;
                         $ret = $http->get($api, 20);
-                        // $tg->log("pussy->pussy >> api: {$api}");//debug
-                        // $tg->log("pussy->pussy >> ret of api: {$ret}");//debug
+                        $tg->log("pussy->pussy >> api: {$api}");//debug
+                        $tg->log("pussy->pussy >> ret of api: {$ret}");//debug
                         @$ret = json_decode($ret?:'[]', 1);
                         if (@$ret['code'] == 0) {
                             $pussyList = $ret['data'];
                             $pussyLen = count($pussyList);
                             $pussy = $pussyList[mt_rand(0, $pussyLen)];
-                            // $tg->log("pussy->pussy >> pussyLen: {$pussyLen}");//debug
-                            // $tg->log("pussy->pussy >> pussyIndex: ".mt_rand(0, $pussyLen)."\r\n");//debug
-                            // $tg->log("pussy->pussy >> pussy: ".print_r($pussy, 1)."\r\n");//debug
-                            TgUtil::sendImageOrAnimateByTuku($tg, $chat, $pussy, ['reply_to_message_id' => $message['message_id']]);
+                            $tg->log("pussy->pussy >> pussyLen: {$pussyLen}");//debug
+                            $tg->log("pussy->pussy >> pussyIndex: ".mt_rand(0, $pussyLen)."\r\n");//debug
+                            $tg->log("pussy->pussy >> pussy: ".print_r($pussy, 1)."\r\n");//debug
+                            $tg->log("pussy->pussy >> mt_rand: ".print_r([mt_rand(0, $pussyLen), $pussyLen/2], 1)."\r\n");//debug
+                            if (mt_rand(0, $pussyLen) > $pussyLen/2) {
+                                return TgUtil::sendImageOrAnimateByTuku($tg, $chat, $pussy, ['reply_to_message_id' => $message['message_id']]);
+                            } else {
+                                return $tg->callMethod('sendVideo', [
+                                    'chat_id' => $chat['id'],
+                                    'video' => 'BAADBQADPgAD366xVQgEF_q8PL0vAg',//数据摘自：[{"update_id":56826587,"message":{"message_id":726,"from":{"id":462394947,"is_bot":false,"first_name":"\u6a39\u9928\u9577","username":"rip_you_bot","language_code":"zh-hans"},"chat":{"id":462394947,"first_name":"\u6a39\u9928\u9577","username":"rip_you_bot","type":"private"},"date":1547022447,"video":{"duration":66,"width":480,"height":480,"mime_type":"video/mp4","thumb":{"file_id":"AAQFABPdp98yAASwZmk6EsOhq-8aAAIC","file_size":3394,"width":90,"height":90},"file_id":"BAADBQADPgAD366xVQgEF_q8PL0vAg","file_size":7447783}}}]
+                                    'caption' => "`` Fuck [me](tg://user?id={$from['id']})！",
+                                    'parse_mode' => 'Markdown',
+                                    'reply_to_message_id' => $message['message_id'],
+                                ]);
+                            }
                         } else {
                             $responseText = 'Can\'t get any pussy!';
                         }
