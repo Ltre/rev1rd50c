@@ -306,7 +306,7 @@ class TgDeal extends DIEntity {
                             $tg->log("pussy->pussy >> pussyIndex: ".mt_rand(0, $pussyLen)."\r\n");//debug
                             $tg->log("pussy->pussy >> pussy: ".print_r($pussy, 1)."\r\n");//debug
                             $tg->log("pussy->pussy >> mt_rand: ".print_r([mt_rand(0, $pussyLen), $pussyLen/2], 1)."\r\n");//debug
-                            if (mt_rand(0, $pussyLen) > $pussyLen/10) {
+                            if (mt_rand(0, $pussyLen) > $pussyLen/15) {
                                 return TgUtil::sendImageOrAnimateByTuku($tg, $chat, $pussy, ['reply_to_message_id' => $message['message_id']]);
                             } else {
                                 return $tg->callMethod('sendVideo', [
