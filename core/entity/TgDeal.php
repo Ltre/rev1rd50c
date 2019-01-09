@@ -295,8 +295,8 @@ class TgDeal extends DIEntity {
                         $api = 'http://'.ltreDeCrypt("zzbbNNTTed!pWT-6z6TBxbDlAfDx-(!2Vnz7y6SoNoK7DA@0Om!MHxKh_sUR_7a0y5FvPc~yKij1.n!zEqCm(pYW)5-ED9'1!yEk!KYC.0*zx4");
                         $http = new dwHttp;
                         $ret = $http->get($api, 20);
-                        $tg->log("pussy->pussy >> api: {$api}");//debug
-                        $tg->log("pussy->pussy >> ret of api: {$ret}");//debug
+                        // $tg->log("pussy->pussy >> api: {$api}");//debug
+                        // $tg->log("pussy->pussy >> ret of api: {$ret}");//debug
                         @$ret = json_decode($ret?:'[]', 1);
                         if (@$ret['code'] == 0) {
                             $pussyList = $ret['data'];
@@ -306,7 +306,7 @@ class TgDeal extends DIEntity {
                             $tg->log("pussy->pussy >> pussyIndex: ".mt_rand(0, $pussyLen)."\r\n");//debug
                             $tg->log("pussy->pussy >> pussy: ".print_r($pussy, 1)."\r\n");//debug
                             $tg->log("pussy->pussy >> mt_rand: ".print_r([mt_rand(0, $pussyLen), $pussyLen/2], 1)."\r\n");//debug
-                            if (mt_rand(0, $pussyLen) > $pussyLen/2) {
+                            if (mt_rand(0, $pussyLen) > $pussyLen/10) {
                                 return TgUtil::sendImageOrAnimateByTuku($tg, $chat, $pussy, ['reply_to_message_id' => $message['message_id']]);
                             } else {
                                 return $tg->callMethod('sendVideo', [
