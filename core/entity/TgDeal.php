@@ -269,6 +269,13 @@ class TgDeal extends DIEntity {
                             'caption' => "骚年，我的大不大？",
                             'reply_to_message_id' => $message['message_id'],
                         ]);
+                    case 'hungry':
+                        return $tg->callMethod('sendPhoto', [
+                            'chat_id' => $chat['id'],
+                            'photo' => 'AgADBQADbKgxG5GZUVeNC4beZXhtvP5U9jIABC1OWVGp4wOH5SkBAAEC',
+                            'caption' => '咖喱饭做好了！',
+                            'reply_to_message_id' => $message['message_id'],
+                        ]);
                 }
             } elseif ($this->hdl == 'kowaii') {
                 switch ($matches[1]) {
@@ -306,7 +313,7 @@ class TgDeal extends DIEntity {
                             $tg->log("pussy->pussy >> pussyIndex: ".mt_rand(0, $pussyLen)."\r\n");//debug
                             $tg->log("pussy->pussy >> pussy: ".print_r($pussy, 1)."\r\n");//debug
                             $tg->log("pussy->pussy >> mt_rand: ".print_r([mt_rand(0, $pussyLen), $pussyLen/2], 1)."\r\n");//debug
-                            if (mt_rand(0, $pussyLen) > $pussyLen/15) {
+                            if (mt_rand(0, $pussyLen) > $pussyLen/12) {
                                 return TgUtil::sendImageOrAnimateByTuku($tg, $chat, $pussy, ['reply_to_message_id' => $message['message_id']]);
                             } else {
                                 return $tg->callMethod('sendVideo', [
