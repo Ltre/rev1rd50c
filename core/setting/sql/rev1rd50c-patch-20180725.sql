@@ -1,3 +1,8 @@
+
+-- 强烈建议：改为nosql，并针对几个常用的字段加索引
+
+
+
 -- @since 2018-07-25
 -- HP localhost 已同步
 -- Office localhost 未同步
