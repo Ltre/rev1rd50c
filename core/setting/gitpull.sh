@@ -14,6 +14,14 @@ if [ ! -d "/home/wwwroot/rev1rd50c" ]; then
     mkdir /home/wwwroot/rev1rd50c;
 fi
 
+if [ ! -d "/home/wwwroot/rev1rd50c/core" ]; then
+    mkdir /home/wwwroot/rev1rd50c/core;
+fi
+
+if [ ! -d "/home/wwwroot/rev1rd50c/core/data" ]; then
+    mkdir /home/wwwroot/rev1rd50c/core/data;
+fi
+
 mv /home/wwwroot/rev1rd50c /home/wwwroot/rev1rd50c.trash;
 cp /home/wwwsrc/rev1rd50c -r /home/wwwroot/rev1rd50c;
 rm /home/wwwroot/rev1rd50c/.git -rf
