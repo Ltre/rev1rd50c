@@ -31,6 +31,7 @@ chmod -R 767 /home/wwwroot/rev1rd50c/core/data;
 chmod +x /home/wwwroot/rev1rd50c/core/setting/gitpull.sh;
 rm -f -r /home/wwwroot/rev1rd50c.trash;
 
+cd /home/wwwroot
 cd /home/wwwroot/rev1rd50c
 
 service nginx restart
