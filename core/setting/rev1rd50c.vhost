@@ -82,3 +82,10 @@ location ~ .*\.(js|css)?$ {
         expires 7d;
         }
 }
+
+
+--------------------------------------------------------------
+
+Nginx: for lightsail tokyo
+
+no way! gotovpsmysetup
