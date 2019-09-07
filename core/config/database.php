@@ -10,7 +10,7 @@ function __never_used_name_in_database(){
             static $port = 3306;
             static $db = 'rev1rd50c';
             static $user = 'rev1rd50c';
-            static $pwd = '85a1a56dd98b60bb776f6e2475c99d58d13bb3e9';
+            static $pwd = 'O27Ko4PHUF0OnHvo';
             static $table_prefix = 'csdr_';//表前缀
         }
         class DIMMCConfig {
