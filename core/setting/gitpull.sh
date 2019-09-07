@@ -1,3 +1,12 @@
+if [ ! -d "/home/wwwroot" ]; then
+    mkdir /home/wwwroot;
+fi;
+if [ ! -d "/home/wwwbackup" ]; then
+    mkdir /home/wwwbackup;
+fi;
+zip -r /home/wwwbackup/rev1rd50c.zip /home/wwwroot/rev1rd50c/*
+
+
 if [ ! -d "/home/wwwsrc" ]; then
     mkdir /home/wwwsrc;
 fi;
