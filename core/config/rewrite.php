@@ -17,7 +17,8 @@ class DIRouteRewrite {
         __WPREET.'/<A>' => 'short/start/<A>',//短链正式
         __FUCKREET => 'short/start',//短链测试
         __FUCKREET.'/<A>' => 'short/start/<A>',//短链测试
-        __REV1RD50CML.'/<A>' => 'lightm/start',
+        __REV1RD50CML => 'lightm/start',
+        __REV1RD50CML.'/<A>' => 'lightm/start/<A>',
         '://rev1rd50c.me/s' => 'short/start',//短网址实验：这里加上前缀"s/"
         '://rev1rd50c.me/s/<A>' => 'short/start/<A>',//短网址实验：这里加上前缀"s/"
         //域名需要隐蔽配置，用加密字符串
