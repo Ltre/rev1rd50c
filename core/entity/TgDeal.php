@@ -235,7 +235,7 @@ class TgDeal extends DIEntity {
             } elseif ($this->hdl == 'ganmom') {
                 switch ($matches[1]) {
                     case 'help':
-                        $responseText = "我叫甘霖娘，学生，24岁。\ngan-甘霖娘\njby-鸡掰\nfuckstop-好了，你不要再讲了\ndream-做个好梦\nnimabi-我爱你\neatmyjb-拔屌吧兄嘚\nhungry-我饿了\ncherry-来盘车厘子\nshit-野兽先辈";
+                        $responseText = "我叫甘霖娘，学生，24岁。\nhelp-我叫甘霖娘\ngan-甘霖娘\njby-鸡掰\nfuckstop-好了，你不要再讲了\ndream-做个好梦\nnimabi-我爱你\neatmyjb-拔屌吧兄嘚\nhungry-我饿了\ncherry-来盘车厘子\nshit-野兽先辈";
                         break;
                     case 'gan':
                         $responseText = "`` 这个是脏话，[小孩子](tg://user?id={$from['id']})不可以乱讲！";
