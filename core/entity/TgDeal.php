@@ -283,6 +283,28 @@ class TgDeal extends DIEntity {
                             'caption' => '只剩下车厘子干了～',
                             'reply_to_message_id' => $message['message_id'],
                         ]);
+                    case 'shit'://取一张shit
+                        import('net/dwHttp');
+                        $api = 'http://'.ltreDeCrypt("RR99hhZZNM.vb8@0w3*L!G)Nt8ZTCA'9DaDlMvy6WjUR~1@yQAXN.FH2if)5qgC9VLM9)CB9k2M1w3Am~L!nYW.8RpYu'1@wn3JrTx'1w2Da");
+                        $http = new dwHttp;
+                        $ret = $http->get($api, 20);
+                        // $tg->log("ganmom->shit >> api: {$api}");//debug
+                        // $tg->log("shit->shit >> ret of api: {$ret}");//debug
+                        @$ret = json_decode($ret?:'[]', 1);
+                        if (@$ret['code'] == 0) {
+                            $shitList = $ret['data'];
+                            $shitLen = count($shitList);
+                            $shit = $shitList[mt_rand(0, $shitLen)];
+                            $tg->log("ganmom->shit >> shitLen: {$shitLen}");//debug
+                            $tg->log("ganmom->shit >> shitIndex: ".mt_rand(0, $shitLen)."\r\n");//debug
+                            $tg->log("ganmom->shit >> shit: ".print_r($shit, 1)."\r\n");//debug
+                            $tg->log("ganmom->shit >> mt_rand: ".print_r([mt_rand(0, $shitLen), $shitLen/2], 1)."\r\n");//debug
+                            if (mt_rand(0, $shitLen) > $shitLen/12) {
+                                return TgUtil::sendImageOrAnimateByTuku($tg, $chat, $shit, ['reply_to_message_id' => $message['message_id']]);
+                            }
+                        }
+                        $responseText = 'Can\'t get any shit!';
+                        break;
                 }
             } elseif ($this->hdl == 'kowaii') {
                 switch ($matches[1]) {
