@@ -37,6 +37,22 @@ class TgDo extends DIDo {
         @$this->stpl();
     }
 
+    //利用机器人推送私信（必须先start bot）
+    function pushPrivateMsgThroughBot($hdl, $tgUserId){
+        if (empty($hdl) || empty($tgUserId)) {
+            putjsonp(-1, null, 'param err!');
+        }
+
+        $tg = Tg::inst($hdl);
+        list ($ok, $resp) = $tg->callMethod('sendMessage', [
+            'chat_id' => $chat['id'],
+            'text' => TgTest::sample($chat['id'], $from['id'], $text),
+            'reply_to_message_id' => $message['message_id'],
+        ]);
+
+        putjsonp($ok?0:-1, $resp);
+    }
+
     function login($auth = ''){
         if ($auth == 'auth') {
             try {
