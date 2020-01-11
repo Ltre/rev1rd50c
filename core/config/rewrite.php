@@ -19,8 +19,9 @@ class DIRouteRewrite {
         __FUCKREET => 'short/start',//短链测试
         __FUCKREET.'/<A>' => 'short/start/<A>',//短链测试
         __REV1RD50CML => 'lightm/start',
-        __ORPBSMIGT.'/<X>' => 'tg/<X>',
+        __ORPBSMIGT.'/ppmtb/<A>/<B>' => 'tg/pushPrivateMsgThroughBot/<A>/<B>',
         __ORPBSMIGT => 'tg/start',
+        __ORPBSMIGT.'/<X>' => 'tg/<X>',
         '://rev1rd50c.me/s' => 'short/start',//短网址实验：这里加上前缀"s/"
         '://rev1rd50c.me/s/<A>' => 'short/start/<A>',//短网址实验：这里加上前缀"s/"
         //域名需要隐蔽配置，用加密字符串
@@ -28,7 +29,6 @@ class DIRouteRewrite {
         //文章详细页
         'article' => 'start/article',
         'article/<A>' => 'start/article/<A>',
-
 
         //通用入口
         '<D>' => '<D>/start',
