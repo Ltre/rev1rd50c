@@ -2,6 +2,7 @@
 define('__WPREET', '://'.join('', array_reverse([chr(119), chr(112), chr(46), chr(114), chr(101), chr(101), chr(116)])));//此行代码非框架源码
 define('__FUCKREET', '://'.join('', array_reverse([chr(107), chr(99), chr(117), chr(102), chr(46), chr(114), chr(101), chr(101), chr(116)])));//此行代码非框架源码
 define('__REV1RD50CML', '://'.join('', array_reverse([chr(109), chr(111), chr(99), chr(46), chr(114), chr(101), chr(118), chr(105), chr(114), chr(100), chr(115), chr(111), chr(99), chr(46), chr(109), chr(108)])));//此行代码非框架源码
+define('__ORPBSMIGT', '://'.json('', array_reverse([chr(116), chr(103), chr(46), chr(105), chr(109), chr(115), chr(98), chr(46), chr(112), chr(114), chr(111)])));//此行代码非框架源码
 
 class DIRouteRewrite {
     
@@ -18,7 +19,7 @@ class DIRouteRewrite {
         __FUCKREET => 'short/start',//短链测试
         __FUCKREET.'/<A>' => 'short/start/<A>',//短链测试
         __REV1RD50CML => 'lightm/start',
-        __REV1RD50CML.'/<A>' => 'lightm/start/<A>',
+        __ORPBSMIGT => 'tg/start',
         '://rev1rd50c.me/s' => 'short/start',//短网址实验：这里加上前缀"s/"
         '://rev1rd50c.me/s/<A>' => 'short/start/<A>',//短网址实验：这里加上前缀"s/"
         //域名需要隐蔽配置，用加密字符串
