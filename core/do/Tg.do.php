@@ -39,18 +39,18 @@ class TgDo extends DIDo {
 
     //利用机器人推送私信（必须先start bot）
     function pushPrivateMsgThroughBot($hdl, $tgUserId){
-        if (empty($hdl) || empty($tgUserId)) {
+        $msg = arg('msg');
+        if (empty($hdl) || empty($tgUserId) || empty($msg)) {
             putjsonp(-1, null, 'param err!');
         }
 
         $tg = Tg::inst($hdl);
         list ($ok, $resp) = $tg->callMethod('sendMessage', [
-            'chat_id' => $chat['id'],
-            'text' => TgTest::sample($chat['id'], $from['id'], $text),
-            'reply_to_message_id' => $message['message_id'],
+            'chat_id' => $tgUserId,
+            'text' => $msg,
         ]);
 
-        putjsonp($ok?0:-1, $resp);
+        putjsonp($ok?0:-1, $resp, $ok?'ok':'exception');
     }
 
     function login($auth = ''){
