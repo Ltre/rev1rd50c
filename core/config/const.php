@@ -9,6 +9,7 @@ $GLOBALS += array(
             'ganmom'        => "Y8YdBrU7i9k6E9'3R7A5Yr-oOl.p'nV7U6~T)O@zUI.sT6Pz91o4Y3_1k0QJPyQy!n.yB1(uzw*3)!30CC__.~)@a5..93",//sgz
             'kowaii'        => "Zt~bW3Dj*AebHaGu*7za!6*pya'*WHB0A6xeQI-m*7d6UMo9_0(yYEKC.1r2QcV3_tUk@qI8FC!2miFywsa781fakiBBb5",//sgz
             'pussy'         => "UUykRDreQx_1LEZ5Rld4ugUt!f~M.k_vMaClMDr3GB-7w1S5NA87.1E4XqF3)8Pe-s(u@qXnYV(4c3OGYYPKb7eec5xpe7",//sgz
+            'cnmb'          => "SeG1RayiyrNB-JNe(zAdQkPO.NDfRw.1~mq6.FX1(V!8I5R4TuTvS2l4YdH8Id-hK3Wm@qE4yv~1UQCy'(qqriAxVN90pg",//sgz 私人用途，决不公开
             'eosgetdice'    => "J5~i*7)mM3T1LgQQu1x0_1Ny'kNd@1d8VqT3KwD0*7VED3CbX1j0~3'2WbDnVuRBYkLbWmE4ur-6UR87qlrotqvsppCy~V",//laoker
         ],
     ]
