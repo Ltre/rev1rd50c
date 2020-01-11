@@ -361,6 +361,10 @@ class TgDeal extends DIEntity {
                         }
                         break;
                 }
+            } elseif ($this->hdl == 'cnmb') {
+                switch ($matches[1]) {
+                    // ...
+                }
             }
         }
         if ($responseText) {
