@@ -381,6 +381,13 @@ class TgDeal extends DIEntity {
                             ]);
                         }
                         break;
+                    case 'help':
+                        return Tg::init($this->hdl)->callMethod('sendMessage', [
+                            'chat_id' => $chat['id'],
+                            'text' => "ppmtb命令: 利用机器人向单个订阅者发送文字信息。\n -- 用法：/ppmtb yourbot_username/tgUserId textmsg\n -- 例如：/ppmtb pinkjj/123456 这是文字信息",
+                            'reply_to_message_id' => $message['message_id'],
+                        ]);
+                        break;
                 }
             }
         }
