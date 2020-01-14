@@ -363,7 +363,24 @@ class TgDeal extends DIEntity {
                 }
             } elseif ($this->hdl == 'cnmb') {
                 switch ($matches[1]) {
-                    // ...
+                    case 'ppmtb':
+                        if (preg_match('#^/ppmtb(@'.$me['username'].')?\s+([\w_]+)/(\d+)\s+(.+)$#', $message['text'], $argMatches)) {
+                            $botHdl = $argMatches[2];
+                            $tgUserId = $argMatches[3];
+                            $pushMsg =  $argMatches[4];
+                            $tg = Tg::inst($botHdl);
+                            return $tg->callMethod('sendMessage', [
+                                'chat_id' => $tgUserId,
+                                'text' => $pushMsg,
+                            ]);
+                        } else {
+                            return Tg::inst($this->hdl)->callMethod('sendMessage', [
+                                'chat_id' => $chat['id'],
+                                'text' => 'param err!',
+                                'reply_to_message_id' => $message['message_id'],
+                            ]);
+                        }
+                        break;
                 }
             }
         }
