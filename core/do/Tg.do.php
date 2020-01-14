@@ -1,5 +1,5 @@
 <?php
-//未测试
+
 class TgDo extends DIDo {
 
     //This is an webhook.
