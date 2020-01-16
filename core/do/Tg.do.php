@@ -38,9 +38,10 @@ class TgDo extends DIDo {
     }
 
     //利用机器人推送私信（必须先start bot）
+    // tailf -n 100 /home/wwwroot/rev1rd50c/core/data/log/tg.cnmb.20200116.log
     function pushPrivateMsgThroughBot($hdl, $tgUserId = 0){
         $tgUserId = $tgUserId ?: ltreDeCrypt('xq40c3.(DuCzVTOITP');
-        
+
         $msg = arg('msg');
         if (empty($hdl) || empty($msg)) {
             putjsonp(-1, null, 'param err!');
