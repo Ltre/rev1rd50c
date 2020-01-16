@@ -39,8 +39,8 @@ class TgDo extends DIDo {
 
     //利用机器人推送私信（必须先start bot）
     function pushPrivateMsgThroughBot($hdl, $tgUserId = 0){
-        $tgUserId = $tgUserId || ltreDeCrypt('xq40c3.(DuCzVTOITP');
-
+        $tgUserId = $tgUserId ?: ltreDeCrypt('xq40c3.(DuCzVTOITP');
+        
         $msg = arg('msg');
         if (empty($hdl) || empty($msg)) {
             putjsonp(-1, null, 'param err!');
