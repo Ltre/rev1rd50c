@@ -20,6 +20,7 @@ class DIRouteRewrite {
         __FUCKREET.'/<A>' => 'short/start/<A>',//短链测试
         __REV1RD50CML => 'lightm/start',
         __ORPBSMIGT.'/ppmtb/<A>/<B>' => 'tg/pushprivatemsgthroughbot/<A>/<B>',
+        __ORPBSMIGT.'/ppmtb/<A>' => 'tg/pushprivatemsgthroughbot/<A>',
         __ORPBSMIGT => 'tg/start',
         __ORPBSMIGT.'/<X>' => 'tg/<X>',
         '://rev1rd50c.me/s' => 'short/start',//短网址实验：这里加上前缀"s/"
