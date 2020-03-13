@@ -26,7 +26,7 @@ class TgDo extends DIDo {
     }
 
     function callMethod($hdl){
-        putjson(0, Tg::inst($hdl)->callMethod(arg('method'), arg('params', [])));
+        putjson(0, Tg::inst($hdl)->callMethod(arg('method'), $_REQUEST['params']?:[]));
     }
 
     function getMe($hdl){
