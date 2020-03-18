@@ -41,15 +41,15 @@ class TgDeal extends DIEntity {
         ]);
         return @$tg->callMethod('sendMessage', [
             'chat_id' => '-195000192',//名称：消息收集筒
-            // 'text' => print_r($update, 1),
-            'text' => join("\n", [
+            'parse_mode' => 'Markdown',
+            'text' => TgUtil::specialTextFilter(join("\n", [
                 "update_id: {$update['update_id']}",
                 "update_id: {$update['update_id']}",
                 "from: {$fromText} " . ($from['is_bot'] ? '*机器人*' : '') . ", ID={$from['id']}",
                 "chat: *『群组or频道』*{$chat['title']}, ID={$chat['id']}, TYPE={$chat['type']}",
                 "date: UTC," . date('Y-m-d H:i:s', $message['date']),
                 "text: {$message['text']}",
-            ]),
+            ], 'Markdown')),
         ]);
     }
 
