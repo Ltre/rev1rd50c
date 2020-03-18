@@ -30,9 +30,26 @@ class TgDeal extends DIEntity {
 
     function onAnyWhere(array $update){
         $tg = Tg::inst($this->hdl);
-        return $tg->callMethod('sendMessage', [
+        $message = $update['message'];
+        $chat = $message['chat'];
+        $from = $message['from'];
+        @$fromText = TgUtil::specialTextFilter($from['first_name'].$from['last_name'], 'Markdown');
+
+        @$tg->callMethod('sendMessage', [
             'chat_id' => '-195000192',//名称：消息收集筒
             'text' => print_r($update, 1),
+        ]);
+        return @$tg->callMethod('sendMessage', [
+            'chat_id' => '-195000192',//名称：消息收集筒
+            // 'text' => print_r($update, 1),
+            'text' => join("\n", [
+                "update_id: {$update['update_id']}",
+                "update_id: {$update['update_id']}",
+                "from: {$fromText} " . ($from['is_bot'] ? '*机器人*' : '') . ", ID={$from['id']}",
+                "chat: *『群组or频道』*{$chat['title']}, ID={$chat['id']}, TYPE={$chat['type']}",
+                "date: UTC," . date('Y-m-d H:i:s', $message['date']),
+                "text: {$message['text']}",
+            ]),
         ]);
     }
 
