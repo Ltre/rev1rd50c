@@ -411,8 +411,8 @@ class TgDeal extends DIEntity {
                     case 'wau': //wau
                         return $tg->callMethod('sendVideo', [
                             'chat_id' => $chat['id'],
-                            //AAMCBQADGQEAAwZevmyAccg9yKQ3xoEsfo0zpNS8zAACmQADeXz4VVtlRJanpm1QpdeBanQAAwEAB20AAzdXAAIZBA
-                            'video' => 'AQADpdeBanQAAzdXAAI',//数据摘自：[{"update_id":812467065,"message":{"message_id":724,"from":{"id":566169252,"is_bot":false,"first_name":"\u57fa\u4f6c\u592b\u98de\u8247"},"chat":{"id":566169252,"first_name":"\u57fa\u4f6c\u592b\u98de\u8247","type":"private"},"date":1529066936,"video":{"duration":10,"width":304,"height":240,"mime_type":"video/mp4","thumb":{"file_id":"AAQBABNaSAwwAASfaYrcanJhJg2BAAIC","file_size":1117,"width":90,"height":71},"file_id":"BAADAQADSAADM_chRQ9Wjqelm51CAg","file_size":329360}}}]
+                            //AQADpdeBanQAAzdXAAI
+                            'video' => 'AAMCBQADGQEAAwZevmyAccg9yKQ3xoEsfo0zpNS8zAACmQADeXz4VVtlRJanpm1QpdeBanQAAwEAB20AAzdXAAIZBA',//数据摘自：[{"update_id":812467065,"message":{"message_id":724,"from":{"id":566169252,"is_bot":false,"first_name":"\u57fa\u4f6c\u592b\u98de\u8247"},"chat":{"id":566169252,"first_name":"\u57fa\u4f6c\u592b\u98de\u8247","type":"private"},"date":1529066936,"video":{"duration":10,"width":304,"height":240,"mime_type":"video/mp4","thumb":{"file_id":"AAQBABNaSAwwAASfaYrcanJhJg2BAAIC","file_size":1117,"width":90,"height":71},"file_id":"BAADAQADSAADM_chRQ9Wjqelm51CAg","file_size":329360}}}]
                             'reply_to_message_id' => $message['message_id'],
                         ]);
                         break;
@@ -439,7 +439,7 @@ class TgDeal extends DIEntity {
                     case 'ayi'://阿姨先辈！
                         return $tg->callMethod('sendPhoto', [
                             'chat_id' => $chat['id'],
-                            'photo' => 'AQADPGbAanQAA2D9AQAB', //AgACAgUAAxkBAAMIXr5te8IUPyjyPwE-FidTMLtSYnUAAoaqMRt5fPhVc_YvnX3x59Q8ZsBqdAADAQADAgADeQADYP0BAAEZBA
+                            'photo' => 'AgACAgUAAxkBAAMIXr5te8IUPyjyPwE-FidTMLtSYnUAAoaqMRt5fPhVc_YvnX3x59Q8ZsBqdAADAQADAgADeQADYP0BAAEZBA', //AQADPGbAanQAA2D9AQAB
                             'caption' => '阿姨，18岁，是个UP！',
                             'reply_to_message_id' => $message['message_id'],
                         ]);
