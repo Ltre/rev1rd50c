@@ -406,6 +406,45 @@ class TgDeal extends DIEntity {
                         ]);
                         break;
                 }
+            } elseif ($this->hdl == 'yui') {
+                switch ($matches[1]) {
+                    case 'wau': //wau
+                        return $tg->callMethod('sendVideo', [
+                            'chat_id' => $chat['id'],
+                            //AAMCBQADGQEAAwZevmyAccg9yKQ3xoEsfo0zpNS8zAACmQADeXz4VVtlRJanpm1QpdeBanQAAwEAB20AAzdXAAIZBA
+                            'video' => 'AQADpdeBanQAAzdXAAI',//数据摘自：[{"update_id":812467065,"message":{"message_id":724,"from":{"id":566169252,"is_bot":false,"first_name":"\u57fa\u4f6c\u592b\u98de\u8247"},"chat":{"id":566169252,"first_name":"\u57fa\u4f6c\u592b\u98de\u8247","type":"private"},"date":1529066936,"video":{"duration":10,"width":304,"height":240,"mime_type":"video/mp4","thumb":{"file_id":"AAQBABNaSAwwAASfaYrcanJhJg2BAAIC","file_size":1117,"width":90,"height":71},"file_id":"BAADAQADSAADM_chRQ9Wjqelm51CAg","file_size":329360}}}]
+                            'reply_to_message_id' => $message['message_id'],
+                        ]);
+                        break;
+                    case 'doge': //美好的一天从扔柯基开始
+                        import('net/dwHttp');
+                        $api = 'http://'.ltreDeCrypt("LLiiXXAAts(rxu@0!zCkwaOwHmWQDB-6VVg8yta8_7-YD2ojMK(4vrE0c7zx.8kk!s-~42-6ecjbe9PN(4~VQcd8US'9SdNEup_)!2@mXPidYW-6ojJ5upIG*3NEGytob9@033ULXSUS.8Bw~n~WCA_7F2fc!2Cao8c2)CSd)!~1Brt0LB_uIfTr.Q!h)CRDYI@lnl-6Jh'F.0v1*J-Or5.0Sov2");
+                        $http = new dwHttp;
+                        $ret = $http->get($api, 20);
+                        @$ret = json_decode($ret?:'[]', 1);
+                        if (@$ret['code'] == 0) {
+                            $dogeList = $ret['data'];
+                            $dogeLen = count($dogeList);
+                            $doge = $dogeList[mt_rand(0, $dogeLen-1)];
+                            $tg->log("yui->doge >> dogeLen: {$dogeLen}");//debug
+                            $tg->log("yui->doge >> dogeIndex: ".mt_rand(0, $dogeLen-1)."\r\n");//debug
+                            $tg->log("yui->doge >> doge: ".print_r($doge, 1)."\r\n");//debug
+                            $tg->log("yui->doge >> mt_rand: ".print_r([mt_rand(0, $dogeLen-1), $dogeLen/2], 1)."\r\n");//debug
+                            if (mt_rand(0, $dogeLen-1) > $dogeLen/12) {
+                                return TgUtil::sendImageOrAnimateByTuku($tg, $chat, $doge, ['reply_to_message_id' => $message['message_id']]);
+                            }
+                        }
+                        $responseText = 'Can\'t get any doge!';
+                        break;
+                    case 'ayi'://阿姨先辈！
+                        return $tg->callMethod('sendPhoto', [
+                            'chat_id' => $chat['id'],
+                            'photo' => 'AQADPGbAanQAA2D9AQAB', //AgACAgUAAxkBAAMIXr5te8IUPyjyPwE-FidTMLtSYnUAAoaqMRt5fPhVc_YvnX3x59Q8ZsBqdAADAQADAgADeQADYP0BAAEZBA
+                            'caption' => '阿姨，18岁，是个UP！',
+                            'reply_to_message_id' => $message['message_id'],
+                        ]);
+                        break;
+                }
             }
         }
         if ($responseText) {
