@@ -25,6 +25,12 @@ class TgDo extends DIDo {
         }
     }
 
+    /**
+     * 调用任意API
+     *
+     * 示例：
+     *      /tg/callMethod/shabisb&method=sendMessage&params[chat_id]=-1001305029830&params[text]=this_is_a_msg
+     */
     function callMethod($hdl){
         putjson(0, Tg::inst($hdl)->callMethod(arg('method'), $_REQUEST['params']?:[]));
     }
