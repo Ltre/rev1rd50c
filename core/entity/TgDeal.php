@@ -445,6 +445,8 @@ class TgDeal extends DIEntity {
                         ]);
                         break;
                 }
+            } elseif ($this->hdl == 'fch') {
+                $responseText = "暂无命令功能";
             }
         }
         if ($responseText) {
