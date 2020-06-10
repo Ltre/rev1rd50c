@@ -517,7 +517,7 @@ class TgDeal extends DIEntity {
                 'parse_mode' => 'Markdown',
             ]);
             if ($ok) {
-                $newMsgId = $resp['data']['result']['message_id'];
+                $newMsgId = $resp['result']['message_id'];
                 $saveKey = $member['id'];//UID
                 $saveData = ['msgId' => $newMsgId, 'answer' => array_sum($rand), 'time' => time()];
                 $saveFile = DI_DATA_PATH."group.{$chat['id']}.reCaptcha";
