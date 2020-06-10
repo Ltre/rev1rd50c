@@ -27,6 +27,8 @@ class TgDispatch extends DIEntity {
 
 
     //分析机器人收到的数据，@todo 根据$this->hdl区分分析过程，以便于机器人行为多样化的实现
+    //@todo1 改造成返回多种行为的结构，以支持执行多个派遣方法
+    //@todo2 改为：读取每个机器人的事件订阅列表，根据匹配结果，执行对应的处理方法
     function analyze(array $update){
         if (isset($update['message'])) {
             $message = $update['message'];
@@ -40,6 +42,8 @@ class TgDispatch extends DIEntity {
                 return 4;
             } elseif (isset($message['left_chat_member'])) {
                 return 5;
+            } elseif ($message['chat']['type'] == 'group') {
+                return 6;
             }
         }
     }
@@ -81,6 +85,9 @@ class TgDispatch extends DIEntity {
                 break;
             case 5:
                 $result = $deal->onLeftChatMember($update);
+                break;
+            case 6:
+                $result = $deal->onGroupMessage($update);
                 break;
             default:
                 $result = $deal->onAnyWhere($update);

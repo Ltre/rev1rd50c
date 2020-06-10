@@ -28,6 +28,36 @@ class TgDeal extends DIEntity {
     }
 
 
+    function onGroupMessage(array $update){
+        $tg = Tg::inst($this->hdl);
+        $message = $update['message'];
+        $chat = $message['chat'];
+        $from = $message['from'];
+        @$fromText = TgUtil::specialTextFilter($from['first_name'].$from['last_name'], 'Markdown');
+
+        if ($this->hdl == 'pussy') {//入群校验并删除验证消息
+            $saveKey = $from['id'];
+            $saveFile = DI_DATA_PATH."group.{$chat['id']}.reCaptcha";
+            @$data = json_decode(trim((file_get_contents($saveFile) ?: '{}')), 1);
+            if (@$data[$saveKey]) {
+                if (time() - $data[$saveKey]['time'] > 60 || $message['text'] != $data[$saveKey]['answer']) {
+                    @$tg->callMethod('kickChatMember', [
+                        'chat_id' => $chat['id'],
+                        'user_id' => $from['id'],
+                    ]);
+                } else {
+                    unset($data[$saveKey]);
+                }
+                file_put_contents($saveFile, json_encode($data));
+                @$tg->callMethod('deleteMessage', [
+                    'chat_id' => $chat['id'],
+                    'message_id' => $data[$saveKey]['msgId'],
+                ]);
+            }
+        }
+    }
+
+
     function onAnyWhere(array $update){
         $tg = Tg::inst($this->hdl);
         $message = $update['message'];
@@ -473,6 +503,29 @@ class TgDeal extends DIEntity {
                 'reply_to_message_id' => $message['message_id'],
                 'parse_mode' => 'Markdown',
             ]);
+        } elseif ($this->hdl == 'pussy') { //入群校验逻辑见 onGroupMessage()
+            @$name = TgUtil::specialTextFilter($member['first_name'].$member['last_name'], 'Markdown');
+            $t1 = ['','二','三','四','五'];
+            $t2 = ['十','一','二','三','四','五','六','七','八','九'];
+            $rand = [mt_rand(10, 50), mt_rand(10, 50)];
+            $qs = $t1[intval($rand[0]/10)-1] .'十'. $t2[intval($rand[0]%10)] .' 加 '. $t1[intval($rand[1]/10)-1] .'十'. $t2[intval($rand[1]%10)] . ' 等于多少？';
+            //$qs = "{$rand[0]} + {$rand[1]} = ?";
+            list ($ok, $resp) = $tg->callMethod('sendMessage', [
+                'chat_id' => $chat['id'],
+                'text' => "欢迎 [{$name}](tg://user?id={$member['id']}) , 请1分钟内完成入群校验（输入数字）：\n\n__{$qs}__\n\n如果不按时完成，你将在*以后的某个时机*起飞。",
+                'reply_to_message_id' => $message['message_id'],
+                'parse_mode' => 'Markdown',
+            ]);
+            if ($ok) {
+                $newMsgId = $resp['data']['result']['message_id'];
+                $saveKey = $member['id'];//UID
+                $saveData = ['msgId' => $newMsgId, 'answer' => array_sum($rand), 'time' => time()];
+                $saveFile = DI_DATA_PATH."group.{$chat['id']}.reCaptcha";
+                @$data = json_decode(file_get_contents($saveFile) ?: '{}', 1);
+                $data[$saveKey] = $saveData;
+                file_put_contents($saveFile, json_encode($data));
+            }
+            return [$ok, $resp];
         }
     }
 
