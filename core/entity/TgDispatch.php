@@ -42,7 +42,7 @@ class TgDispatch extends DIEntity {
                 return 4;
             } elseif (isset($message['left_chat_member'])) {
                 return 5;
-            } elseif ($message['chat']['type'] == 'group') {
+            } elseif (in_array($message['chat']['type'], ['group', 'supergroup'])) {
                 return 6;
             }
         }
