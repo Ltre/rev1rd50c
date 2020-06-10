@@ -506,7 +506,7 @@ class TgDeal extends DIEntity {
         } elseif ($this->hdl == 'pussy') { //入群校验逻辑见 onGroupMessage()
             @$name = TgUtil::specialTextFilter($member['first_name'].$member['last_name'], 'Markdown');
             $t1 = ['','二','三','四','五'];
-            $t2 = ['十','一','二','三','四','五','六','七','八','九'];
+            $t2 = ['','一','二','三','四','五','六','七','八','九'];
             $rand = [mt_rand(10, 50), mt_rand(10, 50)];
             $qs = $t1[intval($rand[0]/10)-1] .'十'. $t2[intval($rand[0]%10)] .' 加 '. $t1[intval($rand[1]/10)-1] .'十'. $t2[intval($rand[1]%10)] . ' 等于多少？';
             //$qs = "{$rand[0]} + {$rand[1]} = ?";
