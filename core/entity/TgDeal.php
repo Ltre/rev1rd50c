@@ -39,6 +39,7 @@ class TgDeal extends DIEntity {
             $saveKey = $from['id'];
             $saveFile = DI_DATA_PATH."group.{$chat['id']}.reCaptcha";
             @$data = json_decode(trim((file_get_contents($saveFile) ?: '{}')), 1);
+            $tg->log(json_encode(compact('saveKey', 'saveFile', 'data')));//debug
             if (@$data[$saveKey]) {
                 if (time() - $data[$saveKey]['time'] > 60 || $message['text'] != $data[$saveKey]['answer']) {
                     @$tg->callMethod('kickChatMember', [
