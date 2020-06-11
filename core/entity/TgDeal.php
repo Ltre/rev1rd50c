@@ -53,9 +53,9 @@ class TgDeal extends DIEntity {
                         'chat_id' => $chat['id'],
                         'user_id' => $from['id'],
                     ]);
-                    $succ = true;
-                } else {
                     $succ = false;
+                } else {
+                    $succ = true;
                 }
                 unset($data[$saveKey]);
                 file_put_contents($saveFile, json_encode($data));
