@@ -34,6 +34,7 @@ class TgDeal extends DIEntity {
         $chat = $message['chat'];
         $from = $message['from'];
         @$fromText = TgUtil::specialTextFilter($from['first_name'].$from['last_name'], 'Markdown');
+        $fromMention = "[{$fromText}](tg://user?id={$from['id']})";
 
         //DEBUG
         @$tg->callMethod('sendMessage', [
@@ -52,13 +53,21 @@ class TgDeal extends DIEntity {
                         'chat_id' => $chat['id'],
                         'user_id' => $from['id'],
                     ]);
+                    $succ = true;
                 } else {
-                    unset($data[$saveKey]);
+                    $succ = false;
                 }
+                unset($data[$saveKey]);
                 file_put_contents($saveFile, json_encode($data));
                 @$tg->callMethod('deleteMessage', [
                     'chat_id' => $chat['id'],
                     'message_id' => $data[$saveKey]['msgId'],
+                ]);
+                return $tg->callMethod('sendMessage', [
+                    'chat_id' => $chat['id'],
+                    'text' => "{$fromMention} 入群校验" . ($succ ? '通过' : '失败'),
+                    'reply_to_message_id' => $message['message_id'],
+                    'parse_mode' => 'Markdown',
                 ]);
             }
         }
