@@ -57,12 +57,12 @@ class TgDeal extends DIEntity {
                 } else {
                     $succ = true;
                 }
-                unset($data[$saveKey]);
-                file_put_contents($saveFile, json_encode($data));
                 @$tg->callMethod('deleteMessage', [
                     'chat_id' => $chat['id'],
                     'message_id' => $data[$saveKey]['msgId'],
                 ]);
+                unset($data[$saveKey]);
+                file_put_contents($saveFile, json_encode($data));
                 return $tg->callMethod('sendMessage', [
                     'chat_id' => $chat['id'],
                     'text' => "{$fromMention} 入群校验" . ($succ ? '通过' : '失败'),
