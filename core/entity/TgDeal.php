@@ -71,7 +71,7 @@ class TgDeal extends DIEntity {
                 ]);
                 //至此校验完毕，后续执行消息延时清理工作
                 if ($ok) {
-                    sleep(1);
+                    sleep(2);
                     @$tg->callMethod('deleteMessage', [//清理机器人发的校验结果通知
                         'chat_id' => $chat['id'],
                         'message_id' => $resp['result']['message_id'],
