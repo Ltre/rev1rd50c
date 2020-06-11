@@ -48,7 +48,7 @@ class TgDeal extends DIEntity {
             @$data = json_decode(trim((file_get_contents($saveFile) ?: '{}')), 1);
             $tg->log(json_encode(compact('saveKey', 'saveFile', 'data')));//debug
             if (@$data[$saveKey]) {
-                if (time() - $data[$saveKey]['time'] > 60 || $message['text'] != $data[$saveKey]['answer']) {
+                if (time() - $data[$saveKey]['time'] > 60 || trim($message['text']) != $data[$saveKey]['answer']) {
                     @$tg->callMethod('kickChatMember', [
                         'chat_id' => $chat['id'],
                         'user_id' => $from['id'],
