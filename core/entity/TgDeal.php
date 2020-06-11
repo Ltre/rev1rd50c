@@ -540,7 +540,7 @@ class TgDeal extends DIEntity {
             //$qs = "{$rand[0]} + {$rand[1]} = ?";
             list ($ok, $resp) = $tg->callMethod('sendMessage', [
                 'chat_id' => $chat['id'],
-                'text' => "欢迎 [{$name}](tg://user?id={$member['id']}) , 请1分钟内完成入群校验（输入数字）：\n\n__{$qs}__\n\n如果不按时完成，你将在*以后的某个时机*起飞。",
+                'text' => "欢迎 [{$name}](tg://user?id={$member['id']}) , 请1分钟内完成入群校验（*输入阿拉伯数字*）：\n\n__{$qs}__\n\n如果不按时完成，你将在*以后的某个时机*起飞。",
                 'reply_to_message_id' => $message['message_id'],
                 'parse_mode' => 'Markdown',
             ]);
