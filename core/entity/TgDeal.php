@@ -63,12 +63,25 @@ class TgDeal extends DIEntity {
                 ]);
                 unset($data[$saveKey]);
                 file_put_contents($saveFile, json_encode($data));
-                return $tg->callMethod('sendMessage', [
+                list ($ok, $resp) = $tg->callMethod('sendMessage', [
                     'chat_id' => $chat['id'],
                     'text' => "{$fromMention} 入群校验" . ($succ ? '通过' : '失败'),
                     'reply_to_message_id' => $message['message_id'],
                     'parse_mode' => 'Markdown',
                 ]);
+                //至此校验完毕，后续执行消息延时清理工作
+                if ($ok) {
+                    sleep(3);
+                    $resp = json_decode($resp, 1);
+                    @$tg->callMethod('deleteMessage', [//清理机器人发的校验结果通知
+                        'chat_id' => $chat['id'],
+                        'message' => $resp['result']['message_id'],
+                    ]);
+                    @$tg->callMethod('deleteMessage', [//清理入群人发的校验答案
+                        'chat_id' => $chat['id'],
+                        'message' => $message['message_id'],
+                    ]);
+                }
             }
         }
     }
