@@ -46,8 +46,8 @@ class TgDeal extends DIEntity {
             $saveKey = $from['id'];
             $saveFile = DI_DATA_PATH."group.{$chat['id']}.reCaptcha";
             @$data = json_decode(trim((file_get_contents($saveFile) ?: '{}')), 1);
-            $tg->log(json_encode(compact('saveKey', 'saveFile', 'data')));//debug
-            if (@$data[$saveKey]) {
+            // $tg->log(json_encode(compact('saveKey', 'saveFile', 'data')));//debug
+            if (@$data[$saveKey]) { //匹配到用户记录
                 if (time() - $data[$saveKey]['time'] > 60 || trim($message['text']) != $data[$saveKey]['answer']) {
                     @$tg->callMethod('kickChatMember', [
                         'chat_id' => $chat['id'],
@@ -531,7 +531,7 @@ class TgDeal extends DIEntity {
                 'reply_to_message_id' => $message['message_id'],
                 'parse_mode' => 'Markdown',
             ]);
-        } elseif ($this->hdl == 'pussy') { //入群校验逻辑见 onGroupMessage()
+        } elseif ($this->hdl == 'pussy') { //发送入群校验问题，校验逻辑见 onGroupMessage()
             @$name = TgUtil::specialTextFilter($member['first_name'].$member['last_name'], 'Markdown');
             $t1 = ['','二','三','四','五'];
             $t2 = ['','一','二','三','四','五','六','七','八','九'];
@@ -544,15 +544,33 @@ class TgDeal extends DIEntity {
                 'reply_to_message_id' => $message['message_id'],
                 'parse_mode' => 'Markdown',
             ]);
+            //取出历史校验集合文件
+            $saveFile = DI_DATA_PATH."group.{$chat['id']}.reCaptcha";
+            @$data = json_decode(file_get_contents($saveFile) ?: '{}', 1);
+            //额外的操作：清理过期的校验信息，并仅踢掉没有及时发送答案的人(但确保以后还能加群)
+            foreach ($data as $uid => $info) {
+                if (time() - $info['time'] > 60) {
+                    unset($data[$uid]);
+                    @$tg->callMethod('deleteMessage', [
+                        'chat_id' => $chat['id'],
+                        'message_id' => $info['msgId'],
+                    ]);
+                    @$tg->callMethod('kickChatMember', [
+                        'chat_id' => $chat['id'],
+                        'user_id' => $uid,
+                        'until_date' => 31,//31秒后解封（大于30秒且小于366天，将视为有效时间）
+                    ]);
+                }
+            }
+            //记录本次的校验信息
             if ($ok) {
                 $newMsgId = $resp['result']['message_id'];
                 $saveKey = $member['id'];//UID
                 $saveData = ['msgId' => $newMsgId, 'answer' => array_sum($rand), 'time' => time()];
-                $saveFile = DI_DATA_PATH."group.{$chat['id']}.reCaptcha";
-                @$data = json_decode(file_get_contents($saveFile) ?: '{}', 1);
                 $data[$saveKey] = $saveData;
-                file_put_contents($saveFile, json_encode($data));
             }
+            file_put_contents($saveFile, json_encode($data));
+
             return [$ok, $resp];
         }
     }
