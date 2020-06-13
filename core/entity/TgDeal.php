@@ -36,12 +36,6 @@ class TgDeal extends DIEntity {
         @$fromText = TgUtil::specialTextFilter($from['first_name'].$from['last_name'], 'Markdown');
         $fromMention = "[{$fromText}](tg://user?id={$from['id']})";
 
-        //DEBUG
-        @$tg->callMethod('sendMessage', [
-            'chat_id' => '-195000192',//名称：消息收集筒
-            'text' => print_r($update, 1)."#".__FUNCTION__,
-        ]);
-
         if ($this->hdl == 'pussy') {//入群校验并删除验证消息
             $saveKey = $from['id'];
             $saveFile = DI_DATA_PATH."group.{$chat['id']}.reCaptcha";
