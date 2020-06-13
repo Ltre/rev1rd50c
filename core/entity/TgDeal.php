@@ -42,14 +42,18 @@ class TgDeal extends DIEntity {
             @$data = json_decode(trim((file_get_contents($saveFile) ?: '{}')), 1);
             // $tg->log(json_encode(compact('saveKey', 'saveFile', 'data')));//debug
             if (@$data[$saveKey]) { //匹配到用户记录
-                if (time() - $data[$saveKey]['time'] > 60 || trim($message['text']) != $data[$saveKey]['answer']) {
+                $isOvertime = time() - $data[$saveKey]['time'] > 120;
+                $isAnsError = trim($message['text']) != $data[$saveKey]['answer'];
+                if ($isOvertime || $isAnsError) {
                     @$tg->callMethod('kickChatMember', [
                         'chat_id' => $chat['id'],
                         'user_id' => $from['id'],
                     ]);
                     $succ = false;
+                    $tip = $isOvertime ? '超时' : '失败';
                 } else {
                     $succ = true;
+                    $tip = '通过';
                 }
                 @$tg->callMethod('deleteMessage', [
                     'chat_id' => $chat['id'],
@@ -59,7 +63,7 @@ class TgDeal extends DIEntity {
                 file_put_contents($saveFile, json_encode($data));
                 list ($ok, $resp) = $tg->callMethod('sendMessage', [
                     'chat_id' => $chat['id'],
-                    'text' => "{$fromMention} 入群校验" . ($succ ? '通过' : '失败'),
+                    'text' => "{$fromMention} 入群校验{$tip}",
                     'reply_to_message_id' => $message['message_id'],
                     'parse_mode' => 'Markdown',
                 ]);
@@ -534,7 +538,7 @@ class TgDeal extends DIEntity {
             //$qs = "{$rand[0]} + {$rand[1]} = ?";
             list ($ok, $resp) = $tg->callMethod('sendMessage', [
                 'chat_id' => $chat['id'],
-                'text' => "欢迎 [{$name}](tg://user?id={$member['id']}) , 请1分钟内完成入群校验（*输入阿拉伯数字*）：\n\n__{$qs}__\n\n如果不按时完成，你将在*以后的某个时机*起飞。",
+                'text' => "欢迎 [{$name}](tg://user?id={$member['id']}) , 请2分钟内完成入群校验（*输入阿拉伯数字*）：\n\n__{$qs}__\n\n如果不按时完成，你将在*以后的某个时机*起飞。",
                 'reply_to_message_id' => $message['message_id'],
                 'parse_mode' => 'Markdown',
             ]);
@@ -543,7 +547,7 @@ class TgDeal extends DIEntity {
             @$data = json_decode(file_get_contents($saveFile) ?: '{}', 1);
             //额外的操作：清理过期的校验信息，并仅踢掉没有及时发送答案的人(但确保以后还能加群)
             foreach ($data as $uid => $info) {
-                if (time() - $info['time'] > 60) {
+                if (time() - $info['time'] > 120) {
                     unset($data[$uid]);
                     @$tg->callMethod('deleteMessage', [
                         'chat_id' => $chat['id'],
