@@ -48,6 +48,7 @@ class TgDeal extends DIEntity {
                     @$tg->callMethod('kickChatMember', [
                         'chat_id' => $chat['id'],
                         'user_id' => $from['id'],
+                        'until_date' => 86400,//群员自己主动触发的被踢操作，将设置更长的封禁时间
                     ]);
                     $succ = false;
                     $tip = $isOvertime ? '超时' : '失败';
