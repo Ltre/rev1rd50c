@@ -36,12 +36,12 @@ class TgDeal extends DIEntity {
         @$fromText = TgUtil::specialTextFilter($from['first_name'].$from['last_name'], 'Markdown');
         $fromMention = "[{$fromText}](tg://user?id={$from['id']})";
 
-        if ($this->hdl == 'pussy') {//入群校验并删除验证消息
+        if ($this->hdl == 'pussy') {
             $saveKey = $from['id'];
             $saveFile = DI_DATA_PATH."group.{$chat['id']}.reCaptcha";
             @$data = json_decode(trim((file_get_contents($saveFile) ?: '{}')), 1);
             // $tg->log(json_encode(compact('saveKey', 'saveFile', 'data')));//debug
-            if (@$data[$saveKey]) { //匹配到用户记录
+            if (@$data[$saveKey]) { //识别为入群校验模式，并删除验证消息
                 $isOvertime = time() - $data[$saveKey]['time'] > 120;
                 $isAnsError = trim($message['text']) != $data[$saveKey]['answer'];
                 if ($isOvertime || $isAnsError) {
@@ -80,6 +80,8 @@ class TgDeal extends DIEntity {
                         'message_id' => $message['message_id'],
                     ]);
                 }
+            } else {//其他情况（非入群验证模式）
+                //... 
             }
         }
     }
@@ -92,10 +94,11 @@ class TgDeal extends DIEntity {
         $from = $message['from'];
         @$fromText = TgUtil::specialTextFilter($from['first_name'].$from['last_name'], 'Markdown');
 
-        return @$tg->callMethod('sendMessage', [
+        @$tg->callMethod('sendMessage', [
             'chat_id' => '-195000192',//名称：消息收集筒
             'text' => print_r($update, 1),
         ]);
+
         // return @$tg->callMethod('sendMessage', [
         //     'chat_id' => '-195000192',//名称：消息收集筒
         //     'parse_mode' => 'Markdown',
@@ -108,6 +111,15 @@ class TgDeal extends DIEntity {
         //         "text: {$message['text']}",
         //     ], 'Markdown')),
         // ]);
+
+        //在逻辑最后，可延后删除bot命令
+        if (preg_match('/^\/(\w+)(@[_\w]+)?/', $message['text'])) {
+            sleep(1);
+            @$tg->callMethod('deleteMessage', [
+                'chat_id' => $chat['id'],
+                'message_id' => $message['message_id'],
+            ]);
+        }
     }
 
 

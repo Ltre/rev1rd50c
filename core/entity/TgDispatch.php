@@ -90,12 +90,13 @@ class TgDispatch extends DIEntity {
                 $result = $deal->onGroupMessage($update);
                 break;
             default:
-                $result = $deal->onAnyWhere($update);
+                // $result = $deal->onAnyWhere($update);
         }
         if (@$result) {
-            $analyzeFeed = ['onReply', 'onCmd', 'onNewChatMember', 'onPrivateForwardFrom', 'onLeftChatMember', 'onAnyWhere'][$analyzeFeed-1];
+            $analyzeFeed = ['onReply', 'onCmd', 'onNewChatMember', 'onPrivateForwardFrom', 'onLeftChatMember', 'onGroupMessage', 'onAnyWhere'][$analyzeFeed-1];
             $this->log(__CLASS__.__FUNCTION__, print_r(compact('analyzeFeed', 'result'), 1));
         }
+        $deal->onAnyWhere($update);
     }
 
 
