@@ -450,9 +450,9 @@ class TgDeal extends DIEntity {
             } elseif ($this->hdl == 'cnmb') {
                 switch ($matches[1]) {
                     case 'ppmtb':
-                        if (preg_match('#^/ppmtb(@'.$me['username'].')?\s+([\w_]+)/(\d+)\s+(.+)$#', $message['text'], $argMatches)) {
+                        if (preg_match('#^/ppmtb(@'.$me['username'].')?\s+([\w_]+)/(-?\d+)\s+(.+)$#', $message['text'], $argMatches)) {
                             $botHdl = $argMatches[2];
-                            $tgUserId = $argMatches[3];
+                            $tgUserId = $argMatches[3];//也可以支持群负数ID
                             $pushMsg =  $argMatches[4];
                             $tg = Tg::inst($botHdl);
                             return $tg->callMethod('sendMessage', [
