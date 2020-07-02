@@ -533,7 +533,7 @@ class TgDeal extends DIEntity {
                         break;
                     case 'cucu':
                         import('net/dwHttp');
-                        $api = 'http://'.ltreDeCrypt("oo22SS..BA*qYV-6-DYGMqm4Pud731_7)uME-~DB)5ZTwoidb9!2ypOaMHlj-6Ti~Tc786!2icDvUPom~1tkE0MHig*3K7PM~1w4MwWMJgN8EB-6(UOlQGI5PmLjDlWbGdvhKu-rVT-6Ig!y'1JfuaTBAe.0MiUrO9Ay)5I3-(~1XnYV!2UvKhHeCl");
+                        $api = 'http://'.ltreDeCrypt("__uuzz!!YXE1YV_7LixfOsWEEjEyAy-6F4)X_!OM_7'*rjIDRP'9ja.u_!DB!2G5ZRkf42)5ysRJDy97(4d4Vh61JH_7Uhol~1*Btd*T_E.t96.8Cs_E_XJ6Yv(Ci0)kRoUGvf.tJH(4.GD9.0Ea(KXFs6'1EaQn");
                         $http = new dwHttp;
                         $ret = $http->get($api, 20);
                         @$ret = json_decode($ret?:'[]', 1);
