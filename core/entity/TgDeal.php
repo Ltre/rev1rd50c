@@ -450,9 +450,9 @@ class TgDeal extends DIEntity {
             } elseif ($this->hdl == 'cnmb') {
                 switch ($matches[1]) {
                     case 'ppmtb':
-                        if (preg_match('#^/ppmtb(@'.$me['username'].')?\s+([\w_]+)/(-?\d+)\s+(.+)$#', $message['text'], $argMatches)) {
+                        if (preg_match('#^/ppmtb(@'.$me['username'].')?\s+([\w_]+)/(-?\d+|[_\w]+)\s+(.+)$#', $message['text'], $argMatches)) {
                             $botHdl = $argMatches[2];
-                            $tgUserId = $argMatches[3];//也可以支持群负数ID
+                            $tgUserId = $argMatches[3];//支持群或用户，值可正负数ID、或字母数字下划线
                             $pushMsg =  $argMatches[4];
                             $tg = Tg::inst($botHdl);
                             return $tg->callMethod('sendMessage', [
@@ -512,6 +512,54 @@ class TgDeal extends DIEntity {
                             'caption' => '阿姨，18岁，是个UP！',
                             'reply_to_message_id' => $message['message_id'],
                         ]);
+                        break;
+                }
+            } elseif ($this->hdl == 'cucu') {
+                switch ($matches[1]) {
+                    case 'vlog':
+                        $responseText = "游戏地址：" . ltreDeCrypt("PaQO@0Okzf-ImcCdLhAoIei6'uAy*3MnAcWt.0RqUGGk!SVFIsFi)Rn1'1'VHl*Ti2-rwu~1Sd97(4NdWT)5~CLiy5p8");
+                        $responseText .= "\n\n实况录制：" . ltreDeCrypt("U2RnjcGkdcrqLHrkjiIHX2F4)qTR-6)HZLZMk2UpYjig-6'NSuMA'1.Qt8DlpeWE-LWEk9.0(yYsw0K5LJ!2K5vt~1)vhe.8t4TqLii1");
+                        $responseText .= "\n游戏原型：" . ltreDeCrypt("j1NBQJU5nmYXc8*pYQRQ.d)u@lDB*3IkHt@NPxLgH2lj*3-Kw8j7'1p7LqYGi7zhVARz*S.0MgYsOiXidb)5Pa_)~1Wmif'9x8'GRoQz");
+                        $responseText .= "\n梗来源：" . ltreDeCrypt("A3qnDwFstsgfCytm70DCV0-vRcGE@0o0Nz!P'RE9WhHF_7r5-Iym'1WE'O.Qe3HpMr(Mnc.0w0Mgx1XiXV*3K5IG@0_xFC*3.JNk_E-P");
+                        $responseText .= "\n游戏操作：\n上移：↑键 或 触摸上划\n下移：↓键 或 触摸下划\n跳跃：空格键 或 触摸\n开始游戏：确认键 或 点击按钮";
+                        break;
+                    case 'timi':
+                        // return $tg->callMethod('sendAudio', [
+                        //     'chat_id' => $chat['id'],
+                        //     'audio' => '',
+                        //     'reply_to_message_id' => $message['message_id'],
+                        // ]);
+                        $responseText = "正在找大兔兔本人录制重制版TIMI，稍安毋躁！";
+                        break;
+                    case 'cucu':
+                        import('net/dwHttp');
+                        $api = 'http://'.ltreDeCrypt("oo22SS..BA*qYV-6-DYGMqm4Pud731_7)uME-~DB)5ZTwoidb9!2ypOaMHlj-6Ti~Tc786!2icDvUPom~1tkE0MHig*3K7PM~1w4MwWMJgN8EB-6(UOlQGI5PmLjDlWbGdvhKu-rVT-6Ig!y'1JfuaTBAe.0MiUrO9Ay)5I3-(~1XnYV!2UvKhHeCl");
+                        $http = new dwHttp;
+                        $ret = $http->get($api, 20);
+                        @$ret = json_decode($ret?:'[]', 1);
+                        if (@$ret['code'] == 0) {
+                            $cucuList = $ret['data'];
+                            $cucuLen = count($cucuList);
+                            $cucu = $cucuList[mt_rand(0, $cucuLen-1)];
+                            $tg->log("cucu->cucu >> cucuLen: {$cucuLen}");//debug
+                            $tg->log("cucu->cucu >> cucuIndex: ".mt_rand(0, $cucuLen-1)."\r\n");//debug
+                            $tg->log("cucu->cucu >> cucu: ".print_r($cucu, 1)."\r\n");//debug
+                            $tg->log("cucu->cucu >> mt_rand: ".print_r([mt_rand(0, $cucuLen-1), $cucuLen/2], 1)."\r\n");//debug
+                            if (mt_rand(0, $cucuLen-1) > $cucuLen/12) {
+                                return TgUtil::sendImageOrAnimateByTuku($tg, $chat, $cucu, ['reply_to_message_id' => $message['message_id']]);
+                            }
+                        }
+                        $responseText = 'Can\'t get any cucu!';
+                        break;
+                    case 'ga':
+                        $responseText = "大兔兔翻车视频集锦，绝赞收集中！";
+                        break;
+                    case 'help':
+                        $responseText = "vlog - 给你个vlog挑战！";
+                        $responseText .= "\ntimi - TIMI！";
+                        $responseText .= "\ncucu - 大兔兔呢？";
+                        $responseText .= "\nga - 我不知道为什么我这个人她就是很翻车";
+                        $responseText .= "\nhelp - 大兔兔啥也帮不到你";
                         break;
                 }
             } elseif ($this->hdl == 'fch') {
