@@ -552,7 +552,7 @@ class TgDeal extends DIEntity {
                         $responseText = 'Can\'t get any cucu!';
                         break;
                     case 'ga':
-                        $responseText = "大兔兔翻车视频集锦，绝赞收集中！";
+                        $responseText = "大兔兔翻车视频集锦，绝赞收集中！";//包含肥肠米线、小兔崽子等
                         break;
                     case 'help':
                         $responseText = "vlog - 给你个vlog挑战！";
