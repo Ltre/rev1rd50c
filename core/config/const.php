@@ -3,7 +3,7 @@ $GLOBALS += array(
 	'tg' => [
         'bot_tokens' => [
             'pinkjj'        => "TjIb~3Zc(aT7XQF0)m_q.aJhVM'z(dLfAi*4Yc_0Zm@z*kSm*eQdM0Hb~q)~GmJnSeB1Xn)vc9*3ZX_~RJa2c4!@zzAsb6",//sgz
-            'zcg'           => "RlWwGvf6(OZb)bVcEd~2ZcMz'nYN*g-c~6*nRBC6UH-ADfBp_bxo@783!l*VMLKj)oMc-wKaa7!2(~neXR@T~Z@WWVmdNI",//sgz
+            // 'zcg'           => "RlWwGvf6(OZb)bVcEd~2ZcMz'nYN*g-c~6*nRBC6UH-ADfBp_bxo@783!l*VMLKj)oMc-wKaa7!2(~neXR@T~Z@WWVmdNI",//sgz
             'ffjfddc'       => "CyNtX7-TOk(d_wXqOqx0Z3k9DAEkYJWcE1~lTjrp_093)f(6I1-Z(vsdrhJc.2Yu(nOeE4(ueb_7NNPL3371Gzoo'_''ID",//sgz
             'shabisb'       => "qmQcJ2@6(CWczwHz@uVsIvypXuY6*@B8_n'3_!@Ea5e8UtU0Ib.n@6v4)y_0Rm)w!mXn)vWmOL!2FFQI10xuZQWN!!JGFA",//sgz
             'ganmom'        => "Y8YdBrU7i9k6E9'3R7A5Yr-oOl.p'nV7U6~T)O@zUI.sT6Pz91o4Y3_1k0QJPyQy!n.yB1(uzw*3)!30CC__.~)@a5..93",//sgz
@@ -13,6 +13,7 @@ $GLOBALS += array(
             'eosgetdice'    => "J5~i*7)mM3T1LgQQu1x0_1Ny'kNd@1d8VqT3KwD0*7VED3CbX1j0~3'2WbDnVuRBYkLbWmE4ur-6UR87qlrotqvsppCy~V",//laoker
             'yui'           => "Y0EwYtXoSCNwGD(afez1vcCqYrZWDq.9Jq(jc8Bi)Dd0)qV0e4TzmaV1-S-AN2SkVeB1Uk'z.).8OJ22IHldDxBva1FA43hg",//sgz
             'fch'           => "*dHn)eXCNfTetbW610@lYUClCk@3RO@v*K!iP8T4Gz!n'iXFHhEc(b~jLdZcA7xqPaB1)vOeYV)5ohiiHy6650qkkiMJ)(ed",//sgz
+            'cucu'          => "RxE7T7'hGe~u'u@f_m.fVoQat0Qo!c.bykCuYc(ePI@q!RUx_qfcTa*M'y'IF7z8O7@qWmB1YV)5*!FyExNHHDdaGDpiMJBA",//sgz
         ],
     ]
 );
