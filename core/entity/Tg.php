@@ -45,8 +45,22 @@ class Tg extends DIEntity {
 
 
     protected function req($method, array $args){
+        $hasFile = false;
+        foreach ($args as $k => $v) {
+            if ($v instanceof CURLFile) {
+                $hasFile = true;
+                break;
+            }
+        }
+
         $url = "https://api.telegram.org/bot{$this->token}/{$method}";
-        $ret = $this->http->post($url, $args);
+
+        if ($hasFile) {
+            $ret = $this->http->postFile($url, $args);
+        } else {
+            $ret = $this->http->post($url, $args);
+        }
+
         if (false === $ret) {
             $failMsg = "Req method[{$method}] failed, ret is: false, args is: ".print_r($args, 1);
             $this->log($failMsg);
