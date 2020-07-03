@@ -524,8 +524,8 @@ class TgDeal extends DIEntity {
                         $responseText .= "\n游戏操作：\n上移：↑键 或 触摸上划\n下移：↓键 或 触摸下划\n跳跃：空格键 或 触摸\n开始游戏：确认键 或 点击按钮";
                         break;
                     case 'timi':
-                        $oggFile = realpath(DI_DATA_PATH.'resource/cucu/timi.ogg');
-                        return $tg->callMethod('sendAudio', [
+                        $oggFile = realpath(DI_DATA_PATH.'resource/cucu/timi.ogg');//CQACAgUAAxkBAAIBYF7_FA8mi5FzepLebx39UFSfm2m7AAIgAQACzln4V8xUz1_c1-uyGgQ 或 AgADIAEAAs5Z-Fc
+                        return $tg->callMethod('sendVoice', [
                             'chat_id' => $chat['id'],
                             'voice' => class_exists('CURLFile', false) ? "@{$oggFile};type=audio/ogg" : new CURLFile($oggFile, 'audio/ogg'),
                             'reply_to_message_id' => $message['message_id'],
