@@ -24,9 +24,9 @@ class TgUtil extends DIEntity {
         // $tg->log("sendImageOrAnimateByTuku.caption: {$caption}");//debug
         // $tg->log("sendImageOrAnimateByTuku.args: ".print_r($headers, 1)."\r\n");//debug
         if (in_array($headers['Content-Type'], ['image/gif', 'video/mp4'])) {
-            return $tg->callMethod('sendVideo', [
+            return $tg->callMethod('sendAnimation', [
                 'chat_id' => $chat['id'],
-                'video' => $tuData['url'],
+                'animation' => $tuData['url'],
                 'caption' => 'gif|mp4: '.$caption,
                 'reply_to_message_id' => $otherArgs['reply_to_message_id'],
             ]);
