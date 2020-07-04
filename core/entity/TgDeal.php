@@ -528,7 +528,8 @@ class TgDeal extends DIEntity {
                         return $tg->callMethod('sendVoice', [
                             'chat_id' => $chat['id'],
                             // 'voice' => class_exists('CURLFile', false) ? "@{$oggFile};type=audio/ogg" : new CURLFile($oggFile, 'audio/ogg'),
-                            'voice' => 'CQACAgUAAxkBAAIBYF7_FA8mi5FzepLebx39UFSfm2m7AAIgAQACzln4V8xUz1_c1-uyGgQ',
+                            'voice' => 'CQACAgUAAxkBAAIBil8AATRzsea5s95A2-PgqBMdB85k4wACUgEAAnz7CVTIl8YLdgIiQxoE',//AgADUgEAAnz7CVQ
+                            // 'audio' => 'CQACAgUAAxkBAAIBjF8AATTN_-YPtWPjlX8O9ddty9-begACUwEAAnz7CVRQ5CdGQGxrtRoE',//AgADUwEAAnz7CVQ
                             'reply_to_message_id' => $message['message_id'],
                         ]);
                         // $responseText = "正在找大兔兔本人录制重制版TIMI，稍安毋躁！";
