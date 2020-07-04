@@ -528,7 +528,7 @@ class TgDeal extends DIEntity {
                         $tg->log(DI_CORE_PATH.'resource/cucu/timi.ogg');//debug
                         return $tg->callMethod('sendVoice', [
                             'chat_id' => $chat['id'],
-                            'voice' => class_exists('CURLFile', false) ? "@{$oggFile};type=audio/ogg" : new CURLFile($oggFile, 'audio/ogg'),
+                            'voice' => class_exists('CURLFile', false) ? new CURLFile($oggFile, 'audio/ogg') : "@{$oggFile};type=audio/ogg",
                             // 'voice' => 'CQACAgUAAxkBAAIBil8AATRzsea5s95A2-PgqBMdB85k4wACUgEAAnz7CVTIl8YLdgIiQxoE',//AgADUgEAAnz7CVQ
                             // 'audio' => 'CQACAgUAAxkBAAIBjF8AATTN_-YPtWPjlX8O9ddty9-begACUwEAAnz7CVRQ5CdGQGxrtRoE',//AgADUwEAAnz7CVQ
                             'reply_to_message_id' => $message['message_id'],
