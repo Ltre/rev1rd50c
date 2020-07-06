@@ -474,5 +474,26 @@ class TestDo extends DIDo{
 		$j = arg('j');
 		echo "<script>{$j}</script>";
 	}
+
+
+    function action1(){
+        $bot = 'pussy';
+        $receiver = '-1001152891459';
+        $params = ['params' => [
+            'chat_id' => $receiver,
+            'media' => [
+                ['type' => 'photo', 'media' => 'http://news.ouj.com/ceshi/s/default/2020/06/12/170744-864-hex16a.jpg', 'caption' => '处理完毕'],
+                ['type' => 'photo', 'media' => 'http://news.ouj.com/ceshi/s/default/2020/06/12/170744-864-hex3c1.jpg'],
+                ['type' => 'photo', 'media' => 'http://news.ouj.com/ceshi/s/default/2020/06/12/170744-864-hex27a.jpg'],
+            ],
+            'disable_notification' => false,
+        ]];
+        $url = "https://tg.imsb.pro/?tg/callMethod/{$bot}&method=sendMediaGroup";
+        for ($i = 0; $i < 3; $i ++) {
+            $ret = (new dwHttp)->post($url, $params, 10);
+            if (false !== $ret) break;
+        }
+        exit($ret);
+    }
 	
 }
