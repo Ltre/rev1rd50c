@@ -42,13 +42,13 @@ class TgDeal extends DIEntity {
             @$data = json_decode(trim((file_get_contents($saveFile) ?: '{}')), 1);
             // $tg->log(json_encode(compact('saveKey', 'saveFile', 'data')));//debug
             if (@$data[$saveKey]) { //识别为入群校验模式，并删除验证消息
-                $isOvertime = time() - $data[$saveKey]['time'] > 120;
+                $isOvertime = time() - $data[$saveKey]['time'] > 300;
                 $isAnsError = trim($message['text']) != $data[$saveKey]['answer'];
                 if ($isOvertime || $isAnsError) {
                     @$tg->callMethod('kickChatMember', [
                         'chat_id' => $chat['id'],
                         'user_id' => $from['id'],
-                        'until_date' => 86400,//群员自己主动触发的被踢操作，将设置更长的封禁时间
+                        'until_date' => 86400,//群员自己主动触发的被踢操作，将设置更长的封禁时间（好像无效，不论多少，都是永久封禁）
                     ]);
                     $succ = false;
                     $tip = $isOvertime ? '超时' : '失败';
@@ -601,7 +601,7 @@ class TgDeal extends DIEntity {
             //$qs = "{$rand[0]} + {$rand[1]} = ?";
             list ($ok, $resp) = $tg->callMethod('sendMessage', [
                 'chat_id' => $chat['id'],
-                'text' => "欢迎老色批 [{$name}](tg://user?id={$member['id']}) , 请2分钟内完成入群校验（\n*输入阿拉伯数字*例如12\n*输入阿拉伯数字*例如34\n*输入阿拉伯数字*例如56\n重要的话说三遍！你只有一次机会。）：\n\n\n_{$qs}_\n\n\n不按时完成或答错，你将在*以后的某个时机*起飞。",
+                'text' => "欢迎老色批 [{$name}](tg://user?id={$member['id']}) , 请5分钟内完成入群校验（\n*输入阿拉伯数字*例如12\n*输入阿拉伯数字*例如34\n*输入阿拉伯数字*例如56\n重要的话说三遍！你只有一次机会。）：\n\n\n_{$qs}_\n\n\n不按时完成或答错，你将在*以后的某个时机*起飞。",
                 'reply_to_message_id' => $message['message_id'],
                 'parse_mode' => 'Markdown',
             ]);
