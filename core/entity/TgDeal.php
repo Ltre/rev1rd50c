@@ -36,7 +36,7 @@ class TgDeal extends DIEntity {
         @$fromText = TgUtil::specialTextFilter($from['first_name'].$from['last_name'], 'Markdown');
         $fromMention = "[{$fromText}](tg://user?id={$from['id']})";
 
-        if ($this->hdl == 'pussy') {
+        if ($this->hdl == 'pinkjj') {
             $saveKey = $from['id'];
             $saveFile = DI_DATA_PATH."group.{$chat['id']}.reCaptcha";
             @$data = json_decode(trim((file_get_contents($saveFile) ?: '{}')), 1);
@@ -592,7 +592,7 @@ class TgDeal extends DIEntity {
                 'reply_to_message_id' => $message['message_id'],
                 'parse_mode' => 'Markdown',
             ]);
-        } elseif ($this->hdl == 'pussy') { //发送入群校验问题，校验逻辑见 onGroupMessage()
+        } elseif ($this->hdl == 'pinkjj') { //发送入群校验问题，校验逻辑见 onGroupMessage()
             @$name = TgUtil::specialTextFilter($member['first_name'].$member['last_name'], 'Markdown');
             $t1 = ['','二','三','四','五'];
             $t2 = ['','一','二','三','四','五','六','七','八','九'];
