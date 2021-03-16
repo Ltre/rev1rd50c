@@ -212,11 +212,9 @@ class Tg extends DIEntity {
     function filelink($fileId){
         if (! $fileId) return [false, '', null];
 
-        list ($ok, $feed) = Tg::inst($hdl)->callMethod('getFile', [
+        list ($ok, $feed) = $this->callMethod('getFile', [
             'file_id' => $fileId,
         ]);
-
-        putjsonp($feed);//debug
 
         if (!$ok || !isset($feed['result']['file_path'])) return [false, '', $feed];
         
