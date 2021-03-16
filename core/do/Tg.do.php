@@ -94,17 +94,20 @@ class TgDo extends DIDo {
 
 
     //@todo TEST
-    function dlFile($hdl){
+    function fileshow($hdl){
         $fileId = arg('fileId');
+        $contentType = arg('contentType');
         list ($ok, $link, $feed) = Tg::inst($hdl)->filelink($fileId);
-putjson($feed);//debug
         if (! $ok) putjsonp($feed);
 
-        $src = fopen($link, 'r');
-        $dst = fopen('php://output', 'w+');
-        stream_copy_to_stream($src, $dst);
-        fclose($src);
-        fclose($dst);
+        //这段报502错误，可能不支持
+        // $src = fopen($link, 'r');
+        // $dst = fopen('php://output', 'w+');
+        // stream_copy_to_stream($src, $dst);
+        // fclose($src);
+        // fclose($dst);
+
+        (new RemoteFile)->download($link, $contentType);
     }
 
 }
