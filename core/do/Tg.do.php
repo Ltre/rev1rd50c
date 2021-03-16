@@ -109,7 +109,7 @@ class TgDo extends DIDo {
         // fclose($src);
         // fclose($dst);
         import('net/RemoteFile');
-        (new RemoteFile)->show($link, $contentType);
+        (new RemoteFile)->download($link, $contentType);
     }
 
 }
