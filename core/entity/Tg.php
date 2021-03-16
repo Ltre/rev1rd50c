@@ -4,11 +4,13 @@ import('net/dwHttp');
 
 class Tg extends DIEntity {
 
+    const API_PRE = 'https://api.telegram.org';
+
     protected $http;
 
     protected $hdl;
 
-    protected $token = "TjIb~3Zc(aT7XQF0)m_q.aJhVM'z(dLfAi*4Yc_0Zm@z*kSm*eQdM0Hb~q)~GmJnSeB1Xn)vc9*3ZX_~RJa2c4!@zzAsb6";
+    protected $token = "TjIb~3Zc(aT7XQF0)m_q.aJhVM'z(dLfAi*4Yc_0Zm@z*kSm*eQdM0Hb~q)~GmJnSeB1Xn)vc9*3ZX_~RJa2c4!@zzAsb6";//afnaygnahz
 
     protected $hk = "OuUD~mZX(4@KGdVgHF*3v9!Eqe'1-FykLgk2r0sfB9BdUI'1MgC6)zO9OM!2G1)*_7McCz!2Fd_IWtXuve";
 
@@ -53,7 +55,7 @@ class Tg extends DIEntity {
             }
         }
 
-        $url = "https://api.telegram.org/bot{$this->token}/{$method}";
+        $url = self::API_PRE."/bot{$this->token}/{$method}";
 
         if ($hasFile) {
             $ret = $this->http->postFile($url, $args);
@@ -162,12 +164,39 @@ class Tg extends DIEntity {
                 return null;
             }
             $me = $response['result'];//array {id:xx, is_bot:xx, first_name:xx, username:xx}
-            $expire = time() + 86400*30;
+            $expire = time() + 86400*7;
             file_put_contents($meFile, serialize([$me, $expire]));
         }
         return $me;
     }
 
+
+    //@todo TEST
+    function getChatMember($chatId, $userId){
+        $chatMemberFile = DI_DATA_PATH."cache/tg.{$this->hdl}.chatmember.{$chatId}.{$userId}";
+        @$chatMemberData = unserialize(file_get_contents($chatMemberFile)) ?: ["", 0];
+        list ($chatMember, $expire) = $chatMemberData;
+        if (time() >= $expire) {
+            list ($ok, $response) = $this->callMethod('getChatMember', [
+                'chat_id' => $chatId,
+                'user_id' => $userId,
+            ]);
+            if (! $ok || ! isset($response['result'])) {
+                return null;
+            }
+            $chatMember = $response['result'];
+            $expire = time() + 86400*7;
+            file_put_contents($chatMemberFile, serialize([$chatMember, $expire]));
+        }
+        return $chatMemeberData;
+    }
+
+
+    //@todo TEST
+    function isGroupAdmin($chatId, $userId){
+        $chatMemeber = $this->getChatMember($chatId, $userId);
+        $chatMemeber['status'];//The member's status in the chat. Can be “creator”, “administrator”, “member”, “restricted”, “left” or “kicked”.  https://core.telegram.org/bots/api#chatmember
+    }
 
 
     //@todo: 开发中。。example for https://core.telegram.org/bots#deep-linking
@@ -176,6 +205,23 @@ class Tg extends DIEntity {
         $mmc = new dwCache(__CLASS__.__FUNCTION__);
         $memcache_key = "vCH1vGWJxfSeofSAs0K5PA";
         $mmc->set($memcache_key, 123);
+    }
+
+
+    //@todo TEST
+    function filelink($fileId){
+        if (! $fileId) return [false, '', null];
+
+        list ($ok, $feed) = Tg::inst($hdl)->callMethod('getFile', [
+            'file_id' => $fileId,
+        ]);
+
+        if (!$ok || !isset($feed['result']['file_path'])) return [false, '', $feed];
+        
+        $path = $feed['result']['file_path'];
+        $link = self::API_PRE."/file/bot{$this->token}/{$path}";
+
+        return [true, $link, $feed];
     }
 
 
