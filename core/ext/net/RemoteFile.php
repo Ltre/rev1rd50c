@@ -63,9 +63,13 @@ class RemoteFile {
 
 
 	//远程中转下载
-	public function download($url){
+	public function download($url, $forceContentType = ''){
+        if ($forceContentType && ! preg_match('/^\w+\/\w+$/', $forceContentType)) {
+            exit('wtf of contentType!');//恶意媒体类型参数
+        }
+
         if (! preg_match('/^(https?\:)?\/\//', $url)) {
-			return false;//URL格式错误
+            exit('url format error!');//URL格式错误
         }
 
         if (preg_match('/^\/\//', $url)) {//遇到 // 开头的链接
@@ -79,12 +83,12 @@ class RemoteFile {
         }
 
         if (false === $h) {
-			return false;//URL加载信息失败
+            exit('remote http header error!');//URL加载信息失败
         }
 
 		$contentLength = is_array($h['Content-Length']) ? $h['Content-Length'][count($h['Content-Length'])-1] : $h['Content-Length'];//考虑链接跳转的情况下，会变成数组
 		if ($contentLength > 1024*1024*1024) {
-			return false;//文件大小超过1G
+            exit('remote file size > 1G!');//文件大小超过1G
         }
 
         //获取合适的文件扩展名
@@ -94,11 +98,11 @@ class RemoteFile {
             array_shift(explode('?', basename($url)))
         );
         if (empty($ext)) {
-            return [false, "文件类型被禁止, Content-Type: {$contentType}"];
+            exit("Forbiden Content-Type: {$contentType}");//文件类型被禁止
         }
 
 		$fp = fopen($url, 'rb');
-        header("Content-Type: {$contentType}");
+        $forceContentType ? header("Content-Type: {$contentType}") : header("Content-Type: {$forceContentType}");
         header("Accept-Range: bytes");
         header("Accept-length: {$contentLength}");
         header("Content-Disposition: attachment; filename=".uniqid().".{$ext}");
