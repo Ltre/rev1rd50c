@@ -94,6 +94,7 @@ class TgDo extends DIDo {
 
 
     //@todo TEST
+    // https://tg.imsb.pro/tg/fileshow/pussy?fileId=AQADBQAT43e_MgAEAgADyt9p9v____8ACEJPAAIeBA&contentType=image/jpeg
     function fileshow($hdl){
         $fileId = arg('fileId');
         $contentType = arg('contentType');
@@ -108,7 +109,7 @@ class TgDo extends DIDo {
         // fclose($src);
         // fclose($dst);
         import('net/RemoteFile');
-        (new RemoteFile)->download($link, $contentType);
+        (new RemoteFile)->show($link, $contentType);
     }
 
 }
