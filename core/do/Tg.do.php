@@ -92,4 +92,18 @@ class TgDo extends DIDo {
         }
     }
 
+
+    //@todo TEST
+    function dlFile($hdl){
+        $fileId = arg('fileId');
+        list ($ok, $link, $feed) = Tg::inst($hdl)->filelink($fileId);
+        if (! $ok) putjsonp($feed);
+
+        $src = fopen($link, 'r');
+        $dst = fopen('php://output', 'w+');
+        stream_copy_to_stream($src, $dst);
+        fclose($src);
+        fclose($dst);
+    }
+
 }
