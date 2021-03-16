@@ -101,12 +101,13 @@ class TgDo extends DIDo {
         if (! $ok) putjsonp($feed);
 
         //这段报502错误，可能不支持
+        // header("Content-Type: image/jpeg");
         // $src = fopen($link, 'r');
         // $dst = fopen('php://output', 'w+');
         // stream_copy_to_stream($src, $dst);
         // fclose($src);
         // fclose($dst);
-
+        import('net/RemoteFile');
         (new RemoteFile)->download($link, $contentType);
     }
 
