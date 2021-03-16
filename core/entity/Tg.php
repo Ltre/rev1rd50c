@@ -216,6 +216,8 @@ class Tg extends DIEntity {
             'file_id' => $fileId,
         ]);
 
+        putjsonp($feed);//debug
+
         if (!$ok || !isset($feed['result']['file_path'])) return [false, '', $feed];
         
         $path = $feed['result']['file_path'];
