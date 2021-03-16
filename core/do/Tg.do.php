@@ -97,6 +97,7 @@ class TgDo extends DIDo {
     function dlFile($hdl){
         $fileId = arg('fileId');
         list ($ok, $link, $feed) = Tg::inst($hdl)->filelink($fileId);
+putjson($feed);//debug
         if (! $ok) putjsonp($feed);
 
         $src = fopen($link, 'r');
